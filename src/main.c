@@ -28,7 +28,7 @@ void	draw_square(t_image_data *img, int color)
 
 	x = 100;
 	y = 100;
-	size = 100;
+	size = 50;
 
 	while (y < 100 + size)
 	{
@@ -41,7 +41,7 @@ void	draw_square(t_image_data *img, int color)
 		y++;
 	}
 }
-/*
+
 int	main(void)
 {
 	t_image_data img;
@@ -49,37 +49,8 @@ int	main(void)
 
 	init_mlx(&display, &img);
 	draw_square(&img, RED);
+	mlx_put_image_to_window(display.mlx, display.window, display.img.img, 0, 0);
 	ft_mlx_hooks(&display);
 	mlx_loop(display.mlx);
 	return (0);
-}
-*/
-
-int main()
-{
-    void *mlx_ptr;
-    void *win_ptr;
-
-    mlx_ptr = mlx_init();
-    win_ptr = mlx_new_window(mlx_ptr, 800, 600, "My Square");
-
-    int x = 100;
-    int y = 100;
-    int size = 50;
-    int color = 0xFF0000; // RGB color (red)
-
-    while (y < 100 + size)
-    {
-        x = 100;
-        while (x < 100 + size)
-        {
-            mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
-            x++;
-        }
-        y++;
-    }
-
-    mlx_loop(mlx_ptr);
-
-    return 0;
 }

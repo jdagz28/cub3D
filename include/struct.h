@@ -25,4 +25,10 @@ typedef struct s_display
 	t_image_data	img;
 }			t_display;
 
+typedef struct s_player
+{
+	float	x;
+	float	y;
+}	t_player;
+
 #endif

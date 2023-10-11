@@ -7,6 +7,10 @@
 # include "struct.h"
 # include "enums.h"
 
+# define PI 3.1415
+# define WHITE 0xFFFFFF
+# define RED 0xFF0000
+
 /* Hooks */
 void	ft_mlx_hooks(t_display *display);
 
