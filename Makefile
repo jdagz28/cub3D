@@ -13,28 +13,33 @@ CC			=	gcc
 
 CFLAGS		=	-Wall -Werror -Wextra
 
-# Get_next_line
-GNL_DIR		= src/get_next_line
-
-# Minilibx
-MLX_DIR		= mlx
-
-MLX_PATH 	= $(MLX_DIR)/libmlx.a
-
-MLX			= -framework OpenGL -framework AppKit ${MLX_PATH}
-
-SANITIZE	=	0
-
 ifeq ($(SANITIZE), 1)
 	CFLAGS	+= -fsanitize=address -g3
 endif
 
+### Get_next_line
+GNL_DIR		= src/get_next_line
+
+### Libft
+LIBFT_DIR	=	src/libft
+LIBFT		=	$(LIBFT_DIR)/libft.a
+
+### Minilibx
+MLX_DIR		= mlx
+MLX_PATH 	= $(MLX_DIR)/libmlx.a
+MLX			= -framework OpenGL -framework AppKit ${MLX_PATH}
+
+SANITIZE	=	0
+
 ### RULES ###
 
 $(NAME):		$(OBJS)
+				@echo "Making libft..."
+				@make -C $(LIBFT_DIR)
+				@echo "Libft done."
 				@make -C ${MLX_DIR}
 				@echo "Compiling..."
-				@$(CC) $(CFLAGS) $(OBJS) $(DIRS) $(READL) $(GNL) $(MLX) -o $(NAME)
+				@$(CC) $(CFLAGS) $(OBJS) $(DIRS) $(READL) $(GNL) $(LIBFT) $(MLX) -o $(NAME)
 				@echo "Done."
 
 .c.o:
@@ -49,6 +54,7 @@ sanitize:		fclean
 clean:
 				@echo "Cleaning..."
 				@rm -f $(OBJS)
+				@make clean -C $(LIBFT_DIR)
 				@make clean -C ${MLX_DIR}
 				@echo "Cleaned."
 

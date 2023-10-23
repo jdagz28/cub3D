@@ -1,6 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../src/Libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include "mlx.h"

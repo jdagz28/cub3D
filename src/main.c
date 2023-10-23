@@ -40,16 +40,14 @@ void	draw_square(t_image_data *img, int color, int coord_x, int coord_y)
 	}
 }
 
-void	move()
-{
-
-}
 
 int	main(void)
 {
 	t_image_data img;
 	t_display display;
 
+	int i = ft_isalnum(14);
+	i += 1;
 	init_mlx(&display, &img);
 	draw_square(&img, RED, 200, 200);
 	mlx_put_image_to_window(display.mlx, display.window, display.img.img, 0, 0);
