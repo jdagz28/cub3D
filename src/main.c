@@ -40,7 +40,55 @@ void	draw_square(t_image_data *img, int color, int coord_x, int coord_y)
 	}
 }
 
+void print_map(char **map)
+{
+	for (int j = 0; j < 5; j++)
+	{
+		for (int i = 0; i < 7; i++)
+		{
+			printf("%c", map[j][i]);
+		}
+		printf("\n");
+	}
+}
 
+char	**get_map(void)
+{
+	char **map;
+
+	map = malloc(sizeof(char*) * 5);
+	for (int i = 0; i < 6; i++)
+		map[i] = malloc(sizeof(char) * 7);
+	for (int j = 0; j < 5; j++)
+	{
+		for (int i = 0; i < 6; i++)
+			map[j][i] = '0';
+	}
+	for (int i = 0; i < 7; i++)
+	{
+		map[0][i] = '1';
+		map[4][i] = '1';
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		map[i][0] = '1';
+		map[i][6] = '1';
+	}
+	map[1][3] = '1';
+	map[3][4] = 'N';
+	return (map);
+}
+
+int main(void)
+{
+	char **map;
+
+	map = get_map();
+	print_map(map);
+	return (0);
+}
+
+/*
 int	main(void)
 {
 	t_image_data img;
@@ -55,3 +103,4 @@ int	main(void)
 	mlx_loop(display.mlx);
 	return (0);
 }
+*/
