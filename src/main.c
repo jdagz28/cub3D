@@ -1,5 +1,38 @@
 #include "../include/cub3d.h"
 
+// PARSING DE LA  MAP
+
+static void	arg_error(int argc, char **argv)
+{
+	int	len;
+
+	if (argc != 2)
+	{
+		printf("[ERROR]\nWrong number of arguments\n");
+		exit(EXIT_FAILURE);
+	}
+	len = (int)ft_strlen(argv[1]);
+	if (ft_strncmp(&argv[1][len - 4], ".cub", 4) != 0)
+	{
+		printf("[ERROR]\nMap is not .cub\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+int	parsing(int argc, char **argv)
+{
+	arg_error(argc, argv);
+	//get_texture(argv);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	parsing(argc, argv);
+	return (0);
+}
+
+/**************************************************/
 void	init_mlx(t_display *display, t_image_data *img)
 {
 	display->mlx = mlx_init();
@@ -78,7 +111,7 @@ char	**get_map(void)
 	map[3][4] = 'N';
 	return (map);
 }
-
+/*
 int main(void)
 {
 	char **map;
@@ -87,6 +120,7 @@ int main(void)
 	print_map(map);
 	return (0);
 }
+*/
 
 /*
 int	main(void)

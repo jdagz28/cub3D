@@ -59,6 +59,7 @@ clean:
 				@echo "Cleaned."
 
 fclean:			clean
+				@make fclean -C $(LIBFT_DIR)
 				@rm -f $(NAME)
 
 re :			fclean $(NAME)
