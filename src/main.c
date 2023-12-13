@@ -8,21 +8,67 @@ static void	arg_error(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("[ERROR]\nWrong number of arguments\n");
+		printf("Error\nWrong number of arguments\n");
 		exit(EXIT_FAILURE);
 	}
 	len = (int)ft_strlen(argv[1]);
 	if (ft_strncmp(&argv[1][len - 4], ".cub", 4) != 0)
 	{
-		printf("[ERROR]\nMap is not .cub\n");
+		printf("Error\nMap is not .cub\n");
 		exit(EXIT_FAILURE);
 	}
 }
 
+static void	get_texture(char *line)
+{
+	int i;
+
+	i = 0;
+	if (line[0] == 'N' && line[1] == 'O')
+	{
+		//struct_data_North = le path (line[3] jusque line[dernier element])
+		printf("NO\n");
+	} // quand je stock un elem, check avant si il y a deja qq chose
+	// si oui -> message d'erreur
+	else if (line[0] == 'W' && line[1] == 'E')
+		printf("WE\n");
+	else if (line[0] == 'S' && line[1] == 'O')
+		printf("SO\n");
+	else if (line[0] == 'E' && line[1] == 'A')
+		printf("EA\n");
+	else if (line[0] == 'F')
+		printf("F\n");
+	else if (line[0] == 'C')
+		printf("C\n");
+}
+
+static void	get_map_data(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (line[0] == '\n')
+			line = get_next_line(fd);
+		printf("Line = %s", line);
+		get_texture(line);
+		line = get_next_line(fd);
+	}
+	// fonction qui check si toutes les donnees sont bien presents dans la struct
+	// pendant le parsing fonction qui check si on remplis pas plusieurs fois la meme donnees
+}
+
 int	parsing(int argc, char **argv)
 {
+	int fd;
+
+	fd = 0;
 	arg_error(argc, argv);
-	//get_texture(argv);
+	if ((fd = open(argv[1], O_RDONLY)) == -1)
+		exit(1);
+	get_map_data(fd);
+	close(fd); // va avec fd = open
 	return (0);
 }
 
