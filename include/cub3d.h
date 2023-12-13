@@ -2,8 +2,11 @@
 # define CUB3D_H
 
 # include "../src/Libft/libft.h"
+# include "../src/get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
 # include "mlx.h"
 # include "struct.h"
 # include "enums.h"
