@@ -11,7 +11,7 @@ static void	arg_error(int argc, char **argv)
 		printf("Error\nWrong number of arguments\n");
 		exit(EXIT_FAILURE);
 	}
-	len = (int)ft_strlen(argv[1]);
+	len = ft_strlen(argv[1]);
 	if (ft_strncmp(&argv[1][len - 4], ".cub", 4) != 0)
 	{
 		printf("Error\nMap is not .cub\n");
@@ -55,26 +55,44 @@ static void	get_map_data(int fd)
 		get_texture(line);
 		line = get_next_line(fd);
 	}
-	// fonction qui check si toutes les donnees sont bien presents dans la struct
+	// fonction qui check si toutes les donnees sont bien presentes dans la struct
 	// pendant le parsing fonction qui check si on remplis pas plusieurs fois la meme donnees
 }
 
-int	parsing(int argc, char **argv)
+static void	init_textures(t_texture *texture)
 {
-	int fd;
+	texture->north = NULL;
+	texture->south = NULL;
+	texture->west = NULL;
+	texture->east = NULL;
+}
 
-	fd = 0;
+t_game *init_game(t_game *game)
+{
+	game->map_width = 0;
+	game->map_height = 0;
+	game->map = NULL;
+	game->fd = 0;
+	init_textures(&game->texture);
+	return (game);
+}
+
+int	parsing(int argc, char **argv, t_game *game)
+{
 	arg_error(argc, argv);
-	if ((fd = open(argv[1], O_RDONLY)) == -1)
+	init_game(game);
+	if ((game->fd = open(argv[1], O_RDONLY)) == -1)
 		exit(1);
-	get_map_data(fd);
-	close(fd); // va avec fd = open
+	get_map_data(game->fd);
+	close(game->fd); // va avec fd = open
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	parsing(argc, argv);
+	t_game	game;
+
+	parsing(argc, argv, &game);
 	return (0);
 }
 
@@ -82,7 +100,6 @@ int	main(int argc, char **argv)
 void	init_mlx(t_display *display, t_image_data *img)
 {
 	display->mlx = mlx_init();
-	if (!display->mlx)
 		exit(1);
 	display->window = mlx_new_window(display->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	display->img.img = mlx_new_image(display->mlx, WIN_WIDTH, WIN_HEIGHT);

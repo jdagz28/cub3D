@@ -31,4 +31,16 @@ typedef struct s_player
 	float	y;
 }	t_player;
 
+typedef struct s_game
+{
+	t_player	player;
+	t_texture	texture;
+	//int floor_color;
+	//int ceiling_color;
+	int			map_width;
+	int			map_height;
+	char		**map;
+	int			fd;
+}	t_game;
+
 #endif
