@@ -19,44 +19,69 @@ static void	arg_error(int argc, char **argv)
 	}
 }
 
-static void	get_texture(char *line)
+static void	assign_texture(void *texture, char *path)
+{
+	if (texture == NULL)
+	{
+		texture = path;
+		printf("Path = %s\n", path);
+	}
+	else
+	{
+		printf("Error: Textures not valid.\n");
+		exit(EXIT_FAILURE);
+	}
+}
+static int	len_split(char **split)
 {
 	int i;
 
 	i = 0;
-	if (line[0] == 'N' && line[1] == 'O')
-	{
-		//struct_data_North = le path (line[3] jusque line[dernier element])
-		printf("NO\n");
-	} // quand je stock un elem, check avant si il y a deja qq chose
-	// si oui -> message d'erreur
-	else if (line[0] == 'W' && line[1] == 'E')
-		printf("WE\n");
-	else if (line[0] == 'S' && line[1] == 'O')
-		printf("SO\n");
-	else if (line[0] == 'E' && line[1] == 'A')
-		printf("EA\n");
-	else if (line[0] == 'F')
-		printf("F\n");
-	else if (line[0] == 'C')
-		printf("C\n");
+	while (split[i])
+		i++;
+	return (i);
 }
 
-static void	get_map_data(int fd)
+static void	get_texture(t_texture *texture, char *line)
+{
+	char **split;
+
+	split = ft_split(line, ' ');
+	if (len_split(split) != 2)
+	{
+		printf("%s\n", line);
+		printf("Texture path is not valid.\n");
+		exit(EXIT_FAILURE);
+	}
+	if (ft_strncmp(split[0], "NO", ft_strlen(split[0])) == 0)
+			assign_texture(texture->north, split[1]);
+	else if (ft_strncmp(split[0], "SO", ft_strlen(split[0])) == 0)
+			assign_texture(texture->south, split[1]);
+	else if (ft_strncmp(split[0], "WE", ft_strlen(split[0])) == 0)
+			assign_texture(texture->west, split[1]);
+	else if (ft_strncmp(split[0], "EA", ft_strlen(split[0])) == 0)
+			assign_texture(texture->east, split[1]);
+	else if (ft_strncmp(split[0], "F", ft_strlen(split[0])) == 0)
+		printf("ceci est un F\n");
+	else if (ft_strncmp(split[0], "C", ft_strlen(split[0])) == 0)
+		printf("ceci est un C\n");
+}
+
+static void	get_data(t_game *game)
 {
 	char	*line;
 
-	line = get_next_line(fd);
+	line = get_next_line(game->fd);
 	while (line)
 	{
-		if (line[0] == '\n')
-			line = get_next_line(fd);
-		printf("Line = %s", line);
-		get_texture(line);
-		line = get_next_line(fd);
+		while (line[0] == '\n')
+			line = get_next_line(game->fd);
+		get_texture(&game->texture, line);
+		if (line)
+			line = get_next_line(game->fd);
 	}
 	// fonction qui check si toutes les donnees sont bien presentes dans la struct
-	// pendant le parsing fonction qui check si on remplis pas plusieurs fois la meme donnees
+	// pendant le parsing fonction qui check si on ne remplit pas plusieurs fois la meme donnees
 }
 
 static void	init_textures(t_texture *texture)
@@ -82,8 +107,11 @@ int	parsing(int argc, char **argv, t_game *game)
 	arg_error(argc, argv);
 	init_game(game);
 	if ((game->fd = open(argv[1], O_RDONLY)) == -1)
+	{
+		printf("Error: Can't open file.\n");
 		exit(1);
-	get_map_data(game->fd);
+	}
+	get_data(game);
 	close(game->fd); // va avec fd = open
 	return (0);
 }
