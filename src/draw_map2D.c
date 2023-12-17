@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/17 23:42:49 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/17 23:47:50 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ typedef struct s_gametest
 	//int ceiling_color;
 	int			map_width;
 	int			map_height;
-	int			**map[ROWS][COLS];
+	int			map[ROWS][COLS];
 	int			fd;
 }	t_gametest;
 
 void	init_testmap(t_game *game)
 {
-	int	**map;
+	int	map;
 
 
 	map[ROWS][COLS] = {
