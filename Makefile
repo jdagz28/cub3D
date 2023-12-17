@@ -23,6 +23,10 @@ ifeq ($(SANITIZE), 1)
     CFLAGS         		+= -fsanitize=address -g3
 endif
 
+ifdef debug
+    FSANITIZE        	= -g
+endif
+
 CC                  	:= gcc
 CFLAGS              	:= -Wall -Werror -Wextra $(FSANITIZE) $(OS_FLAG)
 
@@ -51,7 +55,8 @@ HEADER					:= cub3d.h\
 							struct.h
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER))
 
-FILES               	:= main.c\
+FILES               	:= draw_map2D.c\
+							mlx_init.c\
                        		hooks.c
 OBJ_LIST                := $(patsubst %.c,%.o,$(FILES))
 OBJS                    := $(addprefix $(OBJ_DIR),$(OBJ_LIST))

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/17 23:47:50 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/18 00:58:28 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,9 @@ typedef struct s_gametest
 	int			fd;
 }	t_gametest;
 
-void	init_testmap(t_game *game)
+void	init_testmap(t_gametest *game)
 {
-	int	map;
-
-
-	map[ROWS][COLS] = {
+	int	map[ROWS][COLS] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
 	{1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
@@ -48,26 +45,75 @@ void	init_testmap(t_game *game)
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 	};
-	memcpy(game->map, map, sizeof(int) * ROWS * COLS);
+	ft_memcpy(game->map, map, sizeof(int) * ROWS * COLS);
 }
 
-int	draw_map(t_gametest *game, t_display *mlx)
+void	fill_maptile(t_display *mlx, int x, int y)
 {
-	draw_maptiles(game);
-	draw_grid(game);
-	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img.img);
+	int	i;
+	int	j;
+
+	x *= TILE_SIZE;
+	y *= TILE_SIZE;
+	i = 0;
+	while (i < TILE_SIZE)
+	{
+		j = 0;
+		while (j < TILE_SIZE)
+		{
+			mlx->img.address[(y + i) * WIDTH + x + j] = 255;
+			j++;
+		}
+		i++;
+	}
 }
 
+void	draw_maptiles(t_gametest *game, t_display *mlx)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < game->map_height)
+	{
+		j = 0;
+		while (j < game->map_width)
+		{
+			if (game->map[i][j] == 1)
+				fill_maptile(mlx, j, i);
+			j++;
+		}
+		i++;
+	}	
+}
+
+void	draw_map(t_gametest *game, t_display *mlx)
+{
+	draw_maptiles(game, mlx);
+	// draw_grid(game, mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img.img, 0, 0);
+}
 int	main(void)
 {
 	t_gametest		game;
 	t_display		mlx;
+	t_image_data	img;
 
+	game.map_width = 15;
+	game.map_height = 11;
 	init_testmap(&game);
-	mlx_init(mlx);
+
+	mlx.mlx = mlx_init();
+	mlx.window = mlx_new_window(mlx.mlx, WIDTH, HEIGHT, "cub3D");
+
+	img.img = mlx_new_image(mlx.mlx, WIDTH, HEIGHT);
+	img.address = mlx_get_data_addr(img.img,
+			&img.bits_per_pixel, &img.line_length, &img.endian);
+	mlx.img = img;
 	draw_map(&game, &mlx);
-	// mlx_hook(mlx.window, ON_KEYDOWN, keybindings, &game);
-	mlx_hook(mlx.window, ON_DESTROY, close_window, &game);
 	mlx_loop(mlx.mlx);
+
+	return (0);
 }
+
 
