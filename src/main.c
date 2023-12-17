@@ -21,9 +21,9 @@ static void	arg_error(int argc, char **argv)
 
 static void	get_texture(char *line)
 {
-	int i;
+	// int i;
 
-	i = 0;
+	// i = 0;
 	if (line[0] == 'N' && line[1] == 'O')
 	{
 		//struct_data_North = le path (line[3] jusque line[dernier element])

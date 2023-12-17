@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmarchal <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:51:14 by gmarchal          #+#    #+#             */
-/*   Updated: 2023/01/11 19:35:45 by gmarchal         ###   ########.fr       */
+/*   Updated: 2023/12/17 05:11:17 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(const char *s)
+int	ft_strlen_gnl(const char *s)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_bzero(void *s, int n)
+void	ft_bzero_gnl(void *s, int n)
 {
 	int				i;
 	unsigned char	*ret;
@@ -62,17 +62,17 @@ char	*ft_strdup_mod(char *s1, int *check)
 		i++;
 	}
 	ret[i] = '\0';
-	ft_strlcpy(s1, s1 + i, BUFFER_SIZE + 1);
+	ft_strlcpy_gnl(s1, s1 + i, BUFFER_SIZE + 1);
 	return (ret);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	int		i;
 	int		j;
 	char	*ret;
 
-	ret = malloc (sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	ret = malloc (sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1));
 	if (!ret)
 		return (0);
 	i = 0;
@@ -94,7 +94,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (ret);
 }
 
-int	ft_strlcpy(char *dst, const char *src, int size)
+int	ft_strlcpy_gnl(char *dst, const char *src, int size)
 {
 	int	i;
 

@@ -1,69 +1,100 @@
-NAME		=	cub3D
+NAME        			:= cub3D
+OS_NAME     			:= $(shell uname -s)
 
-FILES		=	main.c\
-				get_next_line/get_next_line.c \
-				get_next_line/get_next_line_utils.c \
-				hooks.c\
-
-SRC		=	$(addprefix src/, $(FILES))
-
-OBJS		=	$(SRC:.c=.o)
-
-OBJS_MLX	=	$(MLX_DIR:.c=.o)
-
-CC			=	gcc
-
-CFLAGS		=	-Wall -Werror -Wextra
-
-ifeq ($(SANITIZE), 1)
-	CFLAGS	+= -fsanitize=address -g3
+ifeq ($(OS_NAME), Linux)
+    FSANITIZE           := -fsanitize=address -fsanitize=leak
+    FRAMEWORK           :=
+    LINUX_LIBS          := -lXext -lX11
+    LINUX_INCLUDES      := -I/usr/include
+    MLX_DIR             := ./minilibx/minilibx-linux
+    OS_FLAG             := -D LINUX
+else
+    FSANITIZE           := #-fsanitize=address
+    FRAMEWORK           := -framework OpenGL -framework AppKit
+    LINUX_LIBS          :=
+    LINUX_INCLUDES      :=
+    MLX_DIR             := ./minilibx/mlx
+    OS_FLAG             := -D OSX
 endif
 
+SANITIZE            	:= 0
+
+ifeq ($(SANITIZE), 1)
+    CFLAGS         		+= -fsanitize=address -g3
+endif
+
+CC                  	:= gcc
+CFLAGS              	:= -Wall -Werror -Wextra $(FSANITIZE) $(OS_FLAG)
+
+OBJ_DIR             	:= ./objects/
+INCLUDE_DIR         	:= ./include/
+SRCS_DIR				:= ./src/
+
+### minilibx
+MLX			           	:= $(MLX_DIR)/libmlx.a
+
 ### Get_next_line
-GNL_DIR		= src/get_next_line
+GNL_DIR             	:= src/get_next_line
+GNL                 	:= $(GNL_DIR)/libgnl.a
 
 ### Libft
-LIBFT_DIR	=	src/libft
-LIBFT		=	$(LIBFT_DIR)/libft.a
+LIBFT_DIR           	:= src/Libft
+LIBFT               	:= $(LIBFT_DIR)/libft.a
 
-### Minilibx
-MLX_DIR		= mlx
-MLX_PATH 	= $(MLX_DIR)/libmlx.a
-MLX			= -framework OpenGL -framework AppKit ${MLX_PATH}
+LIBRARIES           	:= -lmlx -lm -L. -L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lgnl \
+								$(FRAMEWORK) $(LINUX_LIBS) -L$(MLX_DIR)
+INCLUDES            	:= -I$(LIBFT_DIR) -I$(GNL_DIR) -I$(INCLUDE_DIR) -I$(MLX_DIR) \
+								$(LINUX_INCLUDES)
 
-SANITIZE	=	0
+HEADER					:= cub3d.h\
+							enums.h\
+							struct.h
+HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER))
+
+FILES               	:= main.c\
+                       		hooks.c
+OBJ_LIST                := $(patsubst %.c,%.o,$(FILES))
+OBJS                    := $(addprefix $(OBJ_DIR),$(OBJ_LIST))
 
 ### RULES ###
+all: $(NAME)
 
-$(NAME):		$(OBJS)
-				@echo "Making libft..."
-				@make -C $(LIBFT_DIR)
-				@echo "Libft done."
-				@make -C ${MLX_DIR}
-				@echo "Compiling..."
-				@$(CC) $(CFLAGS) $(OBJS) $(DIRS) $(READL) $(GNL) $(LIBFT) $(MLX) -o $(NAME)
-				@echo "Done."
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
-.c.o:
-				@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
-				
-all:			$(NAME)
+$(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(HEADER_FILES)
+	@$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
-sanitize:		fclean
-				@echo "Compiling with sanitize..."
-				@make SANITIZE=1
+$(NAME): $(OBJ_DIR) $(OBJS) $(HEADER_FILES)
+	@echo "Making libft..."
+	@make -C $(LIBFT_DIR)
+	@echo "Libft done."
+	@make -C $(GNL_DIR)
+	@echo "get_next_line done"
+	@make -C ${MLX_DIR}
+	@echo "Compiling..."
+	@$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBRARIES) -o $(NAME)
+	@echo "Done."
+
+
+sanitize: fclean
+	@echo "Compiling with sanitize..."
+	@make SANITIZE=1
 
 clean:
-				@echo "Cleaning..."
-				@rm -f $(OBJS)
-				@make clean -C $(LIBFT_DIR)
-				@make clean -C ${MLX_DIR}
-				@echo "Cleaned."
+	@echo "Cleaning..."
+	@rm -rf $(OBJ_DIR)
+	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(GNL_DIR)
+	@make clean -C ${MLX_DIR}
+	@echo "Cleaned."
 
-fclean:			clean
-				@make fclean -C $(LIBFT_DIR)
-				@rm -f $(NAME)
+fclean: clean
+	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(GNL_DIR)
+	@rm $(MLX)
+	@rm -f $(NAME)
 
-re :			fclean $(NAME)
+re: fclean all
 
 .PHONY: sanitize all clean fclean re

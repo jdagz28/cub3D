@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmarchal <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:28:30 by gmarchal          #+#    #+#             */
-/*   Updated: 2023/04/07 20:34:13 by gmarchal         ###   ########.fr       */
+/*   Updated: 2023/12/17 05:08:34 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include <limits.h>
 
 char	*get_next_line(int fd);
-int		ft_strlen(const char *s);
-void	ft_bzero(void *s, int n);
+int		ft_strlen_gnl(const char *s);
+void	ft_bzero_gnl(void *s, int n);
 char	*ft_strdup_mod(char *s1, int *check);
-char	*ft_strjoin(char *s1, char *s2);
-int		ft_strlcpy(char *dst, const char *src, int size);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+int		ft_strlcpy_gnl(char *dst, const char *src, int size);
 
 #endif
