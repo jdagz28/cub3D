@@ -1,0 +1,24 @@
+name: Compile check
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  Compilation:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: make
+      run: make
+    - run: echo "Compiled successfully"
+    - name: make clean
+      run: make clean
+    - run: echo "Removed objects successfully"
+    - name: make re
+      run: make re
+    - run: echo "Recompiled successfully"

@@ -19,6 +19,9 @@
 # define WIN_WIDTH 1500
 # define WIN_HEIGHT 1300
 
+# define ON_KEYDOWN 2
+# define ON_DESTROY 17
+
 /* Hooks */
 void	ft_mlx_hooks(t_display *display);
 
