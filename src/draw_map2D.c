@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/18 14:53:49 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/18 15:17:30 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ typedef struct s_gametest
 	int			map[ROWS][COLS];
 	int			fd;
 }	t_gametest;
+
+typedef struct s_point
+{
+	float	axis[2];
+}	t_point;
 
 void	set_color(char *buffer, int endian, int color, int alpha)
 {
@@ -69,6 +74,58 @@ void	init_testmap(t_gametest *game)
 	ft_memcpy(game->map, map, sizeof(int) * ROWS * COLS);
 	game->map_width = COLS;
 	game->map_height = ROWS;
+}
+
+static void	draw_line_dda(t_image_data *img, t_point start, t_point end)
+{
+	int		steps;
+	t_point	pixel;
+	float	indices[2];
+
+	if (fabsf(end.axis[X_AXIS] - start.axis[X_AXIS]) \
+			> fabsf(end.axis[Y_AXIS] - start.axis[Y_AXIS]))
+		steps = fabsf(end.axis[X_AXIS] - start.axis[X_AXIS]);
+	else
+		steps = fabsf(end.axis[Y_AXIS] - start.axis[Y_AXIS]);
+	indices[X_AXIS] = (end.axis[X_AXIS] - start.axis[X_AXIS]) / (float)steps;
+	indices[Y_AXIS] = (end.axis[Y_AXIS] - start.axis[Y_AXIS]) / (float)steps;
+	pixel.axis[X_AXIS] = start.axis[X_AXIS];
+	pixel.axis[Y_AXIS] = start.axis[Y_AXIS];
+	while (steps--)
+	{
+		my_mlx_pixel_put(img, pixel.axis[X_AXIS], pixel.axis[Y_AXIS], RED);
+		pixel.axis[X_AXIS] += indices[X_AXIS];
+		pixel.axis[Y_AXIS] += indices[Y_AXIS];
+	}
+}
+
+t_point	create_point(int x, int y)
+{
+	t_point	point;
+
+	point.axis[X_AXIS] = x;
+	point.axis[Y_AXIS] = y;
+	return (point);
+}
+
+void	draw_grids(t_display *mlx)
+{
+	int	axis[2];
+
+	axis[Y_AXIS] = 0;
+	while (axis[Y_AXIS] < WIDTH)
+	{
+		draw_line_dda(&mlx->img, create_point(axis[Y_AXIS], 0), \
+			create_point(axis[Y_AXIS], HEIGHT));
+		axis[Y_AXIS] += TILE_SIZE;
+	}
+	axis[X_AXIS] = 0;
+	while (axis[X_AXIS] < HEIGHT)
+	{
+		draw_line_dda(&mlx->img, create_point(0, axis[X_AXIS]), \
+			create_point(WIDTH, axis[X_AXIS]));
+		axis[X_AXIS] += TILE_SIZE;
+	}
 }
 
 void	fill_maptile(t_display *mlx, int x, int y)
@@ -115,9 +172,10 @@ void	draw_maptiles(t_gametest *game, t_display *mlx)
 void	draw_map(t_gametest *game, t_display *mlx)
 {
 	draw_maptiles(game, mlx);
-	//draw_grids(game, mlx);
+	draw_grids(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img.img, 0, 0);
 }
+
 int	main(void)
 {
 	t_gametest		game;
