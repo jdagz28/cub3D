@@ -32,12 +32,13 @@ static void	assign_texture(void *texture, char *path)
 		exit(EXIT_FAILURE);
 	}
 }
+
 static int	len_split(char **split)
 {
 	int i;
 
 	i = 0;
-	while (split[i])
+	while (split && split[i])
 		i++;
 	return (i);
 }
@@ -49,10 +50,15 @@ static void	get_texture(t_texture *texture, char *line)
 	split = ft_split(line, ' ');
 	if (len_split(split) != 2)
 	{
-		printf("%s\n", line);
-		printf("Texture path is not valid.\n");
-		exit(EXIT_FAILURE);
+		if (len_split(split) != 0)
+		{
+			printf("This line is not valid -> %s\n", line); // test
+			printf("Texture path is not valid.\n");
+			exit(EXIT_FAILURE);
+		}
 	}
+	if (!split)
+		return ;
 	if (ft_strncmp(split[0], "NO", ft_strlen(split[0])) == 0)
 			assign_texture(texture->north, split[1]);
 	else if (ft_strncmp(split[0], "SO", ft_strlen(split[0])) == 0)
@@ -69,19 +75,21 @@ static void	get_texture(t_texture *texture, char *line)
 
 static void	get_data(t_game *game)
 {
+	int		i;
 	char	*line;
 
+	i = 0;
 	line = get_next_line(game->fd);
 	while (line)
 	{
-		while (line[0] == '\n')
+		while (line && line[0] == '\n')
 			line = get_next_line(game->fd);
 		get_texture(&game->texture, line);
-		if (line)
+		if (line && line[0] != '\0')
 			line = get_next_line(game->fd);
+		else
+			break ;
 	}
-	// fonction qui check si toutes les donnees sont bien presentes dans la struct
-	// pendant le parsing fonction qui check si on ne remplit pas plusieurs fois la meme donnees
 }
 
 static void	init_textures(t_texture *texture)

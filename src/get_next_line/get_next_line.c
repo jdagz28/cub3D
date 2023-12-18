@@ -6,7 +6,7 @@
 /*   By: gmarchal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:36:38 by gmarchal          #+#    #+#             */
-/*   Updated: 2023/01/11 19:36:22 by gmarchal         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:29:56 by gmarchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,24 +85,3 @@ char	*get_next_line(int fd)
 		return (ft_free(str));
 	return (str);
 }
-/*
-#include <fcntl.h> // delete (pour open)
-#include <stdio.h> // delete
-int	main(void)
-{
-	int		fd;
-	char	*ligne;
-
-	fd = open("test_file", O_RDONLY);
-	ligne = get_next_line(fd);
-	while (ligne)
-	{
-		printf("%s", ligne);
-		free(ligne);
-		ligne = get_next_line(fd);
-	}
-	free(ligne);
-	system("leaks a.out");
-	return (0);
-}
-*/
