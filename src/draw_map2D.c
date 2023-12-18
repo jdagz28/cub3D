@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/18 15:17:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/18 16:22:44 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,10 +169,42 @@ void	draw_maptiles(t_gametest *game, t_display *mlx)
 	}	
 }
 
+void	spawn_player(t_display *mlx)
+{
+	t_point	start_pos;
+	int		axis[2];
+	int		pixel;
+	int		radius;
+
+	radius = 10;
+	start_pos = create_point(WIDTH / 2, HEIGHT / 2);
+	axis[X_AXIS] = -radius;
+	while (axis[X_AXIS] <= radius)
+	{
+		axis[Y_AXIS] = -radius;
+		while (axis[Y_AXIS] <= radius)
+		{
+			if (axis[X_AXIS] * axis[X_AXIS] + axis[Y_AXIS] \
+						* axis[Y_AXIS] <= radius * radius)
+			{
+				pixel = (start_pos.axis[Y_AXIS] + axis[Y_AXIS]) * (WIDTH * 4) \
+							+ (start_pos.axis[X_AXIS] + axis[X_AXIS]) * 4;
+				set_color(&mlx->img.address[pixel], mlx->img.endian, RED, 1);
+			}
+			axis[Y_AXIS]++;
+		}
+		axis[X_AXIS]++;
+	}
+}
+
+
+
+
 void	draw_map(t_gametest *game, t_display *mlx)
 {
 	draw_maptiles(game, mlx);
 	draw_grids(mlx);
+	spawn_player(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img.img, 0, 0);
 }
 
