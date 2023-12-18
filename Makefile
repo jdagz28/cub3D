@@ -55,9 +55,9 @@ HEADER					:= cub3d.h\
 							struct.h
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER))
 
-FILES               	:= draw_map2D.c\
-							mlx_init.c\
-                       		hooks.c
+FILES               	:= draw_map2D.c
+							# mlx_init.c\
+                       		# hooks.c
 OBJ_LIST                := $(patsubst %.c,%.o,$(FILES))
 OBJS                    := $(addprefix $(OBJ_DIR),$(OBJ_LIST))
 
