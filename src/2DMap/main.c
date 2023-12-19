@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/19 00:48:08 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:05:48 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ int	main(void)
 	mlx.img.img = mlx_new_image(mlx.mlx, WIDTH, HEIGHT);
 	mlx.img.address = mlx_get_data_addr(mlx.img.img,
 			&mlx.img.bits_per_pixel, &mlx.img.line_length, &mlx.img.endian);
-	draw_map(&game, &mlx);
+	game.display = mlx;
+	// draw_map(&game);
+	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, close_window, &mlx);
+	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &mlx);
+	mlx_loop_hook(game.display.mlx, &draw_map, &game);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:44:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/19 00:55:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/19 13:51:13 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	spawn_player(t_display *mlx)
 
 	radius = 10;
 	player.position = create_point(WIDTH / 2, HEIGHT / 2);
-	player.direction = create_point(0, -1);
 	axis[X_AXIS] = -radius;
 	while (axis[X_AXIS] <= radius)
 	{
@@ -49,10 +48,12 @@ void	spawn_player(t_display *mlx)
 	}
 }
 
-void	draw_map(t_gametest *game, t_display *mlx)
+int	draw_map(t_gametest *game)
 {
-	draw_maptiles(game, mlx);
-	draw_grids(mlx);
-	spawn_player(mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img.img, 0, 0);
+	draw_maptiles(game, &game->display);
+	draw_grids(&game->display);
+	spawn_player(&game->display);
+	mlx_put_image_to_window(game->display.mlx, \
+		game->display.window, game->display.img.img, 0, 0);
+	return (0);
 }

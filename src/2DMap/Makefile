@@ -33,6 +33,7 @@ CFLAGS              	:= -Wall -Werror -Wextra $(FSANITIZE) $(OS_FLAG)
 OBJ_DIR             	:= ./objects/
 INCLUDE_DIR         	:= ../../include/
 SRCS_DIR				:= ./
+MAIN_SRCS				:= ../
 
 ### minilibx
 MLX			           	:= $(MLX_DIR)/libmlx.a
@@ -61,8 +62,11 @@ FILES               	:= draw_2Dmap.c\
 							draw_maptiles.c\
 							pixel_color.c\
 							main.c\
-							../mlx_draw.c\
-							../mlx_init.c
+							draw_rays2Dmap.c
+
+SRC_FILES				:=	mlx_draw.c\
+							mlx_init.c\
+							hooks.c
 
 OBJ_LIST                := $(patsubst %.c,%.o,$(FILES))
 OBJS                    := $(addprefix $(OBJ_DIR),$(OBJ_LIST))
@@ -79,7 +83,11 @@ $(OBJ_DIR):
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(HEADER_FILES)
 	@$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
-$(NAME): $(OBJ_DIR) $(OBJS) $(HEADER_FILES)
+$(OBJ_DIR)%.o: $(MAIN_SRCS)/%.c $(HEADER_FILES)
+	@$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
+
+
+$(NAME): $(OBJ_DIR) $(SRC_OBJS) $(OBJS) $(HEADER_FILES)
 	@echo "Making libft..."
 	@make -C $(LIBFT_DIR)
 	@echo "Libft done."

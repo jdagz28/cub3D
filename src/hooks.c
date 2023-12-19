@@ -13,7 +13,8 @@ int	close_window(int keycode, t_display *display)
 
 int	close_window_cross(t_display *display)
 {
-	(void) display;
+	mlx_destroy_image(display->mlx, display->img.img);
+	mlx_destroy_window(display->mlx, display->window);
 	exit(0);
 }
 
