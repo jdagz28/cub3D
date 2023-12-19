@@ -25,10 +25,15 @@ typedef struct s_display
 	t_image_data	img;
 }			t_display;
 
+typedef struct s_point
+{
+	float	axis[2];
+}	t_point;
+
 typedef struct s_player
 {
-	float	x;
-	float	y;
+	t_point	position;
+	t_point	direction;
 }	t_player;
 
 typedef struct s_game

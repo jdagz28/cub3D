@@ -22,6 +22,8 @@
 
 # define ON_KEYDOWN 2
 # define ON_DESTROY 17
+# define X_AXIS 0
+# define Y_AXIS 1
 
 /* Hooks */
 void	ft_mlx_hooks(t_display *display);

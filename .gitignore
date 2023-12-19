@@ -1,0 +1,7 @@
+./cub3D
+./objects
+*.o
+./src/2DMap/objects
+./src/get_next_line/objects
+.vscode
+.editorconfig
