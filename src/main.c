@@ -19,19 +19,47 @@ static void	arg_error(int argc, char **argv)
 	}
 }
 
-static void	assign_texture(void *texture, char *path)
+static int	check_texture(void *texture)
 {
 	if (texture == NULL)
-	{
-		texture = path;
-		printf("Path = %s\n", path);
-	}
+		return (0);
 	else
 	{
 		printf("Error: Textures not valid.\n");
+		printf("---------> %s\n", texture); // test
 		exit(EXIT_FAILURE);
 	}
+	return (1);
 }
+
+static void	assign_texture(t_texture *texture, char* direction, char *path)
+{
+	if (ft_strncmp(direction, "NO", ft_strlen(direction)) == 0)
+	{
+		if (!(check_texture(texture->north)))
+				texture->north = path;
+	}
+	else if (ft_strncmp(direction, "SO", ft_strlen(direction)) == 0)
+	{
+		if (!(check_texture(texture->south)))
+				texture->south = path;
+	}
+	else if (ft_strncmp(direction, "WE", ft_strlen(direction)) == 0)
+	{
+		if (!(check_texture(texture->west)))
+				texture->west = path;
+	}
+	else if (ft_strncmp(direction, "EA", ft_strlen(direction)) == 0)
+	{
+		if (!(check_texture(texture->east)))
+				texture->east = path;
+	}
+	else if (ft_strncmp(direction, "F", ft_strlen(direction)) == 0)
+		printf("ceci est un F\n");
+	else if (ft_strncmp(direction, "C", ft_strlen(direction)) == 0)
+		printf("ceci est un C\n");
+}
+
 
 static int	len_split(char **split)
 {
@@ -40,6 +68,24 @@ static int	len_split(char **split)
 	i = 0;
 	while (split && split[i])
 		i++;
+	return (i);
+}
+
+static	int check_all_textures(t_texture *texture)
+{
+	int i;
+
+	i = 1;
+	if (texture->north == NULL)
+		i = 0;
+	if (texture->south == NULL)
+		i = 0;
+	if (texture->west == NULL)
+		i = 0;
+	if (texture->east == NULL)
+		i = 0;
+	if (i == 1) //test + RAJOUTER LE CHECK POUR CEILING ET FLOOR
+		printf("Toutes les textures sont assignees\n");
 	return (i);
 }
 
@@ -59,18 +105,7 @@ static void	get_texture(t_texture *texture, char *line)
 	}
 	if (!split)
 		return ;
-	if (ft_strncmp(split[0], "NO", ft_strlen(split[0])) == 0)
-			assign_texture(texture->north, split[1]);
-	else if (ft_strncmp(split[0], "SO", ft_strlen(split[0])) == 0)
-			assign_texture(texture->south, split[1]);
-	else if (ft_strncmp(split[0], "WE", ft_strlen(split[0])) == 0)
-			assign_texture(texture->west, split[1]);
-	else if (ft_strncmp(split[0], "EA", ft_strlen(split[0])) == 0)
-			assign_texture(texture->east, split[1]);
-	else if (ft_strncmp(split[0], "F", ft_strlen(split[0])) == 0)
-		printf("ceci est un F\n");
-	else if (ft_strncmp(split[0], "C", ft_strlen(split[0])) == 0)
-		printf("ceci est un C\n");
+	assign_texture(texture, split[0], split[1]);
 }
 
 static void	get_data(t_game *game)
@@ -80,7 +115,7 @@ static void	get_data(t_game *game)
 
 	i = 0;
 	line = get_next_line(game->fd);
-	while (line)
+	while (line && !check_all_textures(&game->texture)) // rajouter check si toutes les textures sont completees
 	{
 		while (line && line[0] == '\n')
 			line = get_next_line(game->fd);
