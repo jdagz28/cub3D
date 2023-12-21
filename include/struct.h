@@ -7,6 +7,8 @@ typedef struct s_texture
 	void		*south;
 	void		*west;
 	void		*east;
+	int			floor;
+	int			ceiling;
 }				t_texture;
 
 typedef struct valid_text

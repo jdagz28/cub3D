@@ -35,28 +35,20 @@ static int	check_texture(void *texture)
 static void	assign_texture(t_texture *texture, char* direction, char *path)
 {
 	if (ft_strncmp(direction, "NO", ft_strlen(direction)) == 0)
-	{
 		if (!(check_texture(texture->north)))
 				texture->north = path;
-	}
-	else if (ft_strncmp(direction, "SO", ft_strlen(direction)) == 0)
-	{
+	if (ft_strncmp(direction, "SO", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->south)))
 				texture->south = path;
-	}
-	else if (ft_strncmp(direction, "WE", ft_strlen(direction)) == 0)
-	{
+	if (ft_strncmp(direction, "WE", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->west)))
 				texture->west = path;
-	}
-	else if (ft_strncmp(direction, "EA", ft_strlen(direction)) == 0)
-	{
+	if (ft_strncmp(direction, "EA", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->east)))
 				texture->east = path;
-	}
-	else if (ft_strncmp(direction, "F", ft_strlen(direction)) == 0)
+	if (ft_strncmp(direction, "F", ft_strlen(direction)) == 0)
 		printf("ceci est un F\n");
-	else if (ft_strncmp(direction, "C", ft_strlen(direction)) == 0)
+	if (ft_strncmp(direction, "C", ft_strlen(direction)) == 0)
 		printf("ceci est un C\n");
 }
 
@@ -84,8 +76,12 @@ static	int check_all_textures(t_texture *texture)
 		i = 0;
 	if (texture->east == NULL)
 		i = 0;
+	if (texture->floor == -1)
+		i = 0;
+	if (texture->ceiling == -1)
+		i = 0;
 	if (i == 1) //test + RAJOUTER LE CHECK POUR CEILING ET FLOOR
-		printf("Toutes les textures sont assignees\n");
+		printf("Toutes les textures sont assignees\n"); // test
 	return (i);
 }
 
@@ -115,7 +111,7 @@ static void	get_data(t_game *game)
 
 	i = 0;
 	line = get_next_line(game->fd);
-	while (line && !check_all_textures(&game->texture)) // rajouter check si toutes les textures sont completees
+	while (line && !check_all_textures(&game->texture))
 	{
 		while (line && line[0] == '\n')
 			line = get_next_line(game->fd);
@@ -125,6 +121,9 @@ static void	get_data(t_game *game)
 		else
 			break ;
 	}
+	if (!check_all_textures(&game->texture))
+		printf("Commencer check de map\n");
+	// fonction check map open
 }
 
 static void	init_textures(t_texture *texture)
@@ -133,6 +132,8 @@ static void	init_textures(t_texture *texture)
 	texture->south = NULL;
 	texture->west = NULL;
 	texture->east = NULL;
+	texture->floor = -1;
+	texture->ceiling = -1;
 }
 
 t_game *init_game(t_game *game)
