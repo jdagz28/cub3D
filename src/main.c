@@ -32,7 +32,77 @@ static int	check_texture(void *texture)
 	return (1);
 }
 
-static void	assign_texture(t_texture *texture, char* direction, char *path)
+static int	check_color(int color)
+{
+	if (color == -1)
+		return (0);
+	else
+	{
+		printf("Error: Textures not valid.\n");
+		printf("color of floor or ceiling\n"); // test
+		exit(EXIT_FAILURE);
+	}
+	return (1);
+}
+
+static int	rgb_to_hex(int red, int green, int blue)
+{
+	int	res;
+
+	res = -2;
+	if (red < 0 || red > 255)
+		return (-1);
+	else if (green < 0 || green > 255)
+		return (-1);
+	else if (blue < 0 || blue > 255)
+		return (-1);
+	else
+		printf("Texture error, need to return an error\n"); // return error + free
+	res = (red << 16) | (green << 8) | blue;
+	printf("RGB = %d, %d, %d\n", red, green, blue);
+	printf("Hexa = %d\n", res);
+	return (res);
+}
+
+static int	get_rgb(t_texture *texture, char c, char *path) // SEGFAULT ICI !!!ERROR
+{
+	int		res;
+	char	**split;
+
+	split = ft_split(path, ' ');
+	if (!split)
+		return (-1); // return ou exit ?
+	//if (!split[0] || !split[1] || !split[2]) // || split[3])
+	//	return (-1); // print texture incorrecte
+	printf("Segfault apres cette ligne\n");
+	if (c == 'F')
+	{
+		if (texture->floor == -1)
+			texture->floor = rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
+		else
+		{
+			printf("Error color floor\n");
+			return (-1);
+		}
+	}
+	else if (c == 'C')
+	{
+		printf("%d\n", texture->ceiling);
+		if (texture->ceiling == -1) // cette ligne segfault
+			texture->ceiling = rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
+		else
+		{
+			printf("Error color ceiling\n");
+			return (-1);
+		}
+	}
+	printf("YAAAA\n");
+	res = rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
+	free(split);
+	return (res);
+}
+
+static void	assign_texture(t_texture *texture, char *direction, char *path)
 {
 	if (ft_strncmp(direction, "NO", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->north)))
@@ -47,11 +117,14 @@ static void	assign_texture(t_texture *texture, char* direction, char *path)
 		if (!(check_texture(texture->east)))
 				texture->east = path;
 	if (ft_strncmp(direction, "F", ft_strlen(direction)) == 0)
-		printf("ceci est un F\n");
+	{
+		if (!(check_color(texture->floor)))
+			get_rgb(texture, 'F', path);
+	}
 	if (ft_strncmp(direction, "C", ft_strlen(direction)) == 0)
-		printf("ceci est un C\n");
+		if (!(check_color(texture->ceiling)))
+			get_rgb(texture, 'C', path);
 }
-
 
 static int	len_split(char **split)
 {
@@ -80,7 +153,7 @@ static	int check_all_textures(t_texture *texture)
 		i = 0;
 	if (texture->ceiling == -1)
 		i = 0;
-	if (i == 1) //test + RAJOUTER LE CHECK POUR CEILING ET FLOOR
+	if (i == 1) //test
 		printf("Toutes les textures sont assignees\n"); // test
 	return (i);
 }
@@ -102,6 +175,7 @@ static void	get_texture(t_texture *texture, char *line)
 	if (!split)
 		return ;
 	assign_texture(texture, split[0], split[1]);
+	free(split);
 }
 
 static void	get_data(t_game *game)
@@ -132,6 +206,7 @@ static void	init_textures(t_texture *texture)
 	texture->south = NULL;
 	texture->west = NULL;
 	texture->east = NULL;
+	texture->rgb = -1;
 	texture->floor = -1;
 	texture->ceiling = -1;
 }
@@ -165,6 +240,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	parsing(argc, argv, &game);
+	printf("%d\n", game.texture.floor);// floor a pas ete change
 	return (0);
 }
 
