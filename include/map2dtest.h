@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:47:12 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/19 13:30:16 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/27 01:56:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define WIDTH COLS * TILE_SIZE
 # define HEIGHT ROWS * TILE_SIZE
 # include "cub3d.h"
+# include "struct.h"
 
 typedef struct s_gametest
 {
@@ -35,14 +36,16 @@ typedef struct s_gametest
 
 void	draw_playerpos(t_display *mlx, t_player *player, int axis[2], \
 						int radius);
-void	spawn_player(t_display *mlx);
+void	draw_player(t_gametest *game);
+void	init_player(t_player *player);
 int		draw_map(t_gametest *game);
 void	draw_line_dda(t_image_data *img, t_point start, t_point end);
 void	draw_grids(t_display *mlx);
 t_point	create_point(int x, int y);
+t_vector	create_vector(int x, int y);
 void	fill_maptile(t_display *mlx, int x, int y);
 void	draw_maptiles(t_gametest *game, t_display *mlx);
 void	set_color(char *buffer, int endian, int color, int alpha);
 void	draw_rays2dmap(t_display *mlx, t_point player_pos, t_point dir);
-
+void draw_direction_dda(t_image_data *img, t_point start, t_vector end);
 #endif

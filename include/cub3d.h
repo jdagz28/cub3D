@@ -11,6 +11,7 @@
 # include "mlx.h"
 # include "struct.h"
 # include "enums.h"
+# include "map2dtest.h"
 
 # define PI 3.1415
 
@@ -26,9 +27,8 @@
 # define Y_AXIS 1
 
 /* Hooks */
-void	ft_mlx_hooks(t_display *display);
-int		close_window(int keycode, t_display *display);
-int	close_window_cross(t_display *display);
+int		keybindings(int keycode, t_gametest *game);
+int		close_window_cross(t_display *display);
 void	init_mlx(t_display *display, t_image_data *img);
 void	my_mlx_pixel_put(t_image_data *data, int x, int y, int color);
 

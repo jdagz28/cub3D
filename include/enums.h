@@ -24,7 +24,12 @@ enum {
 	K_NUM_ASTERISK = 65450,
 	K_NUM_MINUS = 65453,
 	K_NUM_PLUS = 65451,
-	K_NUM_ENTER = 65421
+	K_NUM_ENTER = 65421,
+	K_W = 119,
+	K_A = 97,
+	K_S = 115,
+	K_D = 100,
+	K_E = 101
 };
 
 # else
@@ -51,6 +56,11 @@ enum {
 	K_NUM_SLASH = 75,
 	K_NUM_ASTERISK = 67,
 	K_NUM_ENTER = 76,
+	K_W = 23,
+	K_A = 1,
+	K_S = 19,
+	K_D = 4,
+	K_E = 5
 };
 
 #endif

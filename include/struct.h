@@ -39,8 +39,9 @@ typedef struct s_player
 {
 	t_point		position;
 	t_point		mat_position;
-	t_vector	front;
+	t_vector	front; //delta
 	t_vector	cam;
+	float		angle;
 }	t_player;
 
 typedef struct s_game
