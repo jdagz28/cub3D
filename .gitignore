@@ -6,3 +6,5 @@ objects/
 ./src/get_next_line/objects/
 .vscode
 .editorconfig
+./src/get_next_line/libgnl.a
+./src/Libft/libft.a
