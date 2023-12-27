@@ -22,4 +22,17 @@
 /* Hooks */
 void	ft_mlx_hooks(t_display *display);
 
+/* Parsing */
+int	parsing(int argc, char **argv, t_game *game);
+
+/* Init */
+t_game *init_game(t_game *game);
+
+/* Texture */
+void	get_texture(t_texture *texture, char *line);
+
+/* Utils */
+int	len_split(char **split);
+int	rgb_to_hex(int red, int green, int blue);
+
 #endif
