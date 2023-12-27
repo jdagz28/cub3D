@@ -1,8 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft.h"
-# include "get_next_line.h"
+# include "../src/Libft/libft.h"
+# include "../src/get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -31,5 +31,18 @@ int		close_window(int keycode, t_display *display);
 int	close_window_cross(t_display *display);
 void	init_mlx(t_display *display, t_image_data *img);
 void	my_mlx_pixel_put(t_image_data *data, int x, int y, int color);
+
+/* Parsing */
+int	parsing(int argc, char **argv, t_game *game);
+
+/* Init */
+t_game *init_game(t_game *game);
+
+/* Texture */
+void	get_texture(t_texture *texture, char *line);
+
+/* Utils */
+int	len_split(char **split);
+int	rgb_to_hex(int red, int green, int blue);
 
 #endif
