@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:44:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/19 13:51:13 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/27 01:50:34 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,41 @@ void	draw_playerpos(t_display *mlx, t_player *player, int axis[2], \
 	}
 }
 
-void	spawn_player(t_display *mlx)
+void	draw_player(t_gametest *game)
 {
-	t_player	player;
 	int			axis[2];
 	int			radius;
 
 	radius = 10;
-	player.position = create_point(WIDTH / 2, HEIGHT / 2);
 	axis[X_AXIS] = -radius;
 	while (axis[X_AXIS] <= radius)
 	{
 		axis[Y_AXIS] = -radius;
 		while (axis[Y_AXIS] <= radius)
 		{
-			draw_playerpos(mlx, &player, axis, radius);
+			draw_playerpos(&game->display, &game->player, axis, radius);
 			axis[Y_AXIS]++;
 		}
 		axis[X_AXIS]++;
 	}
+	draw_direction_dda(&game->display.img, game->player.position, game->player.front);
+}
+
+void	init_player(t_player *player)
+{
+	player->position = create_point(WIDTH / 2, HEIGHT / 2);
+	player->angle = 90;
+	player->front = create_vector(cos(player->angle) * 5, \
+						sin(player->angle) * 5);
+
 }
 
 int	draw_map(t_gametest *game)
 {
+	ft_bzero(game->display.img.address, WIDTH * HEIGHT * 4);
 	draw_maptiles(game, &game->display);
 	draw_grids(&game->display);
-	spawn_player(&game->display);
+	draw_player(game);
 	mlx_put_image_to_window(game->display.mlx, \
 		game->display.window, game->display.img.img, 0, 0);
 	return (0);
