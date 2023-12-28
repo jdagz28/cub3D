@@ -28,6 +28,7 @@ typedef struct s_display
 typedef struct s_point
 {
 	float	axis[2];
+	int		color;
 }	t_point;
 
 typedef struct s_vector

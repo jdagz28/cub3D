@@ -30,6 +30,6 @@
 int		keybindings(int keycode, t_gametest *game);
 int		close_window_cross(t_display *display);
 void	init_mlx(t_display *display, t_image_data *img);
-void	my_mlx_pixel_put(t_image_data *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_image_data *img, t_point pixel);
 
 #endif
