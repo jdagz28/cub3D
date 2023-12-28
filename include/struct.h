@@ -7,7 +7,18 @@ typedef struct s_texture
 	void		*south;
 	void		*west;
 	void		*east;
+	int			rgb;
+	int			floor;
+	int			ceiling;
 }				t_texture;
+
+typedef struct valid_text
+{
+	int	north;
+	int	south;
+	int	west;
+	int	east;
+}				valid_text;
 
 typedef struct s_image_data
 {
