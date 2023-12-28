@@ -14,6 +14,7 @@
 # include "map2dtest.h"
 
 # define PI 3.1415
+# define FOV 1.0471975512 // M_PI /3
 
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000

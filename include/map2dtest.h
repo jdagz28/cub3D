@@ -6,14 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:47:12 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/28 20:51:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/28 23:01:20 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP2DTEST_H
 # define MAP2DTEST_H
 
-# define TILE_SIZE 60
+# define TILE_SIZE 64
 # define ROWS 11
 # define COLS 15
 # define WIDTH COLS * TILE_SIZE
@@ -26,6 +26,7 @@ typedef struct s_gametest
 {
 	t_display	display;
 	t_player	player;
+	t_ray		ray;
 	t_texture	texture;
 	//int floor_color;
 	//int ceiling_color;
