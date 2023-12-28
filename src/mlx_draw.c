@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_draw.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 20:54:52 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/27 20:22:22 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/28 13:00:09 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	my_mlx_pixel_put(t_image_data *img, t_point pixel)
 {
 	int	mypixel;
 	
-	if (pixel.axis[X_AXIS] >= WIDTH || pixel.axis[Y_AXIS] \
+	if (pixel.axis[X] >= WIDTH || pixel.axis[Y] \
 		>= HEIGHT)
 		return ;
-	mypixel = ((int)pixel.axis[Y_AXIS] * WIDTH * 4)
-		+ ((int)pixel.axis[X_AXIS] * 4);
+	mypixel = ((int)pixel.axis[Y] * WIDTH * 4)
+		+ ((int)pixel.axis[X] * 4);
 	set_color(&img->address[mypixel], \
 			img->endian, pixel.color, 0);
 }

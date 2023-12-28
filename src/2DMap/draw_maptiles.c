@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_maptiles.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:42:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/19 13:44:11 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/28 13:00:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ void	fill_maptile(t_display *mlx, int x, int y)
 
 	x = x * TILE_SIZE;
 	y = y * TILE_SIZE;
-	axis[X_AXIS] = 0;
-	while (axis[X_AXIS] < TILE_SIZE)
+	axis[X] = 0;
+	while (axis[X] < TILE_SIZE)
 	{
-		axis[Y_AXIS] = 0;
-		while (axis[Y_AXIS] < TILE_SIZE)
+		axis[Y] = 0;
+		while (axis[Y] < TILE_SIZE)
 		{
-			pixel = (axis[Y_AXIS] + y) * (WIDTH * 4) \
-						+ (axis[X_AXIS] + x) * 4;
+			pixel = (axis[Y] + y) * (WIDTH * 4) \
+						+ (axis[X] + x) * 4;
 			set_color(&mlx->img.address[pixel], \
 				mlx->img.endian, WHITE, 1);
-			axis[Y_AXIS]++;
+			axis[Y]++;
 		}
-		axis[X_AXIS]++;
+		axis[X]++;
 	}
 }
 
@@ -40,16 +40,16 @@ void	draw_maptiles(t_gametest *game, t_display *mlx)
 {
 	int	axis[2];
 
-	axis[X_AXIS] = 0;
-	while (axis[X_AXIS] < game->map_height)
+	axis[X] = 0;
+	while (axis[X] < game->map_height)
 	{
-		axis[Y_AXIS] = 0;
-		while (axis[Y_AXIS] < game->map_width)
+		axis[Y] = 0;
+		while (axis[Y] < game->map_width)
 		{
-			if (game->map[axis[X_AXIS]][axis[Y_AXIS]] == 1)
-				fill_maptile(mlx, axis[Y_AXIS], axis[X_AXIS]);
-			axis[Y_AXIS]++;
+			if (game->map[axis[X]][axis[Y]] == 1)
+				fill_maptile(mlx, axis[Y], axis[X]);
+			axis[Y]++;
 		}
-		axis[X_AXIS]++;
+		axis[X]++;
 	}	
 }

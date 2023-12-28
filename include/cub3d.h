@@ -24,8 +24,8 @@
 
 # define ON_KEYDOWN 2
 # define ON_DESTROY 17
-# define X_AXIS 0
-# define Y_AXIS 1
+# define X 0
+# define Y 1
 
 /* Hooks */
 int		keybindings(int keycode, t_gametest *game);

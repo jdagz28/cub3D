@@ -11,23 +11,23 @@ int	keybindings(int keycode, t_gametest *game)
 	}
 	else if (keycode == K_W)
 	{
-		game->player.position.axis[X_AXIS] += game->player.front.dir[X_AXIS];
-		game->player.position.axis[Y_AXIS] += game->player.front.dir[Y_AXIS];
+		game->player.position.axis[X] += game->player.front.dir[X];
+		game->player.position.axis[Y] += game->player.front.dir[Y];
 	}
 	else if (keycode == K_S)
 	{
-		game->player.position.axis[X_AXIS] -= game->player.front.dir[X_AXIS];
-		game->player.position.axis[Y_AXIS] -= game->player.front.dir[Y_AXIS];
-	}
-	else if (keycode == K_A)
-	{
-		game->player.position.axis[X_AXIS] += -sin(game->player.angle) * 5;
-		game->player.position.axis[Y_AXIS] += cos(game->player.angle) * 5;
+		game->player.position.axis[X] -= game->player.front.dir[X];
+		game->player.position.axis[Y] -= game->player.front.dir[Y];
 	}
 	else if (keycode == K_D)
 	{
-		game->player.position.axis[X_AXIS] += sin(game->player.angle) * 5;
-		game->player.position.axis[Y_AXIS] += -cos(game->player.angle) * 5;
+		game->player.position.axis[X] += -sin(game->player.angle) * 5;
+		game->player.position.axis[Y] += cos(game->player.angle) * 5;
+	}
+	else if (keycode == K_A)
+	{
+		game->player.position.axis[X] += sin(game->player.angle) * 5;
+		game->player.position.axis[Y] += -cos(game->player.angle) * 5;
 	}
 	else if (keycode == K_LEFT)
 	{
