@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2Dmap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:44:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/28 13:00:05 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/28 20:51:16 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	draw_map(t_gametest *game)
 	draw_maptiles(game, &game->display);
 	draw_grids(&game->display);
 	draw_player(game);
+	draw_rays(game);
 	mlx_put_image_to_window(game->display.mlx, \
 		game->display.window, game->display.img.img, 0, 0);
 	return (0);

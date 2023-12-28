@@ -18,6 +18,7 @@
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define GRAY 0xADADAD
+# define GREEN 0x00FF00
 
 # define WIN_WIDTH 1500
 # define WIN_HEIGHT 1300

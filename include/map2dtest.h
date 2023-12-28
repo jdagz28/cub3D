@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:47:12 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/28 02:57:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/28 20:51:30 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ void	set_color(char *buffer, int endian, int color, int alpha);
 void	draw_rays2dmap(t_display *mlx, t_point player_pos, t_point dir);
 void draw_direction_dda(t_image_data *img, t_point start, t_vector end);
 void	update_player_front(t_player *player);
+void	draw_rays(t_gametest *game);
 #endif
