@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:01:56 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/28 03:34:20 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/28 11:53:51 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_line_dda(t_image_data *img, t_point start, t_point end)
 	indices[Y_AXIS] = (end.axis[Y_AXIS] - start.axis[Y_AXIS]) / steps;
 	pixel.axis[X_AXIS] = start.axis[X_AXIS];
 	pixel.axis[Y_AXIS] = start.axis[Y_AXIS];
-	pixel.color = RED;
+	pixel.color = GRAY;
 	while (steps--)
 	{
 		my_mlx_pixel_put(img, pixel);

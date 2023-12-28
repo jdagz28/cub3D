@@ -11,18 +11,18 @@ int	keybindings(int keycode, t_gametest *game)
 	}
 	else if (keycode == K_W)
 	{
-		game->player.position.axis[Y_AXIS] -= game->player.front.dir[Y_AXIS];
+		game->player.position.axis[Y_AXIS] += game->player.front.dir[Y_AXIS];
 		game->player.position.axis[X_AXIS] +=  game->player.front.dir[X_AXIS];
 	}
 	else if (keycode == K_S)
 	{
-		game->player.position.axis[Y_AXIS] += game->player.front.dir[Y_AXIS];
+		game->player.position.axis[Y_AXIS] -= game->player.front.dir[Y_AXIS];
 		game->player.position.axis[X_AXIS] -=  game->player.front.dir[X_AXIS];
 	}
 	else if (keycode == K_A)
-		game->player.position.axis[X_AXIS] -=  10;
+		game->player.position.axis[X_AXIS] -=  game->player.front.dir[X_AXIS];
 	else if (keycode == K_D)
-		game->player.position.axis[X_AXIS] +=  10;
+		game->player.position.axis[X_AXIS] +=  game->player.front.dir[X_AXIS];
 	else if (keycode == K_LEFT)
 	{
 		game->player.angle -= 0.1;

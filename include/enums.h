@@ -56,11 +56,11 @@ enum {
 	K_NUM_SLASH = 75,
 	K_NUM_ASTERISK = 67,
 	K_NUM_ENTER = 76,
-	K_W = 23,
-	K_A = 1,
-	K_S = 19,
-	K_D = 4,
-	K_E = 5
+	K_W = 13,
+	K_A = 0,
+	K_S = 1,
+	K_D = 2,
+	K_E = 14
 };
 
 #endif
