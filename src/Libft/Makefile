@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmarchal <gmarchal@student.42.fr>          +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/11 15:22:24 by gmarchal          #+#    #+#              #
-#    Updated: 2023/12/11 16:47:57 by gmarchal         ###   ########.fr        #
+#    Updated: 2023/12/27 01:30:46 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 FILES = ft_memset ft_memcpy ft_memmove ft_memchr ft_memcmp \
-	    ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint ft_toupper \
+	    ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint ft_toupper ft_bzero\
 		ft_tolower ft_strchr ft_strrchr ft_strncmp ft_strlcpy ft_strlcat ft_strlen \
 		ft_strnstr ft_atoi ft_calloc ft_strdup ft_substr ft_strtrim \
 		ft_split ft_itoa ft_strmapi ft_putchar_fd ft_putstr_fd ft_putendl_fd \

@@ -39,6 +39,7 @@ typedef struct s_display
 typedef struct s_point
 {
 	float	axis[2];
+	int		color;
 }	t_point;
 
 typedef struct s_vector
@@ -50,8 +51,9 @@ typedef struct s_player
 {
 	t_point		position;
 	t_point		mat_position;
-	t_vector	front;
+	t_vector	front; //delta
 	t_vector	cam;
+	float		angle;
 }	t_player;
 
 typedef struct s_game
