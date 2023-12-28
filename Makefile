@@ -3,7 +3,6 @@ NAME		=	cub3D
 FILES		=	main.c\
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c \
-				hooks.c\
 				parsing.c\
 				init.c\
 				texture.c\
