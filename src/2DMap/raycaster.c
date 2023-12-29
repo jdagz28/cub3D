@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 13:13:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 13:51:29 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ float	get_distance(float x1, float y1, float x2, float y2)
 void	cast_horizontal_rays(t_gametest *game)
 {
 	game->ray.dof = 0;
-	while (game->ray.dof < 8)
+	while (game->ray.dof < 20)
 	{
 		game->ray.map_intersect_x = (int)game->ray.x / 64;
 		if (game->ray.map_intersect_x >= game->map_width)
@@ -50,7 +50,7 @@ void	cast_horizontal_rays(t_gametest *game)
 void	cast_vertical_rays(t_gametest *game)
 {
 	game->ray.dof = 0;
-	while (game->ray.dof < 8)
+	while (game->ray.dof < 20)
 	{
 		game->ray.map_intersect_x = (int)game->ray.x / 64;
 		if (game->ray.map_intersect_x >= game->map_width)
@@ -137,8 +137,12 @@ void	init_ray(t_gametest *game)
 	// t_point	end_y;
 	t_point	end;
 
-	game->ray.angle = game->player.angle;
-	for (int r = 0; r < 1; r++)
+	game->ray.angle = game->player.angle - DEGINRAD * RAYCOUNT;
+	if (game->ray.angle < 0)
+		game->ray.angle += 2 * M_PI;
+	if (game->ray.angle > 2 * M_PI)
+		game->ray.angle -= 2 * M_PI;
+	for (int r = 0; r < 60; r++)
 	{
 		arc_tan = 1 / tan(game->ray.angle);
 		game->ray.dist_h = 10000000;
@@ -161,7 +165,7 @@ void	init_ray(t_gametest *game)
 			game->ray.x = game->ray.h_x;
 			game->ray.y = game->ray.h_y;
 		}
-		else
+		else if (game->ray.dist_v < game->ray.dist_v)
 		{
 			game->ray.x = game->ray.v_x;
 			game->ray.y = game->ray.v_y;
@@ -169,6 +173,11 @@ void	init_ray(t_gametest *game)
 		end = create_point(game->ray.x, game->ray.y);
 		end.color = GREEN;
 		draw_line_dda(&game->display.img, game->player.position, end);
+		game->ray.angle += DEGINRAD;
+		if (game->ray.angle < 0)
+			game->ray.angle += 2 * M_PI;
+		if (game->ray.angle > 2 * M_PI)
+			game->ray.angle -= 2 * M_PI;
 	}
 }
 

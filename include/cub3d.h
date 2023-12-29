@@ -31,6 +31,8 @@
 
 # define M_PI_3 4.71238898038  //3 *PI/2
 # define FOV 1.0471975512 // M_PI /3
+# define DEGINRAD 0.0174533
+# define RAYCOUNT 30
 
 
 /* Hooks */
