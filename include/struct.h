@@ -62,6 +62,8 @@ typedef struct s_ray
 	float	dist_v;
 	float	h_x;
 	float	h_y;
+	float	v_x;
+	float	v_y;
 }	t_ray;
 
 
