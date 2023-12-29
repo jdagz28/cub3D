@@ -1,7 +1,5 @@
 #include "../include/cub3d.h"
 
-// PARSING DE LA  MAP
-
 int	main(int argc, char **argv)
 {
 	t_game	game;
