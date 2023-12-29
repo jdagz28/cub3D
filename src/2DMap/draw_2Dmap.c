@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:44:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 01:07:15 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 01:53:59 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	draw_map(t_gametest *game)
 	draw_grids(&game->display);
 	draw_player(game);
 	init_ray(game);
+	// draw_ray(game);
 	draw_direction_dda(&game->display.img, game->player.position, game->player.front);
 	mlx_put_image_to_window(game->display.mlx, \
 		game->display.window, game->display.img.img, 0, 0);

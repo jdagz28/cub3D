@@ -19,12 +19,12 @@ int	keybindings(int keycode, t_gametest *game)
 		game->player.position.axis[X] -= game->player.front.dir[X];
 		game->player.position.axis[Y] -= game->player.front.dir[Y];
 	}
-	else if (keycode == K_D)
+	else if (keycode == K_A)
 	{
 		game->player.position.axis[X] += -sin(game->player.angle) * 5;
 		game->player.position.axis[Y] += cos(game->player.angle) * 5;
 	}
-	else if (keycode == K_A)
+	else if (keycode == K_D)
 	{
 		game->player.position.axis[X] += sin(game->player.angle) * 5;
 		game->player.position.axis[Y] += -cos(game->player.angle) * 5;

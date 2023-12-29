@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:01:56 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/28 20:50:58 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 01:23:12 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	draw_direction_dda(t_image_data *img, t_point start, t_vector front)
 	float	indices[2];
 	float	end[2];
 
-	end[X] = start.axis[X] + front.dir[X] * 50;
-	end[Y] = start.axis[Y] + front.dir[Y] * 50;
+	end[X] = start.axis[X] + front.dir[X] * 10;
+	end[Y] = start.axis[Y] + front.dir[Y] * 10;
 	if (fabsf(end[X] - start.axis[X]) \
 			> fabsf(end[Y] - start.axis[Y]))
 		steps = fabsf(end[X] - start.axis[X]);
