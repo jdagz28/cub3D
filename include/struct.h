@@ -55,12 +55,13 @@ typedef struct s_ray
 	float	step_x;
 	float	step_y;
 	float	dof;
-	float	map_intersect_x;
-	float	map_intersect_y;
+	int		map_intersect_x;
+	int		map_intersect_y;
 	float	length;
 	float	dist_h;
-	float	dist_v
-
+	float	dist_v;
+	float	h_x;
+	float	h_y;
 }	t_ray;
 
 

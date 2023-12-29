@@ -6,12 +6,17 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 00:40:17 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 01:09:01 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "map2dtest.h"
+
+float	get_distance(float x1, float y1, float x2, float y2)
+{
+	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
+}
 
 void	cast_horizontal_rays(t_gametest *game)
 {
@@ -19,10 +24,29 @@ void	cast_horizontal_rays(t_gametest *game)
 	while (game->ray.dof < 20)
 	{
 		game->ray.map_intersect_x = (int)game->ray.x / 64;
-		if (game->ray.map_intersect_x >= (int)game->map_width)
+		if (game->ray.map_intersect_x >= game->map_width)
 			game->ray.map_intersect_x = game->map_width - 1;
-		if (game->ray)
+		if (game->ray.map_intersect_x < 0)
+			game->ray.map_intersect_x = 0;
+		game->ray.map_intersect_y = (int)game->ray.y / 64;
+		if (game->ray.map_intersect_y >= game->map_height)
+			game->ray.map_intersect_y = game->map_height - 1;
+		if (game->ray.map_intersect_y < 0)
+			game->ray.map_intersect_y = 0;
+		if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x] == 1)
+		{
+			game->ray.h_x = game->ray.x;
+			game->ray.h_y = game->ray.y;
+			game->ray.dist_h = get_distance(game->player.position.axis[X], \
+					game->player.position.axis[Y], game->ray.x, game->ray.y);
+		}
+		game->ray.x += game->ray.step_x;
+		game->ray.y += game->ray.step_y;
+		game->ray.dof++;
 	}
+	t_point	end = create_point(game->ray.x, game->ray.y);
+	end.color = GREEN;
+	draw_line_dda(&game->display.img, game->player.position, end);
 }
 
 void	set_horizontal_angle(t_gametest *game, float arc_tan)
@@ -53,7 +77,7 @@ void	set_horizontal_angle(t_gametest *game, float arc_tan)
 
 void	init_ray(t_gametest *game)
 {
-	float	tangent;
+	//float	tangent;
 	float	arc_tan;
 
 	arc_tan = -1 / tan(game->player.angle);
