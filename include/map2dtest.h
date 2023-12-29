@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2dtest.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:47:12 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 01:01:27 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 15:17:01 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define TILE_SIZE 64
 # define ROWS 11
 # define COLS 15
-# define WIDTH COLS * TILE_SIZE
+# define WIDTH COLS * TILE_SIZE * 2
 # define HEIGHT ROWS * TILE_SIZE
 # define MOVE_SPEED 10
 # include "cub3d.h"

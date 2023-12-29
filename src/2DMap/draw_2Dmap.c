@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2Dmap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:44:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 01:53:59 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 15:16:12 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	update_player_front(t_player *player)
 
 void	init_player(t_player *player)
 {
-	player->position = create_point(WIDTH / 2, HEIGHT / 2);
+	player->position = create_point((WIDTH / 2) / 2, HEIGHT / 2);
 	player->angle = M_PI / 2;
 	update_player_front(player);
 }

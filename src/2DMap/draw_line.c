@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:01:56 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 01:23:12 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 15:16:02 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	draw_grids(t_display *mlx)
 	t_point	end;
 
 	axis[Y] = 0;
-	while (axis[Y] < WIDTH)
+	while (axis[Y] < WIDTH / 2)
 	{
 		end = create_point(axis[Y], HEIGHT);
 		end.color = GRAY;
@@ -81,7 +81,7 @@ void	draw_grids(t_display *mlx)
 	axis[X] = 0;
 	while (axis[X] < HEIGHT)
 	{
-		end = create_point(WIDTH, axis[X]);
+		end = create_point(WIDTH / 2, axis[X]);
 		end.color = GRAY;
 		draw_line_dda(&mlx->img, create_point(0, axis[X]), end);
 		axis[X] += TILE_SIZE;
