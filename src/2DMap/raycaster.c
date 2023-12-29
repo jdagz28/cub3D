@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 11:32:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 12:34:06 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ float	get_distance(float x1, float y1, float x2, float y2)
 void	cast_horizontal_rays(t_gametest *game)
 {
 	game->ray.dof = 0;
-	while (game->ray.dof < 20)
+	while (game->ray.dof < 8)
 	{
 		game->ray.map_intersect_x = (int)game->ray.x / 64;
 		if (game->ray.map_intersect_x >= game->map_width)
@@ -33,7 +33,8 @@ void	cast_horizontal_rays(t_gametest *game)
 			game->ray.map_intersect_y = game->map_height - 1;
 		if (game->ray.map_intersect_y < 0)
 			game->ray.map_intersect_y = 0;
-		if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x])
+		if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x] == 1 \
+			&& game->ray.map_intersect_y <= game->map_height && game->ray.map_intersect_x <= game->map_width)
 		{
 			game->ray.h_x = game->ray.x;
 			game->ray.h_y = game->ray.y;
@@ -46,11 +47,10 @@ void	cast_horizontal_rays(t_gametest *game)
 		game->ray.dof++;
 	}
 }
-
 void	cast_vertical_rays(t_gametest *game)
 {
 	game->ray.dof = 0;
-	while (game->ray.dof < 20)
+	while (game->ray.dof < 8)
 	{
 		game->ray.map_intersect_x = (int)game->ray.x / 64;
 		if (game->ray.map_intersect_x >= game->map_width)
@@ -62,11 +62,12 @@ void	cast_vertical_rays(t_gametest *game)
 			game->ray.map_intersect_y = game->map_height - 1;
 		if (game->ray.map_intersect_y < 0)
 			game->ray.map_intersect_y = 0;
-		if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x])
+		if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x] == 1 \
+			&& game->ray.map_intersect_y <= game->map_height && game->ray.map_intersect_x <= game->map_width)
 		{
 			game->ray.v_x = game->ray.x;
 			game->ray.v_y = game->ray.y;
-			game->ray.dist_h = get_distance(game->player.position.axis[X], \
+			game->ray.dist_v = get_distance(game->player.position.axis[X], \
 					game->player.position.axis[Y], game->ray.x, game->ray.y);
 			break ;
 		}
@@ -94,7 +95,7 @@ void	set_horizontal_angle(t_gametest *game, float arc_tan)
 		game->ray.step_y = 64;
 		game->ray.step_x = -game->ray.step_y * arc_tan;
 	}
-	if (game->ray.angle == 0 || game->ray.angle == M_PI)
+	else if (game->ray.angle == 0 || game->ray.angle == M_PI)
 	{
 		game->ray.x = game->player.position.axis[X];
 		game->ray.y = game->player.position.axis[Y];
@@ -120,7 +121,7 @@ void	set_vertical_angle(t_gametest *game, float tangent)
 		game->ray.step_x = 64;
 		game->ray.step_y = -game->ray.step_x * tangent;
 	}
-	if (game->ray.angle == M_PI_3 || game->ray.angle == M_PI_2)
+	else if (game->ray.angle == 0 || game->ray.angle == M_PI)
 	{
 		game->ray.x = game->player.position.axis[X];
 		game->ray.y = game->player.position.axis[Y];
@@ -132,28 +133,29 @@ void	init_ray(t_gametest *game)
 {
 	float	tangent;
 	float	arc_tan;
-	t_point	end;
+	t_point	end_x;
+	t_point	end_y;
 
-	arc_tan = 1 / tan(game->player.angle);
-	game->ray.dist_h = 10000000;
-	game->ray.x = game->player.position.axis[X];
-	game->ray.y = game->player.position.axis[Y];
-	set_horizontal_angle(game, arc_tan);
-	cast_horizontal_rays(game);
-	end = create_point(game->ray.h_x, game->ray.h_y);
-	end.color = GREEN;
-	draw_line_dda(&game->display.img, game->player.position, end);
-	tangent = tan(game->ray.angle);
-	game->ray.dist_v = 10000000;
-	if (tangent < -600)
-		tangent = -600;
-	if (tangent > 600)
-		tangent = 600;
-	set_vertical_angle(game, tangent);
-	cast_vertical_rays(game);
-	end = create_point(game->ray.v_x, game->ray.v_y);
-	end.color = GREEN;
-	draw_line_dda(&game->display.img, game->player.position, end);
+	game->ray.angle = game->player.angle;
+	for (int r = 0; r < 1; r++)
+	{
+		arc_tan = 1 / tan(game->ray.angle);
+		game->ray.dist_h = 10000000;
+		game->ray.x = game->player.position.axis[X];
+		game->ray.y = game->player.position.axis[Y];
+		set_horizontal_angle(game, arc_tan);
+		cast_horizontal_rays(game);
+		end_x = create_point(game->ray.h_x, game->ray.h_y);
+		end_x.color = GREEN;
+		draw_line_dda(&game->display.img, game->player.position, end_x);
+		tangent = tan(game->ray.angle);
+		game->ray.dist_v = 10000000;
+		set_vertical_angle(game, tangent);
+		cast_vertical_rays(game);
+		end_y = create_point(game->ray.v_x, game->ray.v_y);
+		end_y.color = RED;
+		draw_line_dda(&game->display.img, game->player.position, end_y);
+	}
 }
 
 void	draw_ray(t_gametest *game)
