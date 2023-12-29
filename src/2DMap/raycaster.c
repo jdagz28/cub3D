@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 01:09:01 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 01:16:08 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	init_ray(t_gametest *game)
 	//float	tangent;
 	float	arc_tan;
 
-	arc_tan = -1 / tan(game->player.angle);
+	arc_tan = 1 / tan(game->player.angle);
 	game->ray.dist_h = -1;
 	game->ray.x = game->player.position.axis[X];
 	game->ray.y = game->player.position.axis[Y];
