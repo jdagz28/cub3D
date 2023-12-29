@@ -45,7 +45,27 @@ typedef struct s_point
 typedef struct s_vector
 {
 	float	dir[2];
-} t_vector;
+}	t_vector;
+
+typedef struct s_ray
+{
+	float	angle;
+	float	x;
+	float	y;
+	float	step_x;
+	float	step_y;
+	float	dof;
+	int		map_intersect_x;
+	int		map_intersect_y;
+	float	length;
+	float	dist_h;
+	float	dist_v;
+	float	h_x;
+	float	h_y;
+	float	v_x;
+	float	v_y;
+}	t_ray;
+
 
 typedef struct s_player
 {

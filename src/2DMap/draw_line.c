@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:01:56 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/28 13:00:03 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 01:23:12 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	draw_direction_dda(t_image_data *img, t_point start, t_vector front)
 	float	indices[2];
 	float	end[2];
 
-	end[X] = start.axis[X] + front.dir[X] * 50;
-	end[Y] = start.axis[Y] + front.dir[Y] * 50;
+	end[X] = start.axis[X] + front.dir[X] * 10;
+	end[Y] = start.axis[Y] + front.dir[Y] * 10;
 	if (fabsf(end[X] - start.axis[X]) \
 			> fabsf(end[Y] - start.axis[Y]))
 		steps = fabsf(end[X] - start.axis[X]);
@@ -56,7 +56,7 @@ void	draw_line_dda(t_image_data *img, t_point start, t_point end)
 	indices[Y] = (end.axis[Y] - start.axis[Y]) / steps;
 	pixel.axis[X] = start.axis[X];
 	pixel.axis[Y] = start.axis[Y];
-	pixel.color = GRAY;
+	pixel.color = end.color;
 	while (steps--)
 	{
 		my_mlx_pixel_put(img, pixel);
@@ -67,20 +67,23 @@ void	draw_line_dda(t_image_data *img, t_point start, t_point end)
 
 void	draw_grids(t_display *mlx)
 {
-	int	axis[2];
+	int		axis[2];
+	t_point	end;
 
 	axis[Y] = 0;
 	while (axis[Y] < WIDTH)
 	{
-		draw_line_dda(&mlx->img, create_point(axis[Y], 0), \
-			create_point(axis[Y], HEIGHT));
+		end = create_point(axis[Y], HEIGHT);
+		end.color = GRAY;
+		draw_line_dda(&mlx->img, create_point(axis[Y], 0), end);
 		axis[Y] += TILE_SIZE;
 	}
 	axis[X] = 0;
 	while (axis[X] < HEIGHT)
 	{
-		draw_line_dda(&mlx->img, create_point(0, axis[X]), \
-			create_point(WIDTH, axis[X]));
+		end = create_point(WIDTH, axis[X]);
+		end.color = GRAY;
+		draw_line_dda(&mlx->img, create_point(0, axis[X]), end);
 		axis[X] += TILE_SIZE;
 	}
 }

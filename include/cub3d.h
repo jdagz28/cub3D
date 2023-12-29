@@ -13,11 +13,13 @@
 # include "enums.h"
 # include "map2dtest.h"
 
-# define PI 3.1415
+
+
 
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define GRAY 0xADADAD
+# define GREEN 0x00FF00
 
 # define WIN_WIDTH 1500
 # define WIN_HEIGHT 1300
@@ -26,6 +28,12 @@
 # define ON_DESTROY 17
 # define X 0
 # define Y 1
+
+# define M_PI_3 4.71238898038  //3 *PI/2
+# define FOV 1.0471975512 // M_PI /3
+# define DEGINRAD 0.0174533
+# define RAYCOUNT 30
+
 
 /* Hooks */
 int		keybindings(int keycode, t_gametest *game);

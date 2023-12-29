@@ -6,14 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:47:12 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/28 02:57:39 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 01:01:27 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP2DTEST_H
 # define MAP2DTEST_H
 
-# define TILE_SIZE 60
+# define TILE_SIZE 64
 # define ROWS 11
 # define COLS 15
 # define WIDTH COLS * TILE_SIZE
@@ -26,6 +26,7 @@ typedef struct s_gametest
 {
 	t_display	display;
 	t_player	player;
+	t_ray		ray;
 	t_texture	texture;
 	//int floor_color;
 	//int ceiling_color;
@@ -50,4 +51,6 @@ void	set_color(char *buffer, int endian, int color, int alpha);
 void	draw_rays2dmap(t_display *mlx, t_point player_pos, t_point dir);
 void draw_direction_dda(t_image_data *img, t_point start, t_vector end);
 void	update_player_front(t_player *player);
+void	draw_ray(t_gametest *game);
+void	init_ray(t_gametest *game);
 #endif

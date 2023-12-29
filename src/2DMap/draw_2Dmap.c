@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2Dmap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:44:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/28 13:00:05 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/29 01:53:59 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ void	draw_player(t_gametest *game)
 		}
 		axis[X]++;
 	}
-	draw_direction_dda(&game->display.img, game->player.position, game->player.front);
 }
 
 void	update_player_front(t_player *player)
 {
 	player->front.dir[X] = cos(player->angle) * 5;
-	player->front.dir[Y] = sin(player->angle) * 5;
+	player->front.dir[Y] = (sin(player->angle) * 5) * -1;
 }
 
 void	init_player(t_player *player)
@@ -75,6 +74,9 @@ int	draw_map(t_gametest *game)
 	draw_maptiles(game, &game->display);
 	draw_grids(&game->display);
 	draw_player(game);
+	init_ray(game);
+	// draw_ray(game);
+	draw_direction_dda(&game->display.img, game->player.position, game->player.front);
 	mlx_put_image_to_window(game->display.mlx, \
 		game->display.window, game->display.img.img, 0, 0);
 	return (0);
