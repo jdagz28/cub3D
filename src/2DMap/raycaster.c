@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/02 01:11:05 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/02 22:58:53 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ void	draw_ray(t_gametest *game)
 	while (++i < RAYCOUNT * 2)
 	{
 		init_ray(game);
+		draw_3d(game, i);
 		game->ray.angle += DEGINRAD;
 		if (game->ray.angle < 0)
 			game->ray.angle += 2 * M_PI;

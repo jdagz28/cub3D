@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2dtest.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:47:12 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 15:17:01 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/02 23:33:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void draw_direction_dda(t_image_data *img, t_point start, t_vector end);
 void	update_player_front(t_player *player);
 void	draw_ray(t_gametest *game);
 void	init_ray(t_gametest *game);
+void	draw_3d(t_gametest *game, int raynum);
 #endif
