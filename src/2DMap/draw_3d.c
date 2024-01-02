@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/02 23:38:36 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/02 23:52:49 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	draw_3d(t_gametest *game, int raynum)
 {
 	int	i;
 
-	i = WIDTH - 1 - raynum * RAYCOUNT / 2;
+	i = WIDTH - 1 - raynum * FOV * 0.95; //0.95 factor to render right side of the window.
 	if (game->ray.dist_h < game->ray.dist_v)
 		game->ray.dist = game->ray.dist_h;
 	else

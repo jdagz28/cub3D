@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/02 22:58:53 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/02 23:49:07 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,16 +173,16 @@ void	draw_ray(t_gametest *game)
 	int	i;
 
 	i = -1;
-	game->ray.angle = game->player.angle - DEGINRAD * RAYCOUNT;
+	game->ray.angle = game->player.angle - FOV / 2;
 	if (game->ray.angle < 0)
 		game->ray.angle += 2 * M_PI;
 	if (game->ray.angle > 2 * M_PI)
 		game->ray.angle -= 2 * M_PI;
-	while (++i < RAYCOUNT * 2)
+	while (++i < WIDTH / 2)
 	{
 		init_ray(game);
 		draw_3d(game, i);
-		game->ray.angle += DEGINRAD;
+		game->ray.angle = game->player.angle + FOV / 2 - FOV * i / (WIDTH / 2);
 		if (game->ray.angle < 0)
 			game->ray.angle += 2 * M_PI;
 		if (game->ray.angle > 2 * M_PI)
