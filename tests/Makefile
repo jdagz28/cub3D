@@ -121,7 +121,6 @@ clean:
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(GNL_DIR)
-	@rm $(MLX)
 	@rm -f $(NAME)
 
 re: fclean all
