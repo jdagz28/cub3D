@@ -20,22 +20,19 @@ static void	arg_error(int argc, char **argv)
 // Return 1 si toutes les textures sont assignees
 static	int check_all_textures(t_texture *texture)
 {
-	int i;
-
-	i = 1;
 	if (texture->north == NULL)
-		i = 0;
+		return (0);
 	if (texture->south == NULL)
-		i = 0;
+		return (0);
 	if (texture->west == NULL)
-		i = 0;
+		return (0);
 	if (texture->east == NULL)
-		i = 0;
+		return (0);
 	if (texture->floor == -1)
-		i = 0;
+		return (0);
 	if (texture->ceiling == -1)
-		i = 0;
-	return (i);
+		return (0);
+	return (1);
 }
 
 char	*check_empty(int fd, char *line) // mettre dans utils.c
@@ -46,76 +43,40 @@ char	*check_empty(int fd, char *line) // mettre dans utils.c
 }
 
 /*
-char	*add_line_to_array(char *line) // mettre dans array.c
+void print_map(char **map)
 {
-	char	*new = malloc(ft_strlen(line) + 1);
-
-	if (new == NULL)
-		exit(EXIT_FAILURE); // !!exit et free!! (delete)
-	ft_strlcpy(new, line, ft_strlen(line));
-	return (new);
-}
-
-void test_ft(int fd, char *line)
-{
-	line = check_empty(fd, line);
-	while (line)
-	{
-		printf("Printf line : %s\n", line);
-		line = get_next_line(fd);
-		//put line in array
-	}
-}
-
-char	**map_array(int fd, char *line)
-{
-	int	i;
-	int	j;
-	char	**array;
-
+	int i, j;
 	i = 0;
-	j = 0;
-	array = NULL;
-	line = check_empty(fd, line);
-	while (line)
-	{
 
-		array[i] = add_line_to_array(line);
-		line = get_next_line(fd);
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			printf("%c", map[i][j]);
+			j++;
+		}
+		printf("\n");
 		i++;
-		//put line in array
 	}
-	return (array);
 }
 */
 
-void print_map(char **map)
+char	**get_map(int fd, char *start) // rajouter une * pour array
 {
-	for (int j = 0; j < 5; j++)
-	{
-		for (int i = 0; i < 7; i++)
-		{
-			printf("%c", map[j][i]);
-		}
-		printf("\n");
-	}
-}
+	char	*line;
+	char	**array;
 
-char	*get_map(int fd, char *line) // rajouter une * pour array
-{
-	char	*long_line;
-
-	long_line = ft_strdup(line);
-	
+	start = check_empty(fd, start);
 	line = get_next_line(fd);
 	while (line)
 	{
-		printf("longline = %s\nline = %s\n", long_line, line);
-		ft_strlcat(long_line, line, ft_strlen(long_line));
+		start = ft_strjoin(start, line);
 		line = get_next_line(fd);
 	}
-	printf("Long_line = %s\n", long_line);
-	return (long_line); // change return with the array
+	free(line);
+	array = ft_split(start, '\n');
+	return (array);
 }
 
 // Lire line apres line et les ajoutes a long_line
@@ -142,10 +103,8 @@ static void	get_data(t_game *game)
 		printf("Test: Manque des textures\n");
 		exit(1);
 	}
-	// fonction check map open
-	//test_ft(game->fd, line);
-	//print_map(map_array(game->fd, line));
-	get_map(game->fd, line);
+	game->map = get_map(game->fd, line);
+	//print_map(game->map); // (delete)
 }
 
 int	parsing(int argc, char **argv, t_game *game)

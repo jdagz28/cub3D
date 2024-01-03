@@ -46,7 +46,6 @@ $(NAME):		$(OBJS)
 				@make -C ${MLX_DIR}
 				@echo "Compiling..."
 				@$(CC) $(CFLAGS) $(OBJS) $(DIRS) $(READL) $(GNL) $(LIBFT) $(MLX) -o $(NAME)
-				@echo "Done.\n"
 
 .c.o:
 				@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
