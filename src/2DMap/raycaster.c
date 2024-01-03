@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/02 23:49:07 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/03 13:48:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,27 @@ void	set_vertical_angle(t_gametest *game, float tangent)
 	}
 }
 
+void	calculate_shading(t_gametest * game)
+{
+	if (game->ray.dist_h < game->ray.dist_v)
+	{
+		game->ray.shade = 0.5;
+		game->ray.x = game->ray.h_x;
+		game->ray.y = game->ray.h_y;
+		game->ray.dist = game->ray.dist_h;
+		game->ray.color = RED;
+		game->ray.hit = 1;
+	}
+	else if (game->ray.dist_v < game->ray.dist_h)
+	{
+		game->ray.x = game->ray.v_x;
+		game->ray.y = game->ray.v_y;
+		game->ray.dist = game->ray.dist_v;
+		game->ray.color = 0x9B0000;
+		game->ray.hit = -1;
+	}
+}
+
 void	init_ray(t_gametest *game)
 {
 	float	tangent;
@@ -153,16 +174,7 @@ void	init_ray(t_gametest *game)
 	// end_y = create_point(game->ray.v_x, game->ray.v_y);
 	// end_y.color = RED;
 	// draw_line_dda(&game->display.img, game->player.position, end_y);
-	if (game->ray.dist_h < game->ray.dist_v)
-	{
-		game->ray.x = game->ray.h_x;
-		game->ray.y = game->ray.h_y;
-	}
-	else if (game->ray.dist_v < game->ray.dist_h)
-	{
-		game->ray.x = game->ray.v_x;
-		game->ray.y = game->ray.v_y;
-	}
+	calculate_shading(game);
 	end = create_point(game->ray.x, game->ray.y);
 	end.color = GREEN;
 	draw_line_dda(&game->display.img, game->player.position, end);
