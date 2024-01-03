@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 13:51:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/03 13:48:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,27 @@ void	set_vertical_angle(t_gametest *game, float tangent)
 	}
 }
 
+void	calculate_shading(t_gametest * game)
+{
+	if (game->ray.dist_h < game->ray.dist_v)
+	{
+		game->ray.shade = 0.5;
+		game->ray.x = game->ray.h_x;
+		game->ray.y = game->ray.h_y;
+		game->ray.dist = game->ray.dist_h;
+		game->ray.color = RED;
+		game->ray.hit = 1;
+	}
+	else if (game->ray.dist_v < game->ray.dist_h)
+	{
+		game->ray.x = game->ray.v_x;
+		game->ray.y = game->ray.v_y;
+		game->ray.dist = game->ray.dist_v;
+		game->ray.color = 0x9B0000;
+		game->ray.hit = -1;
+	}
+}
+
 void	init_ray(t_gametest *game)
 {
 	float	tangent;
@@ -137,64 +158,43 @@ void	init_ray(t_gametest *game)
 	// t_point	end_y;
 	t_point	end;
 
-	game->ray.angle = game->player.angle - DEGINRAD * RAYCOUNT;
-	if (game->ray.angle < 0)
-		game->ray.angle += 2 * M_PI;
-	if (game->ray.angle > 2 * M_PI)
-		game->ray.angle -= 2 * M_PI;
-	for (int r = 0; r < 60; r++)
-	{
-		arc_tan = 1 / tan(game->ray.angle);
-		game->ray.dist_h = 10000000;
-		game->ray.x = game->player.position.axis[X];
-		game->ray.y = game->player.position.axis[Y];
-		set_horizontal_angle(game, arc_tan);
-		cast_horizontal_rays(game);
-		// end_x = create_point(game->ray.h_x, game->ray.h_y);
-		// end_x.color = GREEN;
-		// draw_line_dda(&game->display.img, game->player.position, end_x);
-		tangent = tan(game->ray.angle);
-		game->ray.dist_v = 10000000;
-		set_vertical_angle(game, tangent);
-		cast_vertical_rays(game);
-		// end_y = create_point(game->ray.v_x, game->ray.v_y);
-		// end_y.color = RED;
-		// draw_line_dda(&game->display.img, game->player.position, end_y);
-		if (game->ray.dist_h < game->ray.dist_v)
-		{
-			game->ray.x = game->ray.h_x;
-			game->ray.y = game->ray.h_y;
-		}
-		else if (game->ray.dist_v < game->ray.dist_v)
-		{
-			game->ray.x = game->ray.v_x;
-			game->ray.y = game->ray.v_y;
-		}
-		end = create_point(game->ray.x, game->ray.y);
-		end.color = GREEN;
-		draw_line_dda(&game->display.img, game->player.position, end);
-		game->ray.angle += DEGINRAD;
-		if (game->ray.angle < 0)
-			game->ray.angle += 2 * M_PI;
-		if (game->ray.angle > 2 * M_PI)
-			game->ray.angle -= 2 * M_PI;
-	}
+	arc_tan = 1 / tan(game->ray.angle);
+	game->ray.dist_h = 10000000;
+	game->ray.x = game->player.position.axis[X];
+	game->ray.y = game->player.position.axis[Y];
+	set_horizontal_angle(game, arc_tan);
+	cast_horizontal_rays(game);
+	// end_x = create_point(game->ray.h_x, game->ray.h_y);
+	// end_x.color = GREEN;
+	// draw_line_dda(&game->display.img, game->player.position, end_x);
+	tangent = tan(game->ray.angle);
+	game->ray.dist_v = 10000000;
+	set_vertical_angle(game, tangent);
+	cast_vertical_rays(game);
+	// end_y = create_point(game->ray.v_x, game->ray.v_y);
+	// end_y.color = RED;
+	// draw_line_dda(&game->display.img, game->player.position, end_y);
+	calculate_shading(game);
+	end = create_point(game->ray.x, game->ray.y);
+	end.color = GREEN;
+	draw_line_dda(&game->display.img, game->player.position, end);
 }
 
 void	draw_ray(t_gametest *game)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	game->ray.angle = game->player.angle - FOV / 2;
 	if (game->ray.angle < 0)
 		game->ray.angle += 2 * M_PI;
 	if (game->ray.angle > 2 * M_PI)
 		game->ray.angle -= 2 * M_PI;
-	while (i < WIDTH)
+	while (++i < WIDTH / 2)
 	{
 		init_ray(game);
-		game->ray.angle = game->player.angle + FOV / 2 - FOV * i / WIDTH;
+		draw_3d(game, i);
+		game->ray.angle = game->player.angle + FOV / 2 - FOV * i / (WIDTH / 2);
 		if (game->ray.angle < 0)
 			game->ray.angle += 2 * M_PI;
 		if (game->ray.angle > 2 * M_PI)

@@ -62,7 +62,8 @@ FILES               	:= draw_2Dmap.c\
 							draw_maptiles.c\
 							pixel_color.c\
 							main.c\
-							raycaster.c
+							raycaster.c\
+							draw_3d.c
 
 SRC_FILES				:=	mlx_draw.c\
 							mlx_init.c\

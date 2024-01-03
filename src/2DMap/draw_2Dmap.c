@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:44:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2023/12/29 01:53:59 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/02 23:33:35 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	update_player_front(t_player *player)
 
 void	init_player(t_player *player)
 {
-	player->position = create_point(WIDTH / 2, HEIGHT / 2);
+	player->position = create_point((WIDTH / 2) / 2, HEIGHT / 2);
 	player->angle = M_PI / 2;
 	update_player_front(player);
 }
@@ -74,8 +74,8 @@ int	draw_map(t_gametest *game)
 	draw_maptiles(game, &game->display);
 	draw_grids(&game->display);
 	draw_player(game);
-	init_ray(game);
-	// draw_ray(game);
+	// init_ray(game);
+	draw_ray(game);
 	draw_direction_dda(&game->display.img, game->player.position, game->player.front);
 	mlx_put_image_to_window(game->display.mlx, \
 		game->display.window, game->display.img.img, 0, 0);
