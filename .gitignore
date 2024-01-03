@@ -1,10 +1,11 @@
 cub3D
 objects/
 *.o
-./src/2DMap/objects/
-./src/2DMap/cub3D
-./src/get_next_line/objects/
+./tests/objects/
+./tests/cub3D
 .vscode
 .editorconfig
+./src/get_next_line/objects/
 ./src/get_next_line/libgnl.a
+./src/Libft/objects/
 ./src/Libft/libft.a

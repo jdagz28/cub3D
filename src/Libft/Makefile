@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/11 15:22:24 by gmarchal          #+#    #+#              #
-#    Updated: 2023/12/27 01:30:46 by jdagoy           ###   ########.fr        #
+#    Updated: 2024/01/03 15:04:08 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ FILES = ft_memset ft_memcpy ft_memmove ft_memchr ft_memcmp \
 
 SRCS = $(addsuffix .c, $(FILES))
 
-OBJS = $(SRCS:.c=.o)
+OBJ_DIR = ./objects/
+OBJ_LIST = $(patsubst %.c, %.o, $(SRCS))
+OBJS = $(addprefix $(OBJ_DIR), $(OBJ_LIST))
 
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
@@ -31,8 +33,13 @@ CC = gcc
 RM = rm -f
 
 all: $(NAME)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(OBJS)
+$(OBJ_DIR)%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@ 
+
+$(NAME): $(OBJ_DIR) $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 
 .c.o:
