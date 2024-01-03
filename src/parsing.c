@@ -42,27 +42,7 @@ char	*check_empty(int fd, char *line) // mettre dans utils.c
 	return (line);
 }
 
-/*
-void print_map(char **map)
-{
-	int i, j;
-	i = 0;
-
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			printf("%c", map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
-*/
-
-char	**get_map(int fd, char *start) // rajouter une * pour array
+char	**get_map(int fd, char *start)
 {
 	char	*line;
 	char	**array;
@@ -79,7 +59,53 @@ char	**get_map(int fd, char *start) // rajouter une * pour array
 	return (array);
 }
 
-// Lire line apres line et les ajoutes a long_line
+//Check_map.c
+
+int	check_char(char	c)
+{
+	if (c == '0' || c == '1')
+		return (1);
+	else if (c == ' ')
+		return (2);
+	else if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		return (3);
+	else
+		return (0);
+}
+
+int	check_map(char **map)
+{
+	int	i;
+	int	j;
+	int	spawn;
+
+	i = 0;
+	spawn = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (check_char(map[i][j]) == 0)
+			{
+				printf("Error: Wrong char in map\n");
+				exit(1); // free + delete
+			}
+			else if (check_char(map[i][j]) == 2)
+				map[i][j] = '2';
+			else if (check_char(map[i][j]) == 3)
+					spawn += 1;
+			j++;
+		}
+		i++;
+	}
+	if (spawn != 1)
+	{
+		printf("Error: More than one spawn\n");
+		exit(1); // free et delete
+	}
+	return (0);
+}
 
 static void	get_data(t_game *game)
 {
@@ -104,6 +130,7 @@ static void	get_data(t_game *game)
 		exit(1);
 	}
 	game->map = get_map(game->fd, line);
+	check_map(game->map);
 	//print_map(game->map); // (delete)
 }
 
