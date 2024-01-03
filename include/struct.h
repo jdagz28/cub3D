@@ -78,17 +78,18 @@ typedef struct s_player
 {
 	t_point		position;
 	t_point		mat_position;
-	t_vector	front; //delta
-	t_vector	cam;
+	t_vector	front;
 	float		angle;
 }	t_player;
 
 typedef struct s_game
 {
+	t_display	display;
 	t_player	player;
+	t_ray		ray;
 	t_texture	texture;
-	//int floor_color;
-	//int ceiling_color;
+	int			floor_color;
+	int			ceiling_color;
 	int			map_width;
 	int			map_height;
 	char		**map;
