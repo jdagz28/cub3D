@@ -1,7 +1,13 @@
 #include "../include/cub3d.h"
 
-static int	check_texture(void *texture)
+static int	check_texture(char *texture, char *path)
 {
+	if (ft_strncmp(&path[ft_strlen(path) - 5], ".xpm\n", 4) != 0) // segfault
+	{
+		printf("Error: Textures not valid.\n");
+		printf("Test ---------> %s\n", path); // test (delete)
+		exit(EXIT_FAILURE);
+	}
 	if (texture == NULL)
 		return (0);
 	else
@@ -65,16 +71,16 @@ static int	get_rgb(t_texture *texture, char c, char *path) // fonction trop long
 static void	assign_texture(t_texture *texture, char *direction, char *path)
 {
 	if (ft_strncmp(direction, "NO", ft_strlen(direction)) == 0)
-		if (!(check_texture(texture->north)))
+		if (!(check_texture(texture->north, path)))
 				texture->north = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "SO", ft_strlen(direction)) == 0)
-		if (!(check_texture(texture->south)))
+		if (!(check_texture(texture->south, path)))
 				texture->south = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "WE", ft_strlen(direction)) == 0)
-		if (!(check_texture(texture->west)))
+		if (!(check_texture(texture->west, path)))
 				texture->west = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "EA", ft_strlen(direction)) == 0)
-		if (!(check_texture(texture->east)))
+		if (!(check_texture(texture->east, path)))
 				texture->east = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "F", ft_strlen(direction)) == 0)
 	{
