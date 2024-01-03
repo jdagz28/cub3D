@@ -25,3 +25,8 @@ int	rgb_to_hex(int red, int green, int blue)
 		res = (red << 16) | (green << 8) | blue;
 	return (res);
 }
+
+float	deg_to_rad(float degrees)
+{
+	return (degrees * (M_PI / 180));
+}

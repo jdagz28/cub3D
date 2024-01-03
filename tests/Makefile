@@ -6,14 +6,14 @@ ifeq ($(OS_NAME), Linux)
     FRAMEWORK           :=
     LINUX_LIBS          := -lXext -lX11
     LINUX_INCLUDES      := -I/usr/include
-    MLX_DIR             := ../../minilibx/minilibx-linux
+    MLX_DIR             := ../minilibx/minilibx-linux
     OS_FLAG             := -D LINUX
 else
     FSANITIZE           := #-fsanitize=address
     FRAMEWORK           := -framework OpenGL -framework AppKit
     LINUX_LIBS          :=
     LINUX_INCLUDES      :=
-    MLX_DIR             := ../../minilibx/mlx
+    MLX_DIR             := ../minilibx/mlx
     OS_FLAG             := -D OSX
 endif
 
@@ -31,19 +31,19 @@ CC                  	:= gcc
 CFLAGS              	:= -Wall -Werror -Wextra $(FSANITIZE) $(OS_FLAG)
 
 OBJ_DIR             	:= ./objects/
-INCLUDE_DIR         	:= ../../include/
-SRCS_DIR				:= ./
-MAIN_SRCS				:= ../
+INCLUDE_DIR         	:= ../include/
+TEST_SRCS_DIR			:= ./
+MAIN_SRCS				:= ../src/
 
 ### minilibx
 MLX			           	:= $(MLX_DIR)/libmlx.a
 
 ### Get_next_line
-GNL_DIR             	:= ../get_next_line
+GNL_DIR             	:= ../src/get_next_line
 GNL                 	:= $(GNL_DIR)/libgnl.a
 
 ### Libft
-LIBFT_DIR           	:= ../Libft
+LIBFT_DIR           	:= ../src/Libft
 LIBFT               	:= $(LIBFT_DIR)/libft.a
 
 LIBRARIES           	:= -lmlx -lm -L. -L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lgnl \
@@ -57,17 +57,23 @@ HEADER					:= cub3d.h\
 							map2dtest.h
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER))
 
-FILES               	:= draw_2Dmap.c\
-							draw_line.c\
-							draw_maptiles.c\
-							pixel_color.c\
-							main.c\
-							raycaster.c\
-							draw_3d.c
+FILES               	:= main.c
 
-SRC_FILES				:=	mlx_draw.c\
+SRC_FILES				:= create_vectorpoint.c\
+							draw_3d.c\
+							draw_line.c\
+							draw_map.c\
+							draw_maptiles_bonus.c\
+							draw_minimap_bonus.c\
+							init_player.c\
+							pixel_color.c\
+							raycaster_angles.c\
+							raycaster_castrays.c\
+							raycaster.c\
+							mlx_draw.c\
 							mlx_init.c\
-							hooks.c
+							hooks.c\
+							utils.c
 
 OBJ_LIST                := $(patsubst %.c,%.o,$(FILES))
 OBJS                    := $(addprefix $(OBJ_DIR),$(OBJ_LIST))
@@ -81,7 +87,7 @@ all: $(NAME)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(HEADER_FILES)
+$(OBJ_DIR)%.o: $(TEST_SRCS_DIR)%.c $(HEADER_FILES)
 	@$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
 $(OBJ_DIR)%.o: $(MAIN_SRCS)/%.c $(HEADER_FILES)
@@ -115,7 +121,6 @@ clean:
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(GNL_DIR)
-	@rm $(MLX)
 	@rm -f $(NAME)
 
 re: fclean all

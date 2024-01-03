@@ -6,14 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/03 13:46:02 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/03 14:43:34 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "map2dtest.h"
 
-float	fix_fisheye(t_gametest *game)
+static float	fix_fisheye(t_gametest *game)
 {
 	float	angle;
 
@@ -25,7 +25,7 @@ float	fix_fisheye(t_gametest *game)
 	return (angle);
 }
 
-void	draw_wall(t_gametest *game, int i, int j)
+static void	draw_wall(t_gametest *game, int i, int j)
 {
 	int		counter;
 	t_point	pixel;

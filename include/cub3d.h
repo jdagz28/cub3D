@@ -14,7 +14,7 @@
 # include "map2dtest.h"
 
 
-
+# define TILE_SIZE 64
 
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
@@ -32,26 +32,70 @@
 # define M_PI_3 4.71238898038  //3 *PI/2
 # define FOV 1.0471975512 // M_PI /3
 # define DEGINRAD 0.0174533
-# define RAYCOUNT 30
-
 
 /* Hooks */
-int		keybindings(int keycode, t_gametest *game);
-int		close_window_cross(t_display *display);
-void	init_mlx(t_display *display, t_image_data *img);
-void	my_mlx_pixel_put(t_image_data *img, t_point pixel);
+int			keybindings(int keycode, t_gametest *game);
+int			close_window_cross(t_display *display);
 
 /* Parsing */
-int	parsing(int argc, char **argv, t_game *game);
+int			parsing(int argc, char **argv, t_game *game);
 
 /* Init */
-t_game *init_game(t_game *game);
+t_game		*init_game(t_game *game);
 
 /* Texture */
-void	get_texture(t_texture *texture, char *line);
+void		get_texture(t_texture *texture, char *line);
 
 /* Utils */
-int	len_split(char **split);
-int	rgb_to_hex(int red, int green, int blue);
+int			len_split(char **split);
+int			rgb_to_hex(int red, int green, int blue);
+float		deg_to_rad(float degrees);
+
+// mlx
+void		init_mlx(t_display *display, t_image_data *img);
+void		my_mlx_pixel_put(t_image_data *img, t_point pixel);
+
+// create_vectorpoint.c
+t_point		create_point(float x, float y);
+t_vector	create_vector(float x, float y);
+
+// draw_3d.c
+void		draw_3d(t_gametest *game, int raynum);
+
+// draw_line.c
+void		draw_direction_dda(t_image_data *img, t_point start, \
+									t_vector front);
+void		draw_line_dda(t_image_data *img, t_point start, t_point end);
+
+// draw_map.c
+int			draw_map(t_gametest *game);
+
+//! draw_maptiles_bonus.c
+void		draw_grids(t_display *mlx);
+void		fill_maptile(t_display *mlx, int x, int y);
+void		draw_maptiles(t_gametest *game, t_display *mlx);
+
+//! draw_minimap_bonus.c
+void		draw_minimap(t_gametest *game);
+
+// init_player.c
+void		update_player_front(t_player *player);
+void		init_player(t_player *player);
+
+// set_color.c
+void		set_color(char *buffer, int endian, int color, int alpha);
+
+// raycaster_angles.c
+void		set_horizontal_angle(t_gametest *game, float arc_tan);
+void		set_vertical_angle(t_gametest *game, float tangent);
+
+// raycaster_castrays.c
+void		cast_horizontal_rays(t_gametest *game);
+void		cast_vertical_rays(t_gametest *game);
+
+// raycaster.c
+float		get_distance(float x1, float y1, float x2, float y2);
+void		draw_ray(t_gametest *game);
+
 
 #endif

@@ -6,19 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:44:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/02 23:33:35 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/03 14:35:29 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "map2dtest.h"
 
-float	deg2rad(float degrees)
-{
-	return (degrees * (M_PI / 180));
-}
-
-void	draw_playerpos(t_display *mlx, t_player *player, \
+static void	draw_playerpos(t_display *mlx, t_player *player, \
 							int axis[2], int radius)
 {
 	int	pixel;
@@ -36,7 +31,7 @@ void	draw_playerpos(t_display *mlx, t_player *player, \
 	}
 }
 
-void	draw_player(t_gametest *game)
+static void	draw_player(t_gametest *game)
 {
 	int			axis[2];
 	int			radius;
@@ -55,29 +50,11 @@ void	draw_player(t_gametest *game)
 	}
 }
 
-void	update_player_front(t_player *player)
+void	draw_minimap(t_gametest *game)
 {
-	player->front.dir[X] = cos(player->angle) * 5;
-	player->front.dir[Y] = (sin(player->angle) * 5) * -1;
-}
-
-void	init_player(t_player *player)
-{
-	player->position = create_point((WIDTH / 2) / 2, HEIGHT / 2);
-	player->angle = M_PI / 2;
-	update_player_front(player);
-}
-
-int	draw_map(t_gametest *game)
-{
-	ft_bzero(game->display.img.address, WIDTH * HEIGHT * 4);
 	draw_maptiles(game, &game->display);
 	draw_grids(&game->display);
 	draw_player(game);
-	// init_ray(game);
-	draw_ray(game);
-	draw_direction_dda(&game->display.img, game->player.position, game->player.front);
-	mlx_put_image_to_window(game->display.mlx, \
-		game->display.window, game->display.img.img, 0, 0);
-	return (0);
 }
+
+
