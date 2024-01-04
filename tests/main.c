@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/04 03:07:56 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/04 14:48:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,16 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	// init_testmap(&game);
 	// parsing(argc, argv, &game);
 	game.map = testmap;
 	game.map_height = 11;
 	game.map_width = 15;
 	// print_map(&game);
+	game.floor_color = 0x6F8FAF;
+	game.ceiling_color = 0x0000FF;
 	mlx.mlx = mlx_init();
 	game.window_width = game.map_width * TILE_SIZE * 2;
 	game.window_height = game.map_height * TILE_SIZE;
-	// printf("%d %d\n", game.window_height, game.window_width);
-	// fflush(stdout);
 	mlx.window = mlx_new_window(mlx.mlx, game.window_width, \
 				game.window_height, "cub3D");
 	mlx.img.img = mlx_new_image(mlx.mlx, game.window_width, game.window_height);
