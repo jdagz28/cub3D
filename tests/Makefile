@@ -53,8 +53,8 @@ INCLUDES            	:= -I$(LIBFT_DIR) -I$(GNL_DIR) -I$(INCLUDE_DIR) -I$(MLX_DIR
 
 HEADER					:= cub3d.h\
 							enums.h\
-							struct.h\
-							map2dtest.h
+							struct.h
+							
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER))
 
 FILES               	:= main.c
