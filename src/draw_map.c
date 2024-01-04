@@ -6,15 +6,16 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:27:39 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/03 14:57:14 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/04 03:04:03 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	draw_map(t_gametest *game)
+int	draw_map(t_game *game)
 {
-	ft_bzero(game->display.img.address, WIDTH * HEIGHT * 4);
+	ft_bzero(game->display.img.address, game->window_width \
+					* game->window_height * 4);
 	draw_minimap(game);
 	draw_ray(game);
 	draw_direction_dda(&game->display.img, game->player.position, \

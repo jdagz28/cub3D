@@ -6,13 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:30:07 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/03 14:48:10 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/04 02:02:17 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	set_horizontal_angle(t_gametest *game, float arc_tan)
+void	set_horizontal_angle(t_game *game, float arc_tan)
 {
 	if (game->ray.angle < M_PI)
 	{
@@ -38,7 +38,7 @@ void	set_horizontal_angle(t_gametest *game, float arc_tan)
 	}
 }
 
-void	set_vertical_angle(t_gametest *game, float tangent)
+void	set_vertical_angle(t_game *game, float tangent)
 {
 	if (game->ray.angle > M_PI_2 && game->ray.angle < M_PI_3)
 	{

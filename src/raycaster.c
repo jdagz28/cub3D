@@ -6,19 +6,18 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/03 14:50:05 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/04 03:06:53 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "map2dtest.h"
 
 float	get_distance(float x1, float y1, float x2, float y2)
 {
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
 
-static void	calculate_shading(t_gametest *game)
+static void	calculate_shading(t_game *game)
 {
 	if (game->ray.dist_h < game->ray.dist_v)
 	{
@@ -39,7 +38,7 @@ static void	calculate_shading(t_gametest *game)
 	}
 }
 
-static void	init_ray(t_gametest *game)
+static void	init_ray(t_game *game)
 {
 	float	tangent;
 	float	arc_tan;
@@ -61,7 +60,7 @@ static void	init_ray(t_gametest *game)
 	draw_line_dda(&game->display.img, game->player.position, end);
 }
 
-void	draw_ray(t_gametest *game)
+void	draw_ray(t_game *game)
 {
 	int	i;
 
@@ -71,11 +70,12 @@ void	draw_ray(t_gametest *game)
 		game->ray.angle += 2 * M_PI;
 	if (game->ray.angle > 2 * M_PI)
 		game->ray.angle -= 2 * M_PI;
-	while (++i < WIDTH / 2)
+	while (++i < game->window_width / 2)
 	{
 		init_ray(game);
 		draw_3d(game, i);
-		game->ray.angle = game->player.angle + FOV / 2 - FOV * i / (WIDTH / 2);
+		game->ray.angle = game->player.angle + FOV / 2 - \
+							FOV * i / (game->window_width / 2);
 		if (game->ray.angle < 0)
 			game->ray.angle += 2 * M_PI;
 		if (game->ray.angle > 2 * M_PI)
