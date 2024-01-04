@@ -6,20 +6,20 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:31:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/03 14:34:34 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/04 03:05:06 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	check_wallcollision(t_gametest *game)
+static int	check_wallcollision(t_game *game)
 {
-	if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x] == 1)
+	if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x] == '1')
 		return (1);
 	return (0);
 }
 
-void	cast_horizontal_rays(t_gametest *game)
+void	cast_horizontal_rays(t_game *game)
 {
 	game->ray.dof = 0;
 	while (game->ray.dof < 20)
@@ -48,7 +48,7 @@ void	cast_horizontal_rays(t_gametest *game)
 	}
 }
 
-void	cast_vertical_rays(t_gametest *game)
+void	cast_vertical_rays(t_game *game)
 {
 	game->ray.dof = 0;
 	while (game->ray.dof < 20)

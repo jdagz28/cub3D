@@ -1,7 +1,6 @@
 #include "../include/cub3d.h"
-#include "map2dtest.h"
 
-int	keybindings(int keycode, t_gametest *game)
+int	keybindings(int keycode, t_game *game)
 {
 	if (keycode == K_ESC)
 	{
