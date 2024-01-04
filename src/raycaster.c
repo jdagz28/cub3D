@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/04 03:06:53 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/04 03:18:14 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	init_ray(t_game *game)
 	calculate_shading(game);
 	end = create_point(game->ray.x, game->ray.y);
 	end.color = GREEN;
-	draw_line_dda(&game->display.img, game->player.position, end);
+	draw_line_dda(game, &game->display.img, game->player.position, end);
 }
 
 void	draw_ray(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/04 02:53:45 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/04 03:15:55 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	draw_wall(t_game *game, int i, int j)
 	{
 		pixel = create_point(i, j + counter);
 		pixel.color = game->ray.color;
-		my_mlx_pixel_put(&game->display.img, pixel);
+		my_mlx_pixel_put(game, &game->display.img, pixel);
 	}
 }
 

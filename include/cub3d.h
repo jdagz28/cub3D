@@ -32,9 +32,6 @@
 # define FOV 1.0471975512 // M_PI /3
 # define DEGINRAD 0.0174533
 
-#define WIDTH 1920
-#define HEIGHT 704
-
 /* Hooks */
 int			keybindings(int keycode, t_game *game);
 int			close_window_cross(t_display *display);
@@ -55,7 +52,7 @@ float		deg_to_rad(float degrees);
 
 // mlx
 void		init_mlx(t_display *display, t_image_data *img);
-void		my_mlx_pixel_put(t_image_data *img, t_point pixel);
+void		my_mlx_pixel_put(t_game *game, t_image_data *img, t_point pixel);
 
 // create_vectorpoint.c
 t_point		create_point(float x, float y);
@@ -65,9 +62,10 @@ t_vector	create_vector(float x, float y);
 void		draw_3d(t_game *game, int raynum);
 
 // draw_line.c
-void		draw_direction_dda(t_image_data *img, t_point start, \
-									t_vector front);
-void		draw_line_dda(t_image_data *img, t_point start, t_point end);
+void		draw_direction_dda(t_game *game, t_image_data *img, t_point start, \
+							t_vector front);
+void		draw_line_dda(t_game *game, t_image_data *img, t_point start, \
+						t_point end);
 
 // draw_map.c
 int			draw_map(t_game *game);
