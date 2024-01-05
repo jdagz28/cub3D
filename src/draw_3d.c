@@ -6,11 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/05 04:06:46 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/05 04:27:55 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "enums.h"
 
 static float	fix_fisheye(t_game *game)
 {
@@ -24,22 +25,19 @@ static float	fix_fisheye(t_game *game)
 	return (angle);
 }
 
-static float	get_direction(t_game *game)
+static int	get_direction(t_game *game)
 {
 	if (game->ray.hit == 1)
 	{
 		if (game->ray.angle > M_PI)
-			return (South);
+			return (SOUTH);
 		else
-			return (North);
+			return (NORTH);
 	}
+	else if (game->ray.angle > M_PI_2 && game->ray.angle < M_PI_3)
+		return (WEST);
 	else
-	{
-		if (game->ray.angle > M_PI_2 && game->ray.angle < M_PI_3)
-			return (West);
-		else
-			return (East);
-	}
+		return (EAST);
 }
 
 static float	check_rayhit(t_game *game, float x)
@@ -47,21 +45,22 @@ static float	check_rayhit(t_game *game, float x)
 	if (game->ray.hit == 1)
 	{
 		x = (int)(game->ray.x / 3) % TILE_SIZE;
-		if (get_direction(game) == South)
+		if (get_direction(game) == SOUTH)
 			return (TILE_SIZE - x - 1);
 	}
 	else
 	{
 		x = (int)(game->ray.y / 2) % TILE_SIZE;
-		if (get_direction(game) == West)
+		if (get_direction(game) == WEST)
 			return (TILE_SIZE - x - 1);
 	}
+	return (x);
 }
 
 static void	draw_wall(t_game *game, int i, int j)
 {
 	int				counter;
-	// t_point			pixel;
+	t_point			pixel;
 	t_walltexture	texture;
 
 	texture.y_step = TILE_SIZE / game->ray.height;
@@ -77,8 +76,8 @@ static void	draw_wall(t_game *game, int i, int j)
 	counter = -1;
 	while (++counter < game->ray.height)
 	{
-		// pixel = create_point(i, j + counter);
-		// pixel.color = game->ray.color;
+		pixel = create_point(i, j + counter);
+		pixel.color = game->ray.color;
 		my_mlx_pixel_put(game, &game->display.img, pixel);
 	}
 }

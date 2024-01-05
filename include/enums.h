@@ -63,14 +63,13 @@ enum {
 	K_E = 14
 };
 
-enum e_directions
-{
-	North,
-	South,
-	East,
-	West
-}
-
 #endif
+
+enum e_directions {
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+};
 
 #endif
