@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/05 05:00:14 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/06 01:18:01 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,20 @@ static void	draw_wall(t_game *game, int i, int j)
 	counter = -1;
 	while (++counter < game->ray.height)
 	{
-		float c = checkerboard[(int)(texture.y) % 32];
+		// float c = checkerboard[(int)(texture.y) % 32];
 		pixel = create_point(i, j + counter);
-		if (c == 1)
+		// if (c == 1)
+		// 	pixel.color = 0x000000;
+		// else
+		// 	pixel.color = 0xFFFFFF;
+		if (get_direction(game) == NORTH)
 			pixel.color = 0x000000;
-		else
+		else if (get_direction(game) == SOUTH)
 			pixel.color = 0xFFFFFF;
+		else if (get_direction(game) == WEST)
+			pixel.color = RED;
+		else
+			pixel.color = GREEN;		
 		my_mlx_pixel_put(game, &game->display.img, pixel);
 		texture.y += texture.y_step;
 	}
