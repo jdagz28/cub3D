@@ -40,9 +40,9 @@ int	main(int argc, char **argv)
         "100000000000001",
         "111111111111111"
     };
-	// char			*texture_path;
+	char			*texture_path;
 
-	// texture_path = "../texture/test.xpm";
+	texture_path = "../texture/test.xpm";
 	(void)argc;
 	(void)argv;
 	// parsing(argc, argv, &game);
@@ -62,8 +62,8 @@ int	main(int argc, char **argv)
 			&mlx.img.bits_per_pixel, &mlx.img.line_length, &mlx.img.endian);
 	game.display = mlx;
 	init_player(&game);
-	// game.texture.north = mlx_xpm_file_to_image(game.display.mlx, texture_path, \
-	// 								&game.texture.width, &game.texture.height);
+	game.texture.north = mlx_xpm_file_to_image(game.display.mlx, texture_path, \
+	 								&game.texture.width, &game.texture.height);
 	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, keybindings, &game);
 	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &mlx);
 	mlx_loop_hook(game.display.mlx, &draw_map, &game);
