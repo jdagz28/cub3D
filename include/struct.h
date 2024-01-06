@@ -10,6 +10,8 @@ typedef struct s_texture
 	int			rgb;
 	int			floor;
 	int			ceiling;
+	int			width;
+	int 		height;
 }				t_texture;
 
 typedef struct valid_text
@@ -73,6 +75,13 @@ typedef struct s_ray
 	int		hit;
 }	t_ray;
 
+typedef struct s_walltexture
+{
+	float	x;
+	float	y;
+	float	y_step;
+	float	y_offset;
+}	t_walltexture;
 
 typedef struct s_player
 {

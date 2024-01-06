@@ -65,4 +65,11 @@ enum {
 
 #endif
 
+enum e_directions {
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+};
+
 #endif

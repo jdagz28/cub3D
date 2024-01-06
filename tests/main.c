@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/04 14:48:31 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/06 01:46:40 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ int	main(int argc, char **argv)
         "100000000000101",
         "100001000000101",
         "111100000010101",
-        "100000000010101",
+        "100000000030101",
         "100000001111101",
         "100000000000001",
         "100000000000001",
-        "111111000111101",
+        "111311000111101",
         "100000000000001",
         "111111111111111"
     };
+	// char			*texture_path;
 
+	// texture_path = "../texture/test.xpm";
 	(void)argc;
 	(void)argv;
 	// parsing(argc, argv, &game);
@@ -60,6 +62,8 @@ int	main(int argc, char **argv)
 			&mlx.img.bits_per_pixel, &mlx.img.line_length, &mlx.img.endian);
 	game.display = mlx;
 	init_player(&game);
+	// game.texture.north = mlx_xpm_file_to_image(game.display.mlx, texture_path, \
+	// 								&game.texture.width, &game.texture.height);
 	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, keybindings, &game);
 	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &mlx);
 	mlx_loop_hook(game.display.mlx, &draw_map, &game);
