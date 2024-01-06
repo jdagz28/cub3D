@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/06 01:18:01 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/06 01:36:30 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ static void	draw_wall(t_game *game, int i, int j)
 		// else
 		// 	pixel.color = 0xFFFFFF;
 		if (get_direction(game) == NORTH)
-			pixel.color = 0x000000;
+			pixel.color = game->texture.north;
 		else if (get_direction(game) == SOUTH)
 			pixel.color = 0xFFFFFF;
 		else if (get_direction(game) == WEST)

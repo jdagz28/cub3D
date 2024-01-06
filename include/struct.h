@@ -10,6 +10,8 @@ typedef struct s_texture
 	int			rgb;
 	int			floor;
 	int			ceiling;
+	int			width;
+	int 		height;
 }				t_texture;
 
 typedef struct valid_text
