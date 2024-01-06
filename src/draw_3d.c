@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/06 01:36:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/06 02:15:00 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static void	draw_wall(t_game *game, int i, int j)
 		texture.y_offset = (game->ray.height - game->window_height) / 2;
 		game->ray.height = game->window_height;
 	}
-	texture.y = texture.y_offset * texture.y_step;
+	texture.y = texture.y_offset * texture.y_step + TILE_SIZE;
 	texture.x = 0;
 	texture.x = check_rayhit(game, texture.x);
 	counter = -1;
@@ -121,14 +121,17 @@ static void	draw_wall(t_game *game, int i, int j)
 		// 	pixel.color = 0x000000;
 		// else
 		// 	pixel.color = 0xFFFFFF;
-		if (get_direction(game) == NORTH)
-			pixel.color = game->texture.north;
+		if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x] == '3')
+			pixel.color = GRAY;	
+		else if (get_direction(game) == NORTH)
+			pixel.color = 0x000000;
 		else if (get_direction(game) == SOUTH)
 			pixel.color = 0xFFFFFF;
 		else if (get_direction(game) == WEST)
 			pixel.color = RED;
-		else
-			pixel.color = GREEN;		
+		else if (get_direction(game) == EAST)
+			pixel.color = GREEN;
+
 		my_mlx_pixel_put(game, &game->display.img, pixel);
 		texture.y += texture.y_step;
 	}

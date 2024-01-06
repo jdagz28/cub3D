@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:31:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/04 03:05:06 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/06 02:09:45 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static int	check_wallcollision(t_game *game)
 {
 	if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x] == '1')
+		return (1);
+	if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x] == '3')
 		return (1);
 	return (0);
 }
