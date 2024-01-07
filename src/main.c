@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	parsing(argc, argv, &game);
+	/*
 	printf("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
 	printf("Printfs dans la main pour check si toutes les textures sont correctes\n");
 	printf("North  = %s\n", game.texture.north);
@@ -33,5 +34,6 @@ int	main(int argc, char **argv)
 	printf("Ceiling = %d\n", game.texture.ceiling);
 	printf("Map :\n");
 	print_map(game.map);
+	*/
 	return (0);
 }

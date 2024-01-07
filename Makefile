@@ -8,6 +8,7 @@ FILES		=	main.c\
 				init.c\
 				texture.c\
 				utils.c\
+				check_map.c\
 
 SRC		=	$(addprefix src/, $(FILES))
 
@@ -15,7 +16,7 @@ OBJS		=	$(SRC:.c=.o)
 
 OBJS_MLX	=	$(MLX_DIR:.c=.o)
 
-CC			=	gcc
+CC			=	gcc -g
 
 CFLAGS		=	-Wall -Werror -Wextra
 

@@ -35,7 +35,7 @@ static	int check_all_textures(t_texture *texture)
 	return (1);
 }
 
-char	*check_empty(int fd, char *line) // mettre dans utils.c
+char	*skip_empty_line(int fd, char *line) // mettre dans utils.c
 {
 	while (line && line[0] == '\n')
 		line = get_next_line(fd);
@@ -47,7 +47,7 @@ char	**get_map(int fd, char *start)
 	char	*line;
 	char	**array;
 
-	start = check_empty(fd, start);
+	start = skip_empty_line(fd, start);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -73,7 +73,7 @@ int	check_char(char	c)
 		return (0);
 }
 
-int	check_map(char **map)
+int	check_char_map(char **map)
 {
 	int	i;
 	int	j;
@@ -130,7 +130,10 @@ static void	get_data(t_game *game)
 		exit(1);
 	}
 	game->map = get_map(game->fd, line);
-	check_map(game->map);
+	check_char_map(game->map);
+	if (check_borders_horizontal(game->map))
+		printf("border pas bon\n");
+	//check_open_map(game->map);
 	//print_map(game->map); // (delete)
 }
 

@@ -41,6 +41,10 @@ t_game *init_game(t_game *game);
 /* Texture */
 void	get_texture(t_texture *texture, char *line);
 
+/* Check Map */
+int	check_open_map(char **map);
+int check_borders_horizontal(char **map);
+
 /* Utils */
 int	len_split(char **split);
 int	rgb_to_hex(int red, int green, int blue);
