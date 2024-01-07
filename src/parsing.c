@@ -17,26 +17,94 @@ static void	arg_error(int argc, char **argv)
 	}
 }
 
+// Return 1 si toutes les textures sont assignees
 static	int check_all_textures(t_texture *texture)
 {
-	int i;
-
-	i = 1;
 	if (texture->north == NULL)
-		i = 0;
+		return (0);
 	if (texture->south == NULL)
-		i = 0;
+		return (0);
 	if (texture->west == NULL)
-		i = 0;
+		return (0);
 	if (texture->east == NULL)
-		i = 0;
+		return (0);
 	if (texture->floor == -1)
-		i = 0;
+		return (0);
 	if (texture->ceiling == -1)
-		i = 0;
-	if (i == 1) //test
-		printf("Toutes les textures sont assignees\n"); // test (delete)
-	return (i);
+		return (0);
+	return (1);
+}
+
+char	*skip_empty_line(int fd, char *line) // mettre dans utils.c
+{
+	while (line && line[0] == '\n')
+		line = get_next_line(fd);
+	return (line);
+}
+
+char	**get_map(int fd, char *start)
+{
+	char	*line;
+	char	**array;
+
+	start = skip_empty_line(fd, start);
+	line = get_next_line(fd);
+	while (line)
+	{
+		start = ft_strjoin(start, line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	array = ft_split(start, '\n');
+	return (array);
+}
+
+//Check_map.c
+
+int	check_char(char	c)
+{
+	if (c == '0' || c == '1')
+		return (1);
+	else if (c == ' ')
+		return (2);
+	else if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		return (3);
+	else
+		return (0);
+}
+
+int	check_char_map(char **map)
+{
+	int	i;
+	int	j;
+	int	spawn;
+
+	i = 0;
+	spawn = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (check_char(map[i][j]) == 0)
+			{
+				printf("Error: Wrong char in map\n");
+				exit(1); // free + delete
+			}
+			else if (check_char(map[i][j]) == 2)
+				map[i][j] = '2';
+			else if (check_char(map[i][j]) == 3)
+					spawn += 1;
+			j++;
+		}
+		i++;
+	}
+	if (spawn != 1)
+	{
+		printf("Error: More than one spawn\n");
+		exit(1); // free et delete
+	}
+	return (0);
 }
 
 static void	get_data(t_game *game)
@@ -57,8 +125,16 @@ static void	get_data(t_game *game)
 			break ;
 	}
 	if (!check_all_textures(&game->texture))
-		printf("Commencer check de map\n");
-	// fonction check map open
+	{
+		printf("Test: Manque des textures\n");
+		exit(1);
+	}
+	game->map = get_map(game->fd, line);
+	check_char_map(game->map);
+	if (check_borders_horizontal(game->map))
+		printf("border pas bon\n");
+	//check_open_map(game->map);
+	//print_map(game->map); // (delete)
 }
 
 int	parsing(int argc, char **argv, t_game *game)

@@ -7,6 +7,7 @@ FILES		=	main.c\
 				init.c\
 				texture.c\
 				utils.c\
+				check_map.c\
 
 SRC		=	$(addprefix src/, $(FILES))
 
@@ -14,7 +15,7 @@ OBJS		=	$(SRC:.c=.o)
 
 OBJS_MLX	=	$(MLX_DIR:.c=.o)
 
-CC			=	gcc
+CC			=	gcc -g
 
 CFLAGS		=	-Wall -Werror -Wextra
 
@@ -45,7 +46,6 @@ $(NAME):		$(OBJS)
 				@make -C ${MLX_DIR}
 				@echo "Compiling..."
 				@$(CC) $(CFLAGS) $(OBJS) $(DIRS) $(READL) $(GNL) $(LIBFT) $(MLX) -o $(NAME)
-				@echo "Done."
 
 .c.o:
 				@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
