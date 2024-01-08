@@ -15,12 +15,12 @@ void	player_movement_y(int keycode, t_game *game)
 {
 	int	add_x;
 	int	add_y;
-	// int	sub_x;
-	// int	sub_y;
+	int	sub_x;
+	int	sub_y;
 
 	if (check_playerpos(game) == 0)
 		return ;
-	add_x = (game->player.position.axis[X] + game->player.front.dir[X]) / TILE_SIZE;
+	add_x = (game->player.position.axis[X] - game->player.front.dir[X]) / TILE_SIZE - 0.2;
 	if (add_x < 0 || add_x > game->map_width)
 	{
 		if (add_x < 0)
@@ -28,7 +28,7 @@ void	player_movement_y(int keycode, t_game *game)
 		else
 			add_x = game->map_width;
 	}
-	add_y = (game->player.position.axis[Y] + game->player.front.dir[Y]) / TILE_SIZE;
+	add_y = (game->player.position.axis[Y] - game->player.front.dir[Y]) / TILE_SIZE - 0.2;
 	if (add_y < 0 || add_y > game->map_height)
 	{
 		if (add_y < 0)
@@ -36,11 +36,34 @@ void	player_movement_y(int keycode, t_game *game)
 		else
 			add_y = game->map_height;
 	}
-	if (keycode == K_S)
+	sub_x = (game->player.position.axis[X] + game->player.front.dir[X]) / TILE_SIZE + 0.2;
+	if (sub_x < 0 || sub_x > game->map_width)
+	{
+		if (sub_x < 0)
+			sub_x = 0;
+		else
+			sub_x = game->map_width;
+	}
+	sub_y = (game->player.position.axis[Y] + game->player.front.dir[Y]) / TILE_SIZE + 0.2;
+	if (sub_y < 0 || sub_y > game->map_height)
+	{
+		if (sub_y < 0)
+			sub_y = 0;
+		else
+			sub_y = game->map_height;
+	}
+	if (keycode == K_W)
 	{
 		if (game->map[game->player.array_y][add_x] == '0')
-			game->player.position.axis[X] -= game->player.front.dir[X];
+			game->player.position.axis[X] += game->player.front.dir[X];
 		if (game->map[add_y][game->player.array_x] == '0')
+			game->player.position.axis[Y] += game->player.front.dir[Y];
+	}
+	if (keycode == K_S)
+	{
+		if (game->map[game->player.array_y][sub_x] == '0')
+			game->player.position.axis[X] -= game->player.front.dir[X];
+		if (game->map[sub_y][game->player.array_x] == '0')
 			game->player.position.axis[Y] -= game->player.front.dir[Y];
 	}
 }
@@ -54,12 +77,7 @@ int	keybindings(int keycode, t_game *game)
 		mlx_destroy_window(game->display.mlx, game->display.window);
 		exit(0);
 	}
-	else if (keycode == K_W)
-	{
-		game->player.position.axis[X] += game->player.front.dir[X];
-		game->player.position.axis[Y] += game->player.front.dir[Y];
-	}
-	else if (keycode == K_S)
+	else if (keycode == K_W || keycode == K_S)
 		player_movement_y(keycode, game);
 	else if (keycode == K_A)
 	{
