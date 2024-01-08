@@ -86,8 +86,9 @@ typedef struct s_walltexture
 typedef struct s_player
 {
 	t_point		position;
-	t_point		mat_position;
 	t_vector	front;
+	int			array_x;
+	int			array_y;
 	float		angle;
 }	t_player;
 

@@ -1,5 +1,51 @@
 #include "../include/cub3d.h"
 
+int	check_playerpos(t_game *game)
+{
+	game->player.array_x = (int)game->player.position.axis[X] / TILE_SIZE;
+	game->player.array_y = (int)game->player.position.axis[Y] / TILE_SIZE;
+	if (game->player.array_x < 0)
+		return (0);
+	if (game->player.array_y < 0)
+		return (0);
+	return (1);
+}
+
+void	player_movement_y(int keycode, t_game *game)
+{
+	int	add_x;
+	int	add_y;
+	// int	sub_x;
+	// int	sub_y;
+
+	if (check_playerpos(game) == 0)
+		return ;
+	add_x = (game->player.position.axis[X] + game->player.front.dir[X]) / TILE_SIZE;
+	if (add_x < 0 || add_x > game->map_width)
+	{
+		if (add_x < 0)
+			add_x = 0;
+		else
+			add_x = game->map_width;
+	}
+	add_y = (game->player.position.axis[Y] + game->player.front.dir[Y]) / TILE_SIZE;
+	if (add_y < 0 || add_y > game->map_height)
+	{
+		if (add_y < 0)
+			add_y = 0;
+		else
+			add_y = game->map_height;
+	}
+	if (keycode == K_S)
+	{
+		if (game->map[game->player.array_y][add_x] == '0')
+			game->player.position.axis[X] -= game->player.front.dir[X];
+		if (game->map[add_y][game->player.array_x] == '0')
+			game->player.position.axis[Y] -= game->player.front.dir[Y];
+	}
+}
+
+
 int	keybindings(int keycode, t_game *game)
 {
 	if (keycode == K_ESC)
@@ -14,10 +60,7 @@ int	keybindings(int keycode, t_game *game)
 		game->player.position.axis[Y] += game->player.front.dir[Y];
 	}
 	else if (keycode == K_S)
-	{
-		game->player.position.axis[X] -= game->player.front.dir[X];
-		game->player.position.axis[Y] -= game->player.front.dir[Y];
-	}
+		player_movement_y(keycode, game);
 	else if (keycode == K_A)
 	{
 		game->player.position.axis[X] += -sin(game->player.angle) * 5;
