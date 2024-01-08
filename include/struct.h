@@ -102,8 +102,6 @@ typedef struct s_game
 	int			ceiling_color;
 	int			map_width;
 	int			map_height;
-	int			window_width;
-	int			window_height;
 	char		**map;
 	int			fd;
 }	t_game;

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:42:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/06 02:07:46 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/08 23:15:54 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_grids(t_game *game, t_display *mlx)
 	{
 		end = create_point(axis[Y], game->window_height);
 		end.color = GRAY;
-		draw_line_dda(game, &mlx->img, create_point(axis[Y], 0), end);
+		draw_line_dda(&mlx->img, create_point(axis[Y], 0), end);
 		axis[Y] += TILE_SIZE;
 	}
 	axis[X] = 0;
@@ -30,7 +30,7 @@ void	draw_grids(t_game *game, t_display *mlx)
 	{
 		end = create_point(game->window_width / 2, axis[X]);
 		end.color = GRAY;
-		draw_line_dda(game, &mlx->img, create_point(0, axis[X]), end);
+		draw_line_dda(&mlx->img, create_point(0, axis[X]), end);
 		axis[X] += TILE_SIZE;
 	}
 }

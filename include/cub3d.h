@@ -20,8 +20,8 @@
 # define GRAY 0xADADAD
 # define GREEN 0x00FF00
 
-# define WIN_WIDTH 1500
-# define WIN_HEIGHT 1300
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 900
 
 # define ON_KEYDOWN 2
 # define ON_DESTROY 17
@@ -57,7 +57,7 @@ float		deg_to_rad(float degrees);
 
 // mlx
 void		init_mlx(t_display *display, t_image_data *img);
-void		my_mlx_pixel_put(t_game *game, t_image_data *img, t_point pixel);
+void		my_mlx_pixel_put(t_image_data *img, t_point pixel);
 
 // create_vectorpoint.c
 t_point		create_point(float x, float y);
@@ -67,13 +67,12 @@ t_vector	create_vector(float x, float y);
 void		draw_3d(t_game *game, int raynum);
 
 // draw_line.c
-void		draw_direction_dda(t_game *game, t_image_data *img, t_point start, \
-							t_vector front);
-void		draw_line_dda(t_game *game, t_image_data *img, t_point start, \
-						t_point end);
+void		draw_direction_dda(t_image_data *img, t_point start, \
+								t_vector front);
+void		draw_line_dda(t_image_data *img, t_point start, t_point end);
 
 // draw_map.c
-int			draw_map(t_game *game);
+int		draw_map(t_game *game);
 
 //! draw_maptiles_bonus.c
 void		draw_grids(t_game *game, t_display *mlx);
