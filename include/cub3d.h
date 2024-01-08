@@ -31,6 +31,7 @@
 # define M_PI_3 4.71238898038  //3 *PI/2
 # define FOV 1.0471975512 // M_PI /3
 # define DEGINRAD 0.0174533
+# define MOVE_SPEED 1.5
 
 /* Hooks */
 int			keybindings(int keycode, t_game *game);
@@ -100,5 +101,13 @@ void		cast_vertical_rays(t_game *game);
 float		get_distance(float x1, float y1, float x2, float y2);
 void		draw_ray(t_game *game);
 
+
+//movement_y.c
+int			check_playerpos(t_game *game);
+int			offset_check(t_game *game, char *type, int value);
+void		player_movement_y(int keycode, t_game *game);
+
+//movement_x.c
+void		player_movement_x(int keycode, t_game *game);
 
 #endif

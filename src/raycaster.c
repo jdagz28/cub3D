@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/04 03:18:14 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/08 01:16:17 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	init_ray(t_game *game)
 
 	arc_tan = 1 / tan(game->ray.angle);
 	game->ray.dist_h = 10000000;
-	game->ray.x = game->player.position.axis[X];
-	game->ray.y = game->player.position.axis[Y];
+	game->ray.map_intersect_x = game->player.array_x;
+	game->ray.map_intersect_y = game->player.array_y;
 	set_horizontal_angle(game, arc_tan);
 	cast_horizontal_rays(game);
 	tangent = tan(game->ray.angle);

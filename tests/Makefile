@@ -73,7 +73,9 @@ SRC_FILES				:= create_vectorpoint.c\
 							mlx_draw.c\
 							mlx_init.c\
 							hooks.c\
-							utils.c
+							utils.c\
+							movement_y.c\
+							movement_x.c
 
 OBJ_LIST                := $(patsubst %.c,%.o,$(FILES))
 OBJS                    := $(addprefix $(OBJ_DIR),$(OBJ_LIST))

@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/11 15:22:24 by gmarchal          #+#    #+#              #
-#    Updated: 2024/01/07 20:29:31 by gmarchal         ###   ########.fr        #
+#    Updated: 2024/01/08 09:26:34 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 CC = gcc
 
-RM = rm -f
+RM = rm -rf
 
 all: $(NAME)
 $(OBJ_DIR):
@@ -47,7 +47,7 @@ $(NAME): $(OBJ_DIR) $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
