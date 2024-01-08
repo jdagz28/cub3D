@@ -68,6 +68,61 @@ void	player_movement_y(int keycode, t_game *game)
 	}
 }
 
+void	player_movement_x(int keycode, t_game *game)
+{
+	int	add_x;
+	int	add_y;
+	int	sub_x;
+	int	sub_y;
+
+	add_x = (game->player.position.axis[X] + game->player.front.dir[Y]) / TILE_SIZE - 0.1;
+	if (add_x < 0 || add_x > game->map_width)
+	{
+		if (add_x < 0)
+			add_x = 0;
+		else
+			add_x = game->map_width;
+	}
+	add_y = (game->player.position.axis[Y] - game->player.front.dir[X]) / TILE_SIZE - 0.1;
+	if (add_y < 0 || add_y > game->map_height)
+	{
+		if (add_y < 0)
+			add_y = 0;
+		else
+			add_y = game->map_height;
+	}
+	sub_x = (game->player.position.axis[X] - game->player.front.dir[Y]) / TILE_SIZE + 0.1;
+	if (sub_x < 0 || sub_x > game->map_width)
+	{
+		if (sub_x < 0)
+			sub_x = 0;
+		else
+			sub_x = game->map_width;
+	}
+	sub_y = (game->player.position.axis[Y] - game->player.front.dir[X]) / TILE_SIZE + 0.1;
+	if (sub_y < 0 || sub_y > game->map_height)
+	{
+		if (sub_y < 0)
+			sub_y = 0;
+		else
+			sub_y = game->map_height;
+	}
+	if (keycode == K_A)
+	{
+		if (game->map[game->player.array_y][add_x] == '0')
+			game->player.position.axis[X] += game->player.front.dir[Y];
+		if (game->map[add_y][game->player.array_x] == '0')
+			game->player.position.axis[Y] -= game->player.front.dir[X];
+	}
+	if (keycode == K_D)
+	{
+		if (game->map[game->player.array_y][sub_x] == '0')
+			game->player.position.axis[X] -= game->player.front.dir[Y];
+		if (game->map[sub_y][game->player.array_x] == '0')
+			game->player.position.axis[Y] += game->player.front.dir[X];
+	}
+}
+
 
 int	keybindings(int keycode, t_game *game)
 {
@@ -79,16 +134,8 @@ int	keybindings(int keycode, t_game *game)
 	}
 	else if (keycode == K_W || keycode == K_S)
 		player_movement_y(keycode, game);
-	else if (keycode == K_A)
-	{
-		game->player.position.axis[X] += -sin(game->player.angle) * 5;
-		game->player.position.axis[Y] += -cos(game->player.angle) * 5;
-	}
-	else if (keycode == K_D)
-	{
-		game->player.position.axis[X] += sin(game->player.angle) * 5;
-		game->player.position.axis[Y] += cos(game->player.angle) * 5;
-	}
+	else if (keycode == K_A || keycode == K_D)
+		player_movement_x(keycode, game);
 	else if (keycode == K_RIGHT)
 	{
 		game->player.angle -= 0.1;
