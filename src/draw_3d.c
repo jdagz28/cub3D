@@ -6,51 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/08 12:32:07 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/08 23:42:20 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "enums.h"
-
-const	int	checkerboard[] = {
-	//Checkerboard
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,1,1,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,1,1,1,1,1,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,1,1,1,1,1,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,1,1,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
-
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0,
-
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
- 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1,
-
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 
- 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0
-};
 
 static float	fix_fisheye(t_game *game)
 {
@@ -104,10 +65,10 @@ static void	draw_wall(t_game *game, int i, int j)
 
 	texture.y_step = TILE_SIZE / game->ray.height;
 	texture.y_offset = 1;
-	if (game->ray.height > game->window_height)
+	if (game->ray.height > WIN_HEIGHT)
 	{
-		texture.y_offset = (game->ray.height - game->window_height) / 2;
-		game->ray.height = game->window_height;
+		texture.y_offset = (game->ray.height - WIN_HEIGHT) / 2;
+		game->ray.height = WIN_HEIGHT;
 	}
 	texture.y = texture.y_offset * texture.y_step + TILE_SIZE;
 	texture.x = 0;
@@ -115,56 +76,47 @@ static void	draw_wall(t_game *game, int i, int j)
 	counter = -1;
 	while (++counter < game->ray.height)
 	{
-		// float c = checkerboard[(int)(texture.y) % 32];
 		pixel = create_point(i, j + counter);
-		// if (c == 1)
-		// 	pixel.color = 0x000000;
-		// else
-		// 	pixel.color = 0xFFFFFF;
-		if (game->map[game->ray.map_intersect_y][game->ray.map_intersect_x] == '3')
-			pixel.color = GRAY;	
-		else if (get_direction(game) == NORTH)
-			pixel.color = 0x000000;
+		if (get_direction(game) == NORTH)
+			pixel.color = GREEN;
 		else if (get_direction(game) == SOUTH)
 			pixel.color = 0xFFFFFF;
 		else if (get_direction(game) == WEST)
 			pixel.color = RED;
 		else if (get_direction(game) == EAST)
-			pixel.color = GREEN;
-		my_mlx_pixel_put(game, &game->display.img, pixel);
+			pixel.color = 0x000000;
+		my_mlx_pixel_put(&game->display.img, pixel);
 		texture.y += texture.y_step;
 	}
 }
 
 void	draw_3d(t_game *game, int raynum)
 {
-	int		i;
 	int		j;
 	t_point	pixel;
 
-	i = game->window_width - 1 - raynum * FOV * 0.95; //0.95 factor to render right side of the window.
 	if (game->ray.dist_h < game->ray.dist_v)
 		game->ray.dist = game->ray.dist_h;
 	else
 		game->ray.dist = game->ray.dist_v;
 	game->ray.dist = game->ray.dist * cos(fix_fisheye(game));
-	game->ray.height = (TILE_SIZE * game->window_height) / game->ray.dist;
-	game->ray.start = game->window_height / 2 - game->ray.height / 2;
-	game->ray.end = game->window_height / 2 + game->ray.height / 2;
+	game->ray.height = (TILE_SIZE * WIN_HEIGHT) / game->ray.dist;
+	game->ray.start = WIN_HEIGHT / 2 - game->ray.height / 2;
+	game->ray.end = WIN_HEIGHT / 2 + game->ray.height / 2;
 	j = -1;
 	while (++j < game->ray.start)
 	{
-		pixel = create_point(i, j);
+		pixel = create_point(raynum, j);
 		pixel.color = game->ceiling_color;
-		my_mlx_pixel_put(game, &game->display.img, pixel);
+		my_mlx_pixel_put(&game->display.img, pixel);
 	}
 	j--;
-	draw_wall(game, i, j);
+	draw_wall(game, raynum, j);
 	j = game->ray.end - 2;
-	while (++ j < game->window_height)
+	while (++ j < WIN_HEIGHT)
 	{
-		pixel = create_point(i, j);
+		pixel = create_point(raynum, j);
 		pixel.color = game->floor_color;
-		my_mlx_pixel_put(game, &game->display.img, pixel);
+		my_mlx_pixel_put(&game->display.img, pixel);
 	}
 }

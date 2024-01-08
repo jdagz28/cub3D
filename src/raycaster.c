@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/08 01:16:17 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/08 23:29:24 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static void	init_ray(t_game *game)
 {
 	float	tangent;
 	float	arc_tan;
-	t_point	end;
 
 	arc_tan = 1 / tan(game->ray.angle);
 	game->ray.dist_h = 10000000;
@@ -55,9 +54,6 @@ static void	init_ray(t_game *game)
 	set_vertical_angle(game, tangent);
 	cast_vertical_rays(game);
 	calculate_shading(game);
-	end = create_point(game->ray.x, game->ray.y);
-	end.color = GREEN;
-	draw_line_dda(game, &game->display.img, game->player.position, end);
 }
 
 void	draw_ray(t_game *game)
@@ -70,12 +66,12 @@ void	draw_ray(t_game *game)
 		game->ray.angle += 2 * M_PI;
 	if (game->ray.angle > 2 * M_PI)
 		game->ray.angle -= 2 * M_PI;
-	while (++i < game->window_width / 2)
+	while (++i < WIN_WIDTH)
 	{
 		init_ray(game);
 		draw_3d(game, i);
 		game->ray.angle = game->player.angle + FOV / 2 - \
-							FOV * i / (game->window_width / 2);
+							FOV * i / WIN_WIDTH;
 		if (game->ray.angle < 0)
 			game->ray.angle += 2 * M_PI;
 		if (game->ray.angle > 2 * M_PI)

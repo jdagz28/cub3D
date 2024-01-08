@@ -6,13 +6,13 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:01:56 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/04 03:19:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/08 23:15:37 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_direction_dda(t_game *game, t_image_data *img, t_point start, \
+void	draw_direction_dda(t_image_data *img, t_point start, \
 							t_vector front)
 {
 	int		steps;
@@ -34,14 +34,14 @@ void	draw_direction_dda(t_game *game, t_image_data *img, t_point start, \
 	pixel.color = RED;
 	while (steps--)
 	{
-		my_mlx_pixel_put(game, img, pixel);
+		my_mlx_pixel_put(img, pixel);
 		pixel.axis[X] += indices[X];
 		pixel.axis[Y] += indices[Y];
 	}
 }
 
 
-void	draw_line_dda(t_game *game, t_image_data *img, t_point start, \
+void	draw_line_dda(t_image_data *img, t_point start, \
 						t_point end)
 {
 	int		steps;
@@ -60,7 +60,7 @@ void	draw_line_dda(t_game *game, t_image_data *img, t_point start, \
 	pixel.color = end.color;
 	while (steps--)
 	{
-		my_mlx_pixel_put(game, img, pixel);
+		my_mlx_pixel_put(img, pixel);
 		pixel.axis[X] += indices[X];
 		pixel.axis[Y] += indices[Y];
 	}
