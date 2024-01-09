@@ -2,7 +2,7 @@
 
 int	len_split(char **split)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (split && split[i])

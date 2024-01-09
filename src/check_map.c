@@ -1,5 +1,6 @@
 #include "../include/cub3d.h"
 
+/*
 int	valid_char(char c)
 {
 	if (c == '0' || c == 'N' || c == 'S' || c == 'W' || c == 'E')
@@ -32,7 +33,11 @@ int check_borders_horizontal(char **map)
 	return (0);
 }
 
-/*
+int check_borders_vertical(char **map)
+{
+}
+
+
 int	check_around(char **map, int row, int col)
 {
 	// return 1 if error
@@ -45,24 +50,8 @@ int	check_open_map(char **map)
 	int	col;
 	
 	row = 0;
-	check_borders(**map);
-	while (map[row])
-	{
-		col = 0;
-		while (map[row][col])
-		{
-			if (valid_char(map[row][col]))
-			{
-				if (check_around(**map, row, col) == 0)
-				{
-					printf("Error: Map open\n"); // free (delete)
-					exit(1);
-				}
-			}
-			col++;
-		}
-		row++;
-	}
+	if (check_borders_horizontal(**map)) // put a return
+	
 	return (0);
 }
 */

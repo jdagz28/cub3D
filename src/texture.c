@@ -2,14 +2,22 @@
 
 static int	check_texture(char *texture, char *path)
 {
-	if (ft_strncmp(&path[ft_strlen(path) - 5], ".xpm\n", 4) != 0) // segfault
+	int	fd;
+
+	if (ft_strncmp(&path[ft_strlen(path) - 5], ".xpm\n", 4) != 0)
 	{
 		printf("Error: Textures not valid.\n");
 		printf("Test ---------> %s\n", path); // test (delete)
 		exit(EXIT_FAILURE);
 	}
 	if (texture == NULL)
-		return (0);
+	{
+		if ((fd = open(path, O_RDONLY)) == -1)
+		{
+			printf("Error: Can't open file texture.\n");
+			exit(1); // free + exit (delete)
+		}
+	}
 	else
 	{
 		printf("Error: Textures not valid.\n");
@@ -72,16 +80,16 @@ static void	assign_texture(t_texture *texture, char *direction, char *path)
 {
 	if (ft_strncmp(direction, "NO", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->north, path)))
-				texture->north = ft_strtrim(path, "\n");
+			texture->north = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "SO", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->south, path)))
-				texture->south = ft_strtrim(path, "\n");
+			texture->south = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "WE", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->west, path)))
-				texture->west = ft_strtrim(path, "\n");
+			texture->west = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "EA", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->east, path)))
-				texture->east = ft_strtrim(path, "\n");
+			texture->east = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "F", ft_strlen(direction)) == 0)
 	{
 		if (!(check_color(texture->floor)))
@@ -94,7 +102,7 @@ static void	assign_texture(t_texture *texture, char *direction, char *path)
 
 void	get_texture(t_texture *texture, char *line)
 {
-	char **split;
+	char	**split;
 
 	split = ft_split(line, ' ');
 	if (len_split(split) != 2)

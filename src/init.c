@@ -11,7 +11,7 @@ static void	init_textures(t_texture *texture)
 	texture->ceiling = -1;
 }
 
-t_game *init_game(t_game *game)
+t_game	*init_game(t_game *game)
 {
 	game->map_width = 0;
 	game->map_height = 0;
@@ -20,4 +20,3 @@ t_game *init_game(t_game *game)
 	init_textures(&game->texture);
 	return (game);
 }
-

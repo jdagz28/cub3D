@@ -18,7 +18,7 @@ static void	arg_error(int argc, char **argv)
 }
 
 // Return 1 si toutes les textures sont assignees
-static	int check_all_textures(t_texture *texture)
+static int	check_all_textures(t_texture *texture)
 {
 	if (texture->north == NULL)
 		return (0);
@@ -61,7 +61,7 @@ char	**get_map(int fd, char *start)
 
 //Check_map.c
 
-int	check_char(char	c)
+int	check_char(char c)
 {
 	if (c == '0' || c == '1')
 		return (1);
@@ -94,7 +94,7 @@ int	check_char_map(char **map)
 			else if (check_char(map[i][j]) == 2)
 				map[i][j] = '2';
 			else if (check_char(map[i][j]) == 3)
-					spawn += 1;
+				spawn += 1;
 			j++;
 		}
 		i++;
@@ -131,8 +131,8 @@ static void	get_data(t_game *game)
 	}
 	game->map = get_map(game->fd, line);
 	check_char_map(game->map);
-	if (check_borders_horizontal(game->map))
-		printf("border pas bon\n");
+	//if (check_borders_horizontal(game->map))
+	//	printf("border pas bon\n");
 	//check_open_map(game->map);
 	//print_map(game->map); // (delete)
 }
