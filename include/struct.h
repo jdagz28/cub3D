@@ -12,6 +12,10 @@ typedef struct s_texture
 	int			ceiling;
 	int			width;
 	int 		height;
+	int			n_texture[4096];
+	int			s_texture[4096];
+	int			w_texture[4096];
+	int 		e_texture[4096];
 }				t_texture;
 
 typedef struct valid_text
@@ -74,7 +78,6 @@ typedef struct s_ray
 	int		color;
 	float	shade;
 	int		hit;
-	int		texture[4096];
 }	t_ray;
 
 typedef struct s_walltexture
