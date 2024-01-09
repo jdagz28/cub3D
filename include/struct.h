@@ -29,6 +29,7 @@ typedef struct s_image_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		*add_itr;
 }	t_image_data;
 
 typedef struct s_display
@@ -73,6 +74,7 @@ typedef struct s_ray
 	int		color;
 	float	shade;
 	int		hit;
+	int		texture[4096];
 }	t_ray;
 
 typedef struct s_walltexture

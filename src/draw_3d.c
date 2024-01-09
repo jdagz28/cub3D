@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/08 23:42:20 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/09 10:34:28 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	draw_wall(t_game *game, int i, int j)
 	int				counter;
 	t_point			pixel;
 	t_walltexture	texture;
+	int				array_pointer;
 
 	texture.y_step = TILE_SIZE / game->ray.height;
 	texture.y_offset = 1;
@@ -70,15 +71,18 @@ static void	draw_wall(t_game *game, int i, int j)
 		texture.y_offset = (game->ray.height - WIN_HEIGHT) / 2;
 		game->ray.height = WIN_HEIGHT;
 	}
-	texture.y = texture.y_offset * texture.y_step + TILE_SIZE;
+	texture.y = texture.y_offset * texture.y_step;
 	texture.x = 0;
 	texture.x = check_rayhit(game, texture.x);
 	counter = -1;
 	while (++counter < game->ray.height)
 	{
 		pixel = create_point(i, j + counter);
+		array_pointer = (int)texture.y * TILE_SIZE + texture.x;
+		if (array_pointer > 4095)
+			array_pointer = 4095;
 		if (get_direction(game) == NORTH)
-			pixel.color = GREEN;
+			pixel.color = game->ray.texture[array_pointer];
 		else if (get_direction(game) == SOUTH)
 			pixel.color = 0xFFFFFF;
 		else if (get_direction(game) == WEST)

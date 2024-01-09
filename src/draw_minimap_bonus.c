@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:44:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/04 02:53:55 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/09 10:05:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	draw_playerpos(t_game *game, t_player *player, \
 
 	new_axis[X] = player->position.axis[X] + axis[X];
 	new_axis[Y] = player->position.axis[Y] + axis[Y];
-	if (new_axis[X] >= 0 && new_axis[X] < game->window_width \
-		&& new_axis[Y] >= 0 && new_axis[Y] < game->window_height && \
+	if (new_axis[X] >= 0 && new_axis[X] < WIN_WIDTH \
+		&& new_axis[Y] >= 0 && new_axis[Y] < WIN_HEIGHT && \
 		axis[X] * axis[X] + axis[Y] * axis[Y] \
 		<= radius * radius)
 	{
-		pixel = new_axis[Y] * (game->window_width * 4) + new_axis[X] * 4;
+		pixel = new_axis[Y] * (WIN_WIDTH * 4) + new_axis[X] * 4;
 		set_color(&game->display.img.address[pixel], \
 		game->display.img.endian, RED, 1);
 	}
@@ -53,7 +53,7 @@ static void	draw_player(t_game *game)
 void	draw_minimap(t_game *game)
 {
 	draw_maptiles(game, &game->display);
-	draw_grids(game, &game->display);
+	draw_grids(&game->display);
 	draw_player(game);
 }
 

@@ -75,7 +75,7 @@ void		draw_line_dda(t_image_data *img, t_point start, t_point end);
 int		draw_map(t_game *game);
 
 //! draw_maptiles_bonus.c
-void		draw_grids(t_game *game, t_display *mlx);
+void		draw_grids(t_display *mlx);
 void		draw_maptiles(t_game *game, t_display *mlx);
 
 //! draw_minimap_bonus.c
