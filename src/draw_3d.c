@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/09 10:58:41 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/10 09:30:01 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,20 @@ static float	check_rayhit(t_game *game, float x)
 static int	get_texturecolor(t_game *game, t_walltexture *texture)
 {
 	int	ptr;
+	int pixel_color;
 
 	ptr = (int)texture->y * TILE_SIZE + texture->x;
 	if (ptr > (TILE_SIZE * TILE_SIZE))
 		ptr = 4095;
-	
-	return (ptr);
+	if (get_direction(game) == NORTH)
+		pixel_color = game->texture.n_texture[ptr];
+	else if (get_direction(game) == SOUTH)
+		pixel_color = game->texture.s_texture[ptr];
+	else if (get_direction(game) == EAST)
+		pixel_color = game->texture.e_texture[ptr];
+	else
+		pixel_color = game->texture.w_texture[ptr];
+	return (pixel_color);
 }
 
 static void	draw_wall(t_game *game, int i, int j)
@@ -73,7 +81,6 @@ static void	draw_wall(t_game *game, int i, int j)
 	int				counter;
 	t_point			pixel;
 	t_walltexture	texture;
-	int				array_pointer;
 
 	texture.y_step = TILE_SIZE / game->ray.height;
 	texture.y_offset = 1;
@@ -89,7 +96,7 @@ static void	draw_wall(t_game *game, int i, int j)
 	while (++counter < game->ray.height)
 	{
 		pixel = create_point(i, j + counter);
-		pixel.color = get_texturepixel(game, texture);
+		pixel.color = get_texturecolor(game, &texture);
 		my_mlx_pixel_put(&game->display.img, pixel);
 		texture.y += texture.y_step;
 	}

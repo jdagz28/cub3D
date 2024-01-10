@@ -6,14 +6,14 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/09 11:33:36 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/10 09:32:22 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 
-void	read_textures(t_game *game, t_display *mlx, t_texture *texture)
+void	read_textures(t_game *game, t_display *mlx, t_texture *texture, char *direction)
 {
 	int	i;
 	int	j;
@@ -25,7 +25,10 @@ void	read_textures(t_game *game, t_display *mlx, t_texture *texture)
 	{
 		j = -1;
 		while (++j < TILE_SIZE)
-			game->ray.texture[texture->width * i + j] = mlx->img.add_itr[texture->width * i + j];
+		{
+			if (ft_strncmp(direction, "NORTH", ft_strlen(direction)) == 0)
+				game->texture.n_texture[texture->width * i + j] = mlx->img.add_itr[texture->width * i + j];
+		}
 	}
 }
 
