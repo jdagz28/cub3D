@@ -11,6 +11,14 @@ static void	init_textures(t_texture *texture)
 	texture->ceiling = -1;
 }
 
+static void	init_player(t_player *player)
+{
+	player->position.axis[0] = 0;
+	player->position.axis[1] = 0;
+	player->mat_position.axis[0] = 0;
+	player->mat_position.axis[1] = 0;
+}
+
 t_game	*init_game(t_game *game)
 {
 	game->map_width = 0;
@@ -18,5 +26,6 @@ t_game	*init_game(t_game *game)
 	game->map = NULL;
 	game->fd = 0;
 	init_textures(&game->texture);
+	init_player(&game->player);
 	return (game);
 }

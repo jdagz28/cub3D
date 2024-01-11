@@ -73,31 +73,35 @@ int	check_char(char c)
 		return (0);
 }
 
-int	check_char_map(char **map)
+int	check_char_map(char **map, t_player *player)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 	int	spawn;
 
-	i = 0;
+	x = 0;
 	spawn = 0;
-	while (map[i])
+	while (map[x])
 	{
-		j = 0;
-		while (map[i][j])
+		y = 0;
+		while (map[x][y])
 		{
-			if (check_char(map[i][j]) == 0)
+			if (check_char(map[x][y]) == 0)
 			{
 				printf("Error: Wrong char in map\n");
 				exit(1); // free + delete
 			}
-			else if (check_char(map[i][j]) == 2)
-				map[i][j] = '2';
-			else if (check_char(map[i][j]) == 3)
+			else if (check_char(map[x][y]) == 2)
+				map[x][y] = '2';
+			else if (check_char(map[x][y]) == 3)
+			{
+				player->mat_position.axis[0] = y;
+				player->mat_position.axis[1] = x;
 				spawn += 1;
-			j++;
+			}
+			y++;
 		}
-		i++;
+		x++;
 	}
 	if (spawn != 1)
 	{
@@ -130,9 +134,7 @@ static void	get_data(t_game *game)
 		exit(1);
 	}
 	game->map = get_map(game->fd, line);
-	check_char_map(game->map);
-	//if (check_borders_horizontal(game->map))
-	//	printf("border pas bon\n");
+	check_char_map(game->map, &game->player);
 	//check_open_map(game->map);
 	//print_map(game->map); // (delete)
 }

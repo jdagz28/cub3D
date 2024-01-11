@@ -35,5 +35,6 @@ int	main(int argc, char **argv)
 	printf("Map :\n");
 	print_map(game.map);
 	*/
+	printf("Spawn [%f, %f]\n", game.player.mat_position.axis[0], game.player.mat_position.axis[1]);
 	return (0);
 }
