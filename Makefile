@@ -8,6 +8,7 @@ FILES		=	main.c\
 				init.c\
 				texture.c\
 				utils.c\
+				check_map.c\
 
 SRC		=	$(addprefix src/, $(FILES))
 

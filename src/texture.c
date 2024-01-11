@@ -2,15 +2,17 @@
 
 static int	check_texture(char *texture, char *path)
 {
-	int	fd;
+	//int	fd;
 
-	if (ft_strncmp(&path[ft_strlen(path) - 5], ".xpm\n", 4) != 0)
+	if (ft_strncmp(&path[ft_strlen(path) - 5], ".xpm", 3) != 0)
 	{
 		printf("Error: Textures not valid.\n");
 		printf("Test ---------> %s\n", path); // test (delete)
 		exit(EXIT_FAILURE);
 	}
 	if (texture == NULL)
+		return (0);
+	/*
 	{
 		if ((fd = open(path, O_RDONLY)) == -1)
 		{
@@ -18,6 +20,7 @@ static int	check_texture(char *texture, char *path)
 			exit(1); // free + exit (delete)
 		}
 	}
+	*/
 	else
 	{
 		printf("Error: Textures not valid.\n");

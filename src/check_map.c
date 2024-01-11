@@ -36,8 +36,9 @@ int check_borders_horizontal(char **map)
 int check_borders_vertical(char **map)
 {
 }
+*/
 
-
+/*
 int	check_around(char **map, int row, int col)
 {
 	// return 1 if error
