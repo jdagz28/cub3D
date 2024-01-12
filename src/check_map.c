@@ -9,7 +9,7 @@ int	valid_char(char c)
 
 static int	get_height(char **map)
 {
-	int height;
+	int	height;
 
 	height = 0;
 	while (map[height])
@@ -17,9 +17,9 @@ static int	get_height(char **map)
 	return (height);
 }
 
-void check_wall_map(char **map, int y, int x) // ft segfault
+void	check_wall_map(char **map, int y, int x)
 {
-	int height;
+	int	height;
 
 	height = get_height(map);
 	if (x > (int)ft_strlen(map[x]) - 1 || map[x][y] == '2')

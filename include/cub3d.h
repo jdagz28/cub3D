@@ -49,5 +49,6 @@ void check_wall_map(char **map, int y, int x);
 /* Utils */
 int	len_split(char **split);
 int	rgb_to_hex(int red, int green, int blue);
+char	*skip_empty_line(int fd, char *line);
 
 #endif

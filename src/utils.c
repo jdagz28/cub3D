@@ -25,3 +25,10 @@ int	rgb_to_hex(int red, int green, int blue)
 		res = (red << 16) | (green << 8) | blue;
 	return (res);
 }
+
+char	*skip_empty_line(int fd, char *line)
+{
+	while (line && line[0] == '\n')
+		line = get_next_line(fd);
+	return (line);
+}

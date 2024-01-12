@@ -17,7 +17,6 @@ static void	arg_error(int argc, char **argv)
 	}
 }
 
-// Return 1 si toutes les textures sont assignees
 static int	check_all_textures(t_texture *texture)
 {
 	if (texture->north == NULL)
@@ -33,13 +32,6 @@ static int	check_all_textures(t_texture *texture)
 	if (texture->ceiling == -1)
 		return (0);
 	return (1);
-}
-
-char	*skip_empty_line(int fd, char *line) // mettre dans utils.c
-{
-	while (line && line[0] == '\n')
-		line = get_next_line(fd);
-	return (line);
 }
 
 char	**get_map(int fd, char *start)
@@ -136,22 +128,23 @@ static void	get_data(t_game *game)
 		printf("Test: Manque des textures\n");
 		exit(1);
 	}
-	game->map = game->copy_map = get_map(game->fd, line);
+	game->map = get_map(game->fd, line);
 	check_char_map(game->map, &game->player);
-	// make a map copy before giving it to check wall
-	check_wall_map(game->copy_map, game->player.mat_position.axis[0], game->player.mat_position.axis[1]); // not working
+	check_wall_map(game->map, game->player.mat_position.axis[0],
+		game->player.mat_position.axis[1]);
 }
 
 int	parsing(int argc, char **argv, t_game *game)
 {
 	arg_error(argc, argv);
 	init_game(game);
-	if ((game->fd = open(argv[1], O_RDONLY)) == -1)
+	game->fd = open(argv[1], O_RDONLY);
+	if (game->fd == -1)
 	{
 		printf("Error: Can't open file.\n");
 		exit(1);
 	}
 	get_data(game);
-	close(game->fd); // va avec fd = open
+	close(game->fd);
 	return (0);
 }
