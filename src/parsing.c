@@ -89,6 +89,7 @@ int	check_char_map(char **map, t_player *player)
 			if (check_char(map[x][y]) == 0)
 			{
 				printf("Error: Wrong char in map\n");
+				printf("x,y = %d, %d === char = %c\n", x, y, map[x][y]);
 				exit(1); // free + delete
 			}
 			else if (check_char(map[x][y]) == 2)
@@ -97,6 +98,8 @@ int	check_char_map(char **map, t_player *player)
 			{
 				player->mat_position.axis[0] = y;
 				player->mat_position.axis[1] = x;
+				player->direction = map[x][y];
+				map[x][y] = '0';
 				spawn += 1;
 			}
 			y++;
@@ -133,10 +136,10 @@ static void	get_data(t_game *game)
 		printf("Test: Manque des textures\n");
 		exit(1);
 	}
-	game->map = get_map(game->fd, line);
+	game->map = game->copy_map = get_map(game->fd, line);
 	check_char_map(game->map, &game->player);
-	//check_open_map(game->map);
-	//print_map(game->map); // (delete)
+	// make a map copy before giving it to check wall
+	check_wall_map(game->copy_map, game->player.mat_position.axis[0], game->player.mat_position.axis[1]); // not working
 }
 
 int	parsing(int argc, char **argv, t_game *game)

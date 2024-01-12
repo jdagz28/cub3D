@@ -43,7 +43,8 @@ void	get_texture(t_texture *texture, char *line);
 
 /* Check Map */
 //int	check_open_map(char **map);
-//int check_borders_horizontal(char **map);
+int check_borders_horizontal(char **map);
+void check_wall_map(char **map, int y, int x);
 
 /* Utils */
 int	len_split(char **split);
