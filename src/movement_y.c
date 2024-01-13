@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:25:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/08 12:30:13 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/13 22:43:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ int	check_playerpos(t_game *game)
 {
 	game->player.array_x = (int)game->player.position.axis[X] / TILE_SIZE;
 	game->player.array_y = (int)game->player.position.axis[Y] / TILE_SIZE;
-	if (game->player.array_x < 0)
+	if (game->player.array_x < 0 || game->player.array_y < 0)
 		return (0);
-	if (game->player.array_y < 0)
+	if (game->player.array_x > game->map_width - 3)
+		return (0);
+	if (game->player.array_y > game->map_height - 2)
 		return (0);
 	return (1);
 }
@@ -57,6 +59,36 @@ static void	move_y(t_game *game, int x, int y, int keycode)
 	}
 }
 
+int	check_ymovement_add_x(t_game *game)
+{
+	int	res;
+
+	res = (game->player.position.axis[X] + game->player.front.dir[X]) / TILE_SIZE;
+	if (res < 0 || res > game->map_width)
+	{
+		if (res < 0)
+			res = 0;
+		else
+			res = game->map_width;
+	}
+	return (res);
+}
+
+int	check_ymovement_add_y(t_game *game)
+{
+	int res;
+	
+	res = (game->player.position.axis[X] + game->player.front.dir[X]) / TILE_SIZE;
+	if (res < 0 || res > game->map_width)
+	{
+		if (res < 0)
+			res = 0;
+		else
+			res = game->map_height;
+	}
+	return (res);
+}
+
 void	player_movement_y(int keycode, t_game *game)
 {
 	int	add_x;
@@ -66,12 +98,8 @@ void	player_movement_y(int keycode, t_game *game)
 
 	if (check_playerpos(game) == 0)
 		return ;
-	add_x = (game->player.position.axis[X] - game->player.front.dir[X]) / TILE_SIZE - 0.2;
-	if (add_x < 0 || add_x > game->map_width)
-		add_x = offset_check(game, "add_x", add_x);
-	add_y = (game->player.position.axis[Y] - game->player.front.dir[Y]) / TILE_SIZE - 0.2;
-	if (add_y < 0 || add_y > game->map_height)
-		add_y = offset_check(game, "add_y", add_y);
+	add_x = check_ymovement_add_x(game);
+	add_y = check_ymovement_add_y(game);
 	sub_x = (game->player.position.axis[X] + game->player.front.dir[X]) / TILE_SIZE + 0.2;
 	if (sub_x < 0 || sub_x > game->map_width)
 		sub_x = offset_check(game, "sub_x", sub_x);
