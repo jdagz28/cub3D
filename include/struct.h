@@ -12,6 +12,10 @@ typedef struct s_texture
 	int			ceiling;
 	int			width;
 	int 		height;
+	int			n_texture[4096];
+	int			s_texture[4096];
+	int			w_texture[4096];
+	int 		e_texture[4096];
 }				t_texture;
 
 typedef struct valid_text
@@ -29,6 +33,7 @@ typedef struct s_image_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		*add_itr;
 }	t_image_data;
 
 typedef struct s_display
