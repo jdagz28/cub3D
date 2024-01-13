@@ -6,28 +6,39 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/10 09:32:22 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/13 21:41:50 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 
-void	read_textures(t_game *game, t_display *mlx, t_texture *texture, char *direction)
+void	read_textures(t_game *game, t_display *mlx, char *texture_path, \
+							char *dir)
 {
 	int	i;
 	int	j;
+	int	pos;
 
-	mlx->img.img = mlx_xpm_file_to_image(mlx->mlx, texture->north, &texture->width, &texture->height);
-	mlx->img.add_itr = (int *)mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_length, &mlx->img.endian);
+	mlx->img.img = mlx_xpm_file_to_image(mlx->mlx, texture_path, \
+						&game->texture.width, &game->texture.height);
+	mlx->img.add_itr = (int *)mlx_get_data_addr(mlx->img.img, \
+			&mlx->img.bits_per_pixel, &mlx->img.line_length, &mlx->img.endian);
 	i = -1;
 	while (++i < TILE_SIZE)
 	{
 		j = -1;
 		while (++j < TILE_SIZE)
 		{
-			if (ft_strncmp(direction, "NORTH", ft_strlen(direction)) == 0)
-				game->texture.n_texture[texture->width * i + j] = mlx->img.add_itr[texture->width * i + j];
+			pos = game->texture.width * i + j;
+			if (ft_strncmp(dir, "NORTH", ft_strlen(dir)) == 0)
+				game->texture.n_texture[pos] = mlx->img.add_itr[pos];
+			else if (ft_strncmp(dir, "SOUTH", ft_strlen(dir)) == 0)
+				game->texture.s_texture[pos] = mlx->img.add_itr[pos];
+			else if (ft_strncmp(dir, "EAST", ft_strlen(dir)) == 0)
+				game->texture.e_texture[pos] = mlx->img.add_itr[pos];
+			else if (ft_strncmp(dir, "WEST", ft_strlen(dir)) == 0)
+				game->texture.w_texture[pos] = mlx->img.add_itr[pos];
 		}
 	}
 }
@@ -71,13 +82,10 @@ int	main(int argc, char **argv)
 	texture.south = "../texture/test.xpm";
 	texture.east = "../texture/brick_gray.xpm";
 	texture.west = "../texture/brick_graymoss.xpm";
-	read_textures(&game, &mlx, &texture);
-	// for (int i = 0; i < 4096; i++)
-	// {
-	// 	printf("%d ", game.ray.texture[i]);
-	// 	if (i % TILE_SIZE == 0)
-	// 		printf("\n");
-	// }
+	read_textures(&game, &mlx, texture.north, "NORTH");
+	read_textures(&game, &mlx, texture.south, "SOUTH");
+	read_textures(&game, &mlx, texture.east, "EAST");
+	read_textures(&game, &mlx, texture.west, "WEST");
 	init_player(&game);
 	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, keybindings, &game);
 	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &mlx);

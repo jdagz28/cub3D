@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/10 09:30:01 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/13 21:38:35 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,20 @@ static float	check_rayhit(t_game *game, float x)
 
 static int	get_texturecolor(t_game *game, t_walltexture *texture)
 {
-	int	ptr;
-	int pixel_color;
+	int	pos;
+	int	pixel_color;
 
-	ptr = (int)texture->y * TILE_SIZE + texture->x;
-	if (ptr > (TILE_SIZE * TILE_SIZE))
-		ptr = 4095;
+	pos = (int)texture->y * TILE_SIZE + texture->x;
+	if (pos > (TILE_SIZE * TILE_SIZE))
+		pos = 4095;
 	if (get_direction(game) == NORTH)
-		pixel_color = game->texture.n_texture[ptr];
+		pixel_color = game->texture.n_texture[pos];
 	else if (get_direction(game) == SOUTH)
-		pixel_color = game->texture.s_texture[ptr];
+		pixel_color = game->texture.s_texture[pos];
 	else if (get_direction(game) == EAST)
-		pixel_color = game->texture.e_texture[ptr];
-	else
-		pixel_color = game->texture.w_texture[ptr];
+		pixel_color = game->texture.e_texture[pos];
+	else if (get_direction(game) == WEST)
+		pixel_color = game->texture.w_texture[pos];
 	return (pixel_color);
 }
 
@@ -125,7 +125,7 @@ void	draw_3d(t_game *game, int raynum)
 	j--;
 	draw_wall(game, raynum, j);
 	j = game->ray.end - 2;
-	while (++ j < WIN_HEIGHT)
+	while (++j < WIN_HEIGHT)
 	{
 		pixel = create_point(raynum, j);
 		pixel.color = game->floor_color;
