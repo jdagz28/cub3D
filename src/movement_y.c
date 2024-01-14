@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:25:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 01:32:17 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/14 01:50:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	check_playerpos(t_game *game)
 	if (game->player.array_x < 0 || game->player.array_y < 0)
 		return (0);
 	return (1);
-}
-
-int offset_check(t_game *game, char *type, int value)
+}int offset_check(t_game *game, char *type, int value)
 {
 	int res;
 
@@ -36,7 +34,6 @@ int offset_check(t_game *game, char *type, int value)
 		res = game->map_height;
 	return res;
 }
-
 static void	move_y(t_game *game, int x, int y, int keycode)
 {
 	if (keycode == K_W)
@@ -55,67 +52,48 @@ static void	move_y(t_game *game, int x, int y, int keycode)
 	}
 }
 
-int	check_ymovement_add_x(t_game *game, int offset)
+static void	move_backward(t_game *game, int keycode)
 {
-	int	res;
+	int	x_offset;
+	int	y_offset;
+	int	sub_x;
+	int	sub_y;
 
-	res = (game->player.position.axis[X] + \
-				offset) / TILE_SIZE;
-	return (res);
+	x_offset = 20;
+	if (game->player.front.dir[X] < 0)
+		x_offset = -20;
+	y_offset = 20;
+	if (game->player.front.dir[Y] < 0)
+		y_offset = -20;
+	sub_x = (game->player.position.axis[X] - x_offset) / TILE_SIZE;
+	sub_y = (game->player.position.axis[Y] - y_offset) / TILE_SIZE;
+	move_y(game, sub_x, sub_y, keycode);
 }
 
-int	check_ymovement_add_y(t_game *game, int offset)
-{
-	int	res;
-
-	res = (game->player.position.axis[Y] + \
-				offset) / TILE_SIZE;
-	return (res);
-}
-
-int	check_ymovement_sub_x(t_game *game, int offset)
-{
-	int	res;
-
-	res = (game->player.position.axis[X] - \
-				offset) / TILE_SIZE;
-	return (res);
-}
-
-int	check_ymovement_sub_y(t_game *game, int offset)
-{
-	int	res;
-
-	res = (game->player.position.axis[Y] - \
-				offset) / TILE_SIZE;
-	return (res);
-}
-
-void	player_movement_y(int keycode, t_game *game)
+static void	move_forward(t_game *game, int keycode)
 {
 	int	x_offset;
 	int	y_offset;
 	int	add_x;
 	int	add_y;
-	int	sub_x;
-	int	sub_y;
 
-	if (check_playerpos(game) == 0)
-		return ;
+	x_offset = 20;
 	if (game->player.front.dir[X] < 0)
 		x_offset = -20;
-	else
-		x_offset = 20;
+	y_offset = 20;
 	if (game->player.front.dir[Y] < 0)
 		y_offset = -20;
-	else
-		y_offset = 20;
-	add_x = check_ymovement_add_x(game, x_offset);
-	add_y = check_ymovement_add_y(game, y_offset);
-	sub_x = check_ymovement_sub_x(game, x_offset);
-	sub_y = check_ymovement_sub_y(game, y_offset);
+	add_x = (game->player.position.axis[X] + x_offset) / TILE_SIZE;
+	add_y = (game->player.position.axis[Y] + y_offset) / TILE_SIZE;
+	move_y(game, add_x, add_y, keycode);
+}
+
+void	player_movement_y(int keycode, t_game *game)
+{
+	if (check_playerpos(game) == 0)
+		return ;
 	if (keycode == K_W)
-		move_y(game, add_x, add_y, keycode);
+		move_forward(game, keycode);
 	if (keycode == K_S)
-		move_y(game, sub_x, sub_y, keycode);
+		move_backward(game, keycode);
 }
