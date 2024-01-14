@@ -93,6 +93,7 @@ typedef struct s_player
 	t_point		position;
 	t_point		mat_position;
 	t_vector	front;
+	t_vector	side;
 	int			array_x;
 	int			array_y;
 	float		angle;
