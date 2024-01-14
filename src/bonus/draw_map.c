@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_init.c                                         :+:      :+:    :+:   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 20:57:26 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 22:10:05 by jdagoy           ###   ########.fr       */
+/*   Created: 2024/01/03 14:27:39 by jdagoy            #+#    #+#             */
+/*   Updated: 2024/01/08 23:39:36 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_mlx(t_display *display, t_image_data *img)
+int	draw_map(t_game *game)
 {
-	display->mlx = mlx_init();
-	if (display->mlx != 0)
-		exit (1);
-	display->window = mlx_new_window(display->mlx, WIN_WIDTH, \
-										WIN_HEIGHT, "Cub3D");
-	display->img.img = mlx_new_image(display->mlx, WIN_WIDTH, WIN_HEIGHT);
-	img->address = mlx_get_data_addr(display->img.img,
-			&img->bits_per_pixel, &img->line_length, &img->endian);
+	ft_bzero(game->display.img.address, WIN_WIDTH * WIN_HEIGHT * 4);
+	draw_ray(game);
+	mlx_put_image_to_window(game->display.mlx, \
+		game->display.window, game->display.img.img, 0, 0);
+	return (0);
 }
+

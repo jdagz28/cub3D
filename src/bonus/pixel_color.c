@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_init.c                                         :+:      :+:    :+:   */
+/*   pixel_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 20:57:26 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 22:10:05 by jdagoy           ###   ########.fr       */
+/*   Created: 2023/12/18 15:19:55 by jdagoy            #+#    #+#             */
+/*   Updated: 2023/12/28 21:28:55 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_mlx(t_display *display, t_image_data *img)
+void	set_color(char *buffer, int endian, int color, int alpha)
 {
-	display->mlx = mlx_init();
-	if (display->mlx != 0)
-		exit (1);
-	display->window = mlx_new_window(display->mlx, WIN_WIDTH, \
-										WIN_HEIGHT, "Cub3D");
-	display->img.img = mlx_new_image(display->mlx, WIN_WIDTH, WIN_HEIGHT);
-	img->address = mlx_get_data_addr(display->img.img,
-			&img->bits_per_pixel, &img->line_length, &img->endian);
+	if (endian == 1)
+	{
+		buffer[0] = alpha;
+		buffer[1] = (color >> 16) & 0xFF;
+		buffer[2] = (color >> 8) & 0xFF;
+		buffer[3] = (color) & 0xFF;
+	}
+	else if (endian == 0)
+	{
+		buffer[0] = (color) & 0xFF;
+		buffer[1] = (color >> 8) & 0xFF;
+		buffer[2] = (color >> 16) & 0xFF;
+		buffer[3] = alpha;
+	}
 }

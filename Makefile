@@ -33,6 +33,7 @@ CFLAGS              	:= -Wall -Werror -Wextra $(FSANITIZE) $(OS_FLAG)
 OBJ_DIR             	:= ./objects/
 INCLUDE_DIR         	:= ./include/
 MAIN_SRCS				:= ./src/
+BONUS_SRCS				:= ./src/bonus/
 
 MLX			           	:= $(MLX_DIR)/libmlx.a
 GNL_DIR             	:= ./src/get_next_line
@@ -48,8 +49,13 @@ INCLUDES            	:= -I$(LIBFT_DIR) -I$(GNL_DIR) -I$(INCLUDE_DIR) -I$(MLX_DIR
 HEADER					:= cub3d.h\
 							enums.h\
 							struct.h
+
+HEADER_BONUS			:= cub3d_bonus.h\
+							enums.h\
+							struct.h
 							
 HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER))
+HEADER_BONUS_FILES		:= $(addprefix $(INCLUDE_DIR), $(HEADER_BONUS))
 
 SRC_FILES				:= main.c\
 							create_vectorpoint.c\
@@ -66,14 +72,16 @@ SRC_FILES				:= main.c\
 							hooks.c\
 							utils.c\
 							movement_y.c\
-							movement_x.c
+							movement_x.c\
+							xpm_read_textures.c
 
-BONUS_FILES         	:= draw_maptiles_bonus.c\
-							draw_minimap_bonus.c\
-							hooks_bonus.c
+
+BONUS_FILES         	:= main_bonus.c\
+
 
 OBJ_LIST                := $(patsubst %.c,%.o,$(SRC_FILES))
 OBJS                    := $(addprefix $(OBJ_DIR),$(OBJ_LIST))
+
 
 BONUS_OBJ_LIST			:= $(patsubst %.c,%.o,$(BONUS_FILES))
 BONUS_OBJS              := $(addprefix $(OBJ_DIR), $(BONUS_OBJ_LIST))
@@ -87,7 +95,7 @@ $(OBJ_DIR):
 $(OBJ_DIR)%.o: $(MAIN_SRCS)%.c $(HEADER_FILES)
 	@$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
-$(NAME): $(OBJ_DIR) $(OBJS) $(HEADER_FILES)
+$(NAME): $(OBJ_DIR) $(MAIN_OBJ) $(OBJS) $(HEADER_FILES)
 	@echo "Making libft..."
 	@make -C $(LIBFT_DIR)
 	@echo "Libft done."
@@ -95,16 +103,16 @@ $(NAME): $(OBJ_DIR) $(OBJS) $(HEADER_FILES)
 	@echo "get_next_line done"
 	@make -C ${MLX_DIR}
 	@echo "Compiling..."
-	@$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBRARIES) -o $(NAME)
+	@$(CC) $(CFLAGS) $(MAIN_OBJ) $(OBJS) $(INCLUDES) $(LIBRARIES) -o $(NAME)
 	@echo "Done."
 
 bonus: $(NAME)_bonus
-$(OBJ_DIR)%.o: $(MAIN_SRCS)%.c $(HEADER_FILES)
+$(OBJ_DIR)%.o: $(BONUS_SRCS)%.c $(HEADER_BONUS_FILES)
 	@$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
-$(NAME)_bonus: $(OBJ_DIR) $(OBJS) $(BONUS_OBJS) $(HEADER_FILES)
+$(NAME)_bonus: $(OBJ_DIR) $(BONUS_OBJS) $(HEADER_BONUS_FILES)
 	@echo "Compiling bonus..."
-	@$(CC) $(CFLAGS) $(OBJS) $(BONUS_OBJS) $(INCLUDES) $(LIBRARIES) -o $(NAME)
+	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(INCLUDES) $(LIBRARIES) -o $(NAME)
 	@echo "Done."
 
 sanitize: fclean

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 23:02:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/14 21:32:40 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ int	main(int argc, char **argv)
 	game.map_width = 15;
 	game.floor_color = 0x6F8FAF;
 	game.ceiling_color = 0x0000FF;
-	init_mlx(&mlx, &mlx.img);
+	mlx.mlx = mlx_init();
+	mlx.window = mlx_new_window(mlx.mlx, WIN_WIDTH, \
+				WIN_HEIGHT, "cub3D");
+	mlx.img.img = mlx_new_image(mlx.mlx, WIN_WIDTH, WIN_HEIGHT);
+	mlx.img.address = mlx_get_data_addr(mlx.img.img,
+			&mlx.img.bits_per_pixel, &mlx.img.line_length, &mlx.img.endian);
 	game.display = mlx;
 	texture.north = "./texture/brick_red.xpm";
 	texture.south = "./texture/test.xpm";
@@ -49,7 +54,6 @@ int	main(int argc, char **argv)
 	read_textures(&game, &mlx, texture.east, "EAST");
 	read_textures(&game, &mlx, texture.west, "WEST");
 	init_player(&game);
-
 	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, keybindings, &game);
 	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &mlx);
 	mlx_loop_hook(game.display.mlx, &draw_map, &game);

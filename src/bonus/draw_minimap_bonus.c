@@ -6,11 +6,11 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:44:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/09 10:05:31 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/14 21:51:37 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	draw_playerpos(t_game *game, t_player *player, \
 							int axis[2], int radius)

@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_init.c                                         :+:      :+:    :+:   */
+/*   create_vectorpoint.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 20:57:26 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 22:10:05 by jdagoy           ###   ########.fr       */
+/*   Created: 2024/01/03 14:28:29 by jdagoy            #+#    #+#             */
+/*   Updated: 2024/01/03 14:28:41 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_mlx(t_display *display, t_image_data *img)
+t_point	create_point(float x, float y)
 {
-	display->mlx = mlx_init();
-	if (display->mlx != 0)
-		exit (1);
-	display->window = mlx_new_window(display->mlx, WIN_WIDTH, \
-										WIN_HEIGHT, "Cub3D");
-	display->img.img = mlx_new_image(display->mlx, WIN_WIDTH, WIN_HEIGHT);
-	img->address = mlx_get_data_addr(display->img.img,
-			&img->bits_per_pixel, &img->line_length, &img->endian);
+	t_point	point;
+
+	point.axis[X] = x;
+	point.axis[Y] = y;
+	return (point);
+}
+
+t_vector	create_vector(float x, float y)
+{
+	t_vector	vector;
+
+	vector.dir[X] = x;
+	vector.dir[Y] = y;
+	return (vector);
 }
