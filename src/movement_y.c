@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:25:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 01:50:04 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/14 02:07:00 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	check_playerpos(t_game *game)
 	if (game->player.array_x < 0 || game->player.array_y < 0)
 		return (0);
 	return (1);
-}int offset_check(t_game *game, char *type, int value)
+}
+
+int offset_check(t_game *game, char *type, int value)
 {
 	int res;
 
