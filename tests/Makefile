@@ -9,7 +9,7 @@ ifeq ($(OS_NAME), Linux)
     MLX_DIR             := ../minilibx/minilibx-linux
     OS_FLAG             := -D LINUX
 else
-    FSANITIZE           := #-fsanitize=address
+    FSANITIZE           := -fsanitize=address
     FRAMEWORK           := -framework OpenGL -framework AppKit
     LINUX_LIBS          :=
     LINUX_INCLUDES      :=
@@ -35,16 +35,12 @@ INCLUDE_DIR         	:= ../include/
 TEST_SRCS_DIR			:= ./
 MAIN_SRCS				:= ../src/
 
-### minilibx
 MLX			           	:= $(MLX_DIR)/libmlx.a
-
-### Get_next_line
 GNL_DIR             	:= ../src/get_next_line
 GNL                 	:= $(GNL_DIR)/libgnl.a
-
-### Libft
 LIBFT_DIR           	:= ../src/Libft
 LIBFT               	:= $(LIBFT_DIR)/libft.a
+
 
 LIBRARIES           	:= -lmlx -lm -L. -L$(LIBFT_DIR) -lft -L$(GNL_DIR) -lgnl \
 								$(FRAMEWORK) $(LINUX_LIBS) -L$(MLX_DIR)

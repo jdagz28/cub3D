@@ -1,4 +1,25 @@
-#include "../include/cub3d.h"
+#include "cub3d.h"
+
+void	open_door(int keycode, t_game *game)
+{
+	int	x_offset;
+	int	y_offset;
+	int	add_x;
+	int	add_y;
+
+	if (check_playerpos(game) == 0)
+		return ;
+	x_offset = 25;
+	if (game->player.position.axis[X] < 0)
+		x_offset = -25;
+	y_offset = 25;
+	if (game->player.position.axis[Y] < 0)
+		y_offset = -25;
+	add_x = (game->player.position.axis[X] + x_offset) / TILE_SIZE;
+	add_y = (game->player.position.axis[Y] + y_offset) / TILE_SIZE;
+	if (game->map[game->player.array_y][add_x] == '5')
+
+}
 
 int	close_window_cross(t_display *display)
 {
@@ -31,4 +52,5 @@ int	keybindings(int keycode, t_game *game)
 	}
 	return (0);
 }
+
 
