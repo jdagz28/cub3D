@@ -133,7 +133,7 @@ static void	get_data(t_game *game)
 		game->player.mat_position.axis[1]);
 }
 
-int	parsing(int argc, char **argv, t_game *game)
+int	 parsing(int argc, char **argv, t_game *game)
 {
 	arg_error(argc, argv);
 	init_game(game);
