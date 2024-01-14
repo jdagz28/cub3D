@@ -47,13 +47,14 @@ t_game		*init_game(t_game *game);
 void		get_texture(t_texture *texture, char *line);
 
 /* Check Map */
-int	check_open_map(char **map);
 int check_borders_horizontal(char **map);
+void check_wall_map(char **map, int y, int x);
 
 /* Utils */
 int			len_split(char **split);
 int			rgb_to_hex(int red, int green, int blue);
 float		deg_to_rad(float degrees);
+char		*skip_empty_line(int fd, char *line);
 
 // mlx
 void		init_mlx(t_display *display, t_image_data *img);

@@ -17,8 +17,7 @@ static void	arg_error(int argc, char **argv)
 	}
 }
 
-// Return 1 si toutes les textures sont assignees
-static	int check_all_textures(t_texture *texture)
+static int	check_all_textures(t_texture *texture)
 {
 	if (texture->north == NULL)
 		return (0);
@@ -33,13 +32,6 @@ static	int check_all_textures(t_texture *texture)
 	if (texture->ceiling == -1)
 		return (0);
 	return (1);
-}
-
-char	*skip_empty_line(int fd, char *line) // mettre dans utils.c
-{
-	while (line && line[0] == '\n')
-		line = get_next_line(fd);
-	return (line);
 }
 
 char	**get_map(int fd, char *start)
@@ -61,7 +53,7 @@ char	**get_map(int fd, char *start)
 
 //Check_map.c
 
-int	check_char(char	c)
+int	check_char(char c)
 {
 	if (c == '0' || c == '1')
 		return (1);
@@ -73,31 +65,37 @@ int	check_char(char	c)
 		return (0);
 }
 
-int	check_char_map(char **map)
+int	check_char_map(char **map, t_player *player)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 	int	spawn;
 
-	i = 0;
+	x = 0;
 	spawn = 0;
-	while (map[i])
+	while (map[x])
 	{
-		j = 0;
-		while (map[i][j])
+		y = 0;
+		while (map[x][y])
 		{
-			if (check_char(map[i][j]) == 0)
+			if (check_char(map[x][y]) == 0)
 			{
 				printf("Error: Wrong char in map\n");
 				exit(1); // free + delete
 			}
-			else if (check_char(map[i][j]) == 2)
-				map[i][j] = '2';
-			else if (check_char(map[i][j]) == 3)
-					spawn += 1;
-			j++;
+			else if (check_char(map[x][y]) == 2)
+				map[x][y] = '2';
+			else if (check_char(map[x][y]) == 3)
+			{
+				player->mat_position.axis[0] = y;
+				player->mat_position.axis[1] = x;
+				player->direction = map[x][y];
+				map[x][y] = '0';
+				spawn += 1;
+			}
+			y++;
 		}
-		i++;
+		x++;
 	}
 	if (spawn != 1)
 	{
@@ -130,23 +128,22 @@ static void	get_data(t_game *game)
 		exit(1);
 	}
 	game->map = get_map(game->fd, line);
-	check_char_map(game->map);
-	if (check_borders_horizontal(game->map))
-		printf("border pas bon\n");
-	//check_open_map(game->map);
-	//print_map(game->map); // (delete)
+	check_char_map(game->map, &game->player);
+	check_wall_map(game->map, game->player.mat_position.axis[0],
+		game->player.mat_position.axis[1]);
 }
 
 int	parsing(int argc, char **argv, t_game *game)
 {
 	arg_error(argc, argv);
 	init_game(game);
-	if ((game->fd = open(argv[1], O_RDONLY)) == -1)
+	game->fd = open(argv[1], O_RDONLY);
+	if (game->fd == -1)
 	{
 		printf("Error: Can't open file.\n");
 		exit(1);
 	}
 	get_data(game);
-	close(game->fd); // va avec fd = open
+	close(game->fd);
 	return (0);
 }

@@ -2,7 +2,7 @@
 
 int	len_split(char **split)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (split && split[i])
@@ -29,4 +29,11 @@ int	rgb_to_hex(int red, int green, int blue)
 float	deg_to_rad(float degrees)
 {
 	return (degrees * (M_PI / 180));
+}
+
+char	*skip_empty_line(int fd, char *line)
+{
+	while (line && line[0] == '\n')
+		line = get_next_line(fd);
+	return (line);
 }

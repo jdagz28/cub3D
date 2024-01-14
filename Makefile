@@ -15,7 +15,7 @@ OBJS		=	$(SRC:.c=.o)
 
 OBJS_MLX	=	$(MLX_DIR:.c=.o)
 
-CC			=	gcc -g
+CC			=	cc -g
 
 CFLAGS		=	-Wall -Werror -Wextra
 
