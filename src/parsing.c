@@ -81,7 +81,6 @@ int	check_char_map(char **map, t_player *player)
 			if (check_char(map[x][y]) == 0)
 			{
 				printf("Error: Wrong char in map\n");
-				printf("x,y = %d, %d === char = %c\n", x, y, map[x][y]);
 				exit(1); // free + delete
 			}
 			else if (check_char(map[x][y]) == 2)
