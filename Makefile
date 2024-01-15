@@ -58,12 +58,15 @@ HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER))
 HEADER_BONUS_FILES		:= $(addprefix $(INCLUDE_DIR), $(HEADER_BONUS))
 
 SRC_FILES				:= main.c\
+							check_map.c\
 							create_vectorpoint.c\
 							draw_3d.c\
 							draw_line.c\
 							draw_map.c\
 							get_textures.c\
 							init_player.c\
+							init.c\
+							parsing.c\
 							pixel_color.c\
 							raycaster_angles.c\
 							raycaster_castrays.c\
@@ -73,7 +76,8 @@ SRC_FILES				:= main.c\
 							hooks.c\
 							utils.c\
 							movement_y.c\
-							movement_x.c
+							movement_x.c\
+							texture.c
 
 
 BONUS_FILES         	:= main_bonus.c\
