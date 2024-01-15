@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/15 10:27:41 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/15 10:53:15 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	main(int argc, char **argv)
 	game.floor_color = 0x6F8FAF;
 	game.ceiling_color = 0x0000FF;
 	init_mlx(&game.display);
-	init_player(&game);
 	get_textures(&game);
+	init_player(&game);
 	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, keybindings, &game);
 	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &game.display);
 	mlx_loop_hook(game.display.mlx, &draw_map, &game);

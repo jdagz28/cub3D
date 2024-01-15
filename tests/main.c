@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/15 09:48:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/15 10:40:18 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ int	main(int argc, char **argv)
 	texture.south = "../texture/test.xpm";
 	texture.east = "../texture/brick_gray.xpm";
 	texture.west = "../texture/brick_graymoss.xpm";
-	read_textures(&game, &mlx, texture.north, "NORTH");
-	read_textures(&game, &mlx, texture.south, "SOUTH");
-	read_textures(&game, &mlx, texture.east, "EAST");
-	read_textures(&game, &mlx, texture.west, "WEST");
+	read_textures(&game, &game.display, texture.north, "NORTH");
+	read_textures(&game, &game.display, texture.south, "SOUTH");
+	read_textures(&game, &game.display, texture.east, "EAST");
+	read_textures(&game, &game.display, texture.west, "WEST");
 	init_player(&game);
 	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, keybindings, &game);
 	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &mlx);
