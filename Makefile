@@ -9,7 +9,7 @@ ifeq ($(OS_NAME), Linux)
     MLX_DIR             := ./minilibx/minilibx-linux
     OS_FLAG             := -D LINUX
 else
-    FSANITIZE           := #-fsanitize=address
+    FSANITIZE           := -fsanitize=address
     FRAMEWORK           := -framework OpenGL -framework AppKit
     LINUX_LIBS          :=
     LINUX_INCLUDES      :=
@@ -73,8 +73,7 @@ SRC_FILES				:= main.c\
 							hooks.c\
 							utils.c\
 							movement_y.c\
-							movement_x.c\
-							xpm_read_textures.c
+							movement_x.c
 
 
 BONUS_FILES         	:= main_bonus.c\

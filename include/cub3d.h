@@ -106,8 +106,4 @@ void		player_movement_y(int keycode, t_game *game);
 //movement_x.c
 void		player_movement_x(int keycode, t_game *game);
 
-//xpm_read_textures.c
-void	read_textures(t_game *game, t_display *mlx, \
-						char *texture_path, char *dir);
-
 #endif

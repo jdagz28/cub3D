@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 20:46:31 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/15 09:35:27 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static int	get_texturecolor(t_game *game, t_walltexture *texture)
 	int	pos;
 	int	pixel_color;
 
+	pixel_color = 0;
 	pos = (int)texture->y * TILE_SIZE + texture->x;
 	if (pos > (TILE_SIZE * TILE_SIZE))
 		pos = 4095;

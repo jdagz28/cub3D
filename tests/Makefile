@@ -59,8 +59,6 @@ SRC_FILES				:= create_vectorpoint.c\
 							draw_3d.c\
 							draw_line.c\
 							draw_map.c\
-							draw_maptiles_bonus.c\
-							draw_minimap_bonus.c\
 							init_player.c\
 							pixel_color.c\
 							raycaster_angles.c\
