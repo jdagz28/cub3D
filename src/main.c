@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 23:02:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/15 02:33:21 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	t_game			game;
-	t_display		mlx;
 	char			*testmap[] = {
         "111111111111111",
         "100000000000101",
@@ -29,7 +28,6 @@ int	main(int argc, char **argv)
         "100000000000001",
         "111111111111111"
     };
-	t_texture		texture;
 
 	(void)argc;
 	(void)argv;
@@ -38,21 +36,12 @@ int	main(int argc, char **argv)
 	game.map_width = 15;
 	game.floor_color = 0x6F8FAF;
 	game.ceiling_color = 0x0000FF;
-	init_mlx(&mlx, &mlx.img);
-	game.display = mlx;
-	texture.north = "./texture/brick_red.xpm";
-	texture.south = "./texture/test.xpm";
-	texture.east = "./texture/brick_gray.xpm";
-	texture.west = "./texture/brick_graymoss.xpm";
-	read_textures(&game, &mlx, texture.north, "NORTH");
-	read_textures(&game, &mlx, texture.south, "SOUTH");
-	read_textures(&game, &mlx, texture.east, "EAST");
-	read_textures(&game, &mlx, texture.west, "WEST");
+	init_mlx(&game.display);
 	init_player(&game);
-
+	get_textures(&game);
 	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, keybindings, &game);
-	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &mlx);
+	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &game.display);
 	mlx_loop_hook(game.display.mlx, &draw_map, &game);
-	mlx_loop(mlx.mlx);
+	mlx_loop(game.display.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 21:32:51 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 21:32:59 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/15 03:00:05 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	read_textures(t_game *game, t_display *mlx, char *texture_path, \
 	int	j;
 	int	pos;
 
-	mlx->img.img = mlx_xpm_file_to_image(mlx->mlx, texture_path, \
+	mlx->img.img = mlx_xpm_file_to_image(game->display.mlx, texture_path, \
 						&game->texture.width, &game->texture.height);
 	mlx->img.add_itr = (int *)mlx_get_data_addr(mlx->img.img, \
 			&mlx->img.bits_per_pixel, &mlx->img.line_length, &mlx->img.endian);

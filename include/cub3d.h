@@ -57,7 +57,7 @@ float		deg_to_rad(float degrees);
 char		*skip_empty_line(int fd, char *line);
 
 // mlx
-void		init_mlx(t_display *display, t_image_data *img);
+void		init_mlx(t_display *mlx);
 void		my_mlx_pixel_put(t_image_data *img, t_point pixel);
 
 // create_vectorpoint.c
@@ -74,6 +74,9 @@ void		draw_line_dda(t_image_data *img, t_point start, t_point end);
 
 // draw_map.c
 int		draw_map(t_game *game);
+
+// get_textures.c
+void	get_textures(t_game *game);
 
 // init_player.c
 void		update_player_front(t_player *player);
@@ -104,7 +107,7 @@ void		player_movement_y(int keycode, t_game *game);
 void		player_movement_x(int keycode, t_game *game);
 
 //xpm_read_textures.c
-void	read_textures(t_game *game, t_display *mlx, char *texture_path, \
-							char *dir);
+void	read_textures(t_game *game, t_display *mlx, \
+						char *texture_path, char *dir);
 
 #endif

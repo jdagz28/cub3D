@@ -62,6 +62,7 @@ SRC_FILES				:= main.c\
 							draw_3d.c\
 							draw_line.c\
 							draw_map.c\
+							get_textures.c\
 							init_player.c\
 							pixel_color.c\
 							raycaster_angles.c\
