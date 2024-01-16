@@ -25,14 +25,14 @@ void	check_wall_map(char **map, int y, int x)
 	if (x > (int)ft_strlen(map[x]) - 1 || map[x][y] == '2')
 	{
 		printf("Error: Map not closed.\n");
-		exit(1); // free + error return (delete)
+		exit(1);
 	}
 	if (map[x][y] == '3' || map[x][y] == '1')
 		return ;
 	if (x == 0 || y == 0 || x == height - 1 || y == ft_strlen(map[x]) - 1)
 	{
 		printf("Error: Map not closed.\n");
-		exit(1); // free + return (delete)
+		exit(1);
 	}
 	map[x][y] = '3';
 	check_wall_map(map, y + 1, x);

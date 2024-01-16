@@ -24,7 +24,6 @@ static int	check_texture(char *texture, char *path)
 	else
 	{
 		printf("Error: Textures not valid.\n");
-		printf("Test ---------> %s\n", texture); // test (delete)
 		exit(EXIT_FAILURE);
 	}
 	return (1);
@@ -37,43 +36,33 @@ static int	check_color(int color)
 	else
 	{
 		printf("Error: Textures not valid.\n");
-		printf("color of floor or ceiling is wrong\n"); // test (delete)
 		exit(EXIT_FAILURE);
 	}
 	return (1);
 }
 
-static int	get_rgb(t_texture *texture, char c, char *path) // fonction trop longue -> changer les printf + return en fonction d'exit
+static int	get_rgb(t_texture *texture, char c, char *path)
 {
 	char	**split;
 
 	split = ft_split(path, ',');
-	if (!split[0] || !split[1] || !split[2])
-		return (-1); // free + exit (delete)
-	if (split[3])
-	{
-		printf("split[3] pas cense exister\n"); // free + exit (delete)
-		return (1);
-	}
+	if (split[3] || !split[0] || !split[1] || !split[2])
+		exit(1);
 	if (c == 'F')
 	{
 		if (texture->floor != -1)
-		{
-			printf("Error color floor\n");
-			return (-1);
-		}
+			exit(1);
 		else
-			texture->floor = rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
+			texture->floor = rgb_to_hex(ft_atoi(split[0]), 
+					ft_atoi(split[1]), ft_atoi(split[2]));
 	}
 	else if (c == 'C')
 	{
 		if (texture->ceiling != -1)
-		{
-			printf("Error color ceiling\n");
-			return (-1);
-		}
+			exit(1);
 		else
-			texture->ceiling = rgb_to_hex(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
+			texture->ceiling = rgb_to_hex(ft_atoi(split[0]), 
+					ft_atoi(split[1]), ft_atoi(split[2]));
 	}
 	free(split);
 	return (0);
@@ -112,7 +101,6 @@ void	get_texture(t_texture *texture, char *line)
 	{
 		if (len_split(split) != 0)
 		{
-			printf("Test : This line is not valid -> %s\n", line); // test (delete)
 			printf("Texture path is not valid.\n");
 			exit(EXIT_FAILURE);
 		}
