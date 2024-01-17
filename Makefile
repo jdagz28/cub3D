@@ -58,6 +58,7 @@ HEADER_FILES			:= $(addprefix $(INCLUDE_DIR), $(HEADER))
 HEADER_BONUS_FILES		:= $(addprefix $(INCLUDE_DIR), $(HEADER_BONUS))
 
 SRC_FILES				:= main.c\
+							calc_mapdimensions.c\
 							check_map.c\
 							create_vectorpoint.c\
 							draw_3d.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/15 09:35:27 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/17 12:28:20 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	draw_3d(t_game *game, int raynum)
 	while (++j < game->ray.start)
 	{
 		pixel = create_point(raynum, j);
-		pixel.color = game->ceiling_color;
+		pixel.color = game->texture.ceiling;
 		my_mlx_pixel_put(&game->display.img, pixel);
 	}
 	j--;
@@ -129,7 +129,7 @@ void	draw_3d(t_game *game, int raynum)
 	while (++j < WIN_HEIGHT)
 	{
 		pixel = create_point(raynum, j);
-		pixel.color = game->floor_color;
+		pixel.color = game->texture.floor;
 		my_mlx_pixel_put(&game->display.img, pixel);
 	}
 }

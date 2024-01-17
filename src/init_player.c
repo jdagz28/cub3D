@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:24:11 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/08 23:47:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/17 12:42:01 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,15 @@ void	update_player_front(t_player *player)
 
 void	init_player(t_game *game)
 {
-	game->player.position = create_point((WIN_WIDTH / 2), \
-											WIN_HEIGHT / 2);
-	game->player.array_x = game->map_width / 2;
-	game->player.array_y = game->map_height / 2; 
-	game->player.angle = M_PI;
+	game->player.position = create_point(game->player.array_x * TILE_SIZE, \
+											game->player.array_y * TILE_SIZE);
+	if (game->player.direction == 'N')
+		game->player.angle = M_PI_2;
+	else if (game->player.direction == 'S')
+		game->player.angle = M_PI_3;
+	else if (game->player.direction == 'W')
+		game->player.angle = M_PI;
+	else if (game->player.direction == 'E')
+		game->player.angle = 2 * M_PI;
 	update_player_front(&game->player);
 }
