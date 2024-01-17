@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:24:11 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/17 10:53:35 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/17 12:42:01 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	update_player_front(t_player *player)
 
 void	init_player(t_game *game)
 {
-	game->player.array_x += 1;
-	game->player.array_y += 1;
 	game->player.position = create_point(game->player.array_x * TILE_SIZE, \
 											game->player.array_y * TILE_SIZE);
 	if (game->player.direction == 'N')

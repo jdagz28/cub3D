@@ -60,6 +60,9 @@ char		*skip_empty_line(int fd, char *line);
 void		init_mlx(t_display *mlx);
 void		my_mlx_pixel_put(t_image_data *img, t_point pixel);
 
+// calc_mapdimensions.c
+void	calc_mapdimensions(t_game *game);
+
 // create_vectorpoint.c
 t_point		create_point(float x, float y);
 t_vector	create_vector(float x, float y);
