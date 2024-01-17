@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 00:18:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/17 10:19:13 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/17 12:26:59 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	read_textures(t_game *game, t_image_data *img, char *texture_path, \
 	int	j;
 	int	pos;
 
-	img->img = mlx_xpm_file_to_image(game->display.window, texture_path, \
+	img->img = mlx_xpm_file_to_image(game->display.mlx, texture_path, \
 						&game->texture.width, &game->texture.height);
 	img->add_itr = (int *)mlx_get_data_addr(img->img, \
 			&img->bits_per_pixel, &img->line_length, &img->endian);
@@ -31,8 +31,6 @@ void	read_textures(t_game *game, t_image_data *img, char *texture_path, \
 		while (++j < TILE_SIZE)
 		{
 			pos = game->texture.width * i + j;
-			if (pos > 4095)
-				break ;
 			if (ft_strncmp(dir, "NORTH", ft_strlen(dir)) == 0)
 				game->texture.n_texture[pos] = img->add_itr[pos];
 			else if (ft_strncmp(dir, "SOUTH", ft_strlen(dir)) == 0)
@@ -44,7 +42,6 @@ void	read_textures(t_game *game, t_image_data *img, char *texture_path, \
 		}
 	}
 }
-
 
 void	get_textures(t_game *game)
 {

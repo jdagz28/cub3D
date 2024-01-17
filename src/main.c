@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/17 10:25:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/17 11:01:54 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	main(int argc, char **argv)
 	t_game			game;
 
 	parsing(argc, argv, &game);
-	init_mlx(&game.display);
-	// get_textures(&game);
 	calc_mapdimensions(&game);
+	init_mlx(&game.display);
+	get_textures(&game);
 	init_player(&game);
 	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, keybindings, &game);
 	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, \

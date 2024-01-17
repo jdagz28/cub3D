@@ -11,11 +11,11 @@ typedef struct s_texture
 	int			floor;
 	int			ceiling;
 	int			width;
-	int 		height;
+	int			height;
 	int			n_texture[4096];
 	int			s_texture[4096];
 	int			w_texture[4096];
-	int 		e_texture[4096];
+	int			e_texture[4096];
 }				t_texture;
 
 typedef struct valid_text
@@ -106,8 +106,6 @@ typedef struct s_game
 	t_player	player;
 	t_ray		ray;
 	t_texture	texture;
-	int			floor_color;
-	int			ceiling_color;
 	int			map_width;
 	int			map_height;
 	char		**map;
