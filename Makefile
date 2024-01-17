@@ -2,7 +2,7 @@ NAME        			:= cub3D
 OS_NAME     			:= $(shell uname -s)
 
 ifeq ($(OS_NAME), Linux)
-    FSANITIZE           := #-fsanitize=address -fsanitize=leak
+    FSANITIZE           := -fsanitize=address -fsanitize=leak
     FRAMEWORK           :=
     LINUX_LIBS          := -lXext -lX11
     LINUX_INCLUDES      := -I/usr/include
