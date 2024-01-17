@@ -83,7 +83,7 @@ int	check_char_map(char **map, t_player *player)
 			if (check_char(map[x][y]) == 0)
 			{
 				printf("Error: Wrong char in map\n");
-				exit(1); // free + delete
+				exit(1);
 			}
 			else if (check_char(map[x][y]) == 2)
 				map[x][y] = '2';
@@ -102,7 +102,7 @@ int	check_char_map(char **map, t_player *player)
 	if (spawn != 1)
 	{
 		printf("Error: More than one spawn\n");
-		exit(1); // free et delete
+		exit(1);
 	}
 	return (0);
 }

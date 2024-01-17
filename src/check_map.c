@@ -22,7 +22,7 @@ void	check_wall_map(char **map, int y, int x)
 	int	height;
 
 	height = get_height(map);
-	if (x > (int)ft_strlen(map[x]) - 1 || map[x][y] == '2')
+	if (y > (int)ft_strlen(map[x]) - 1 || map[x][y] == '2')
 	{
 		printf("Error: Map not closed.\n");
 		exit(1);

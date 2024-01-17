@@ -6,11 +6,12 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/17 18:50:28 by gmarchal         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:45:35 by gmarchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 int	main(int argc, char **argv)
 {
@@ -29,7 +30,7 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-/*
+/*   DELETE BEFORE PUSHING FOR CORRECTION
 void print_map(char **map)
 {
 	int i, j;
