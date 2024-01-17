@@ -91,7 +91,6 @@ typedef struct s_walltexture
 typedef struct s_player
 {
 	t_point		position;
-	t_point		mat_position;
 	t_vector	front;
 	t_vector	side;
 	int			array_x;
@@ -112,7 +111,6 @@ typedef struct s_game
 	int			map_width;
 	int			map_height;
 	char		**map;
-	char		**copy_map;
 	int			fd;
 }	t_game;
 
