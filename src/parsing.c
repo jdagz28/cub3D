@@ -44,6 +44,8 @@ char	**get_map(int fd, char *start)
 	while (line)
 	{
 		start = ft_strjoin(start, line);
+		if (!start)
+			exit(1);
 		line = get_next_line(fd);
 	}
 	free(line);
@@ -127,8 +129,9 @@ static void	get_data(t_game *game)
 	}
 	game->map = get_map(game->fd, line);
 	check_char_map(game->map, &game->player);
-	check_wall_map(game->map, game->player.array_y,
-		game->player.array_x);
+	check_wall_map(game->map, game->player.array_x,
+		game->player.array_y);
+	replace_threes(game->map);
 }
 
 int	parsing(int argc, char **argv, t_game *game)

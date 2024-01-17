@@ -109,6 +109,7 @@ typedef struct s_game
 	int			map_width;
 	int			map_height;
 	char		**map;
+	char		**map_copy;
 	int			fd;
 }	t_game;
 

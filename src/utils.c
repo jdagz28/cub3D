@@ -37,3 +37,22 @@ char	*skip_empty_line(int fd, char *line)
 		line = get_next_line(fd);
 	return (line);
 }
+
+void replace_threes(char **map)
+{
+	int i, j;
+	i = 0;
+
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '3')
+				map[i][j] = '0';
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
