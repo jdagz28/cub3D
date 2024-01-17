@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 00:18:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/15 10:57:44 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/17 10:19:13 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ void	get_textures(t_game *game)
 {
 	t_image_data	img;
 
-	game->texture.north = "./texture/brick_red.xpm";
-	game->texture.south = "./texture/test.xpm";
-	game->texture.east = "./texture/brick_gray.xpm";
-	game->texture.west = "./texture/brick_graymoss.xpm";
 	read_textures(game, &img, game->texture.north, "NORTH");
 	read_textures(game, &img, game->texture.south, "SOUTH");
 	read_textures(game, &img, game->texture.east, "EAST");

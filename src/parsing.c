@@ -87,8 +87,8 @@ int	check_char_map(char **map, t_player *player)
 				map[x][y] = '2';
 			else if (check_char(map[x][y]) == 3)
 			{
-				player->array_x = x;
-				player->array_y = y;
+				player->array_x = y;
+				player->array_y = x;
 				player->direction = map[x][y];
 				map[x][y] = '0';
 				spawn += 1;
@@ -107,10 +107,8 @@ int	check_char_map(char **map, t_player *player)
 
 static void	get_data(t_game *game)
 {
-	int		i;
 	char	*line;
 
-	i = 0;
 	line = get_next_line(game->fd);
 	while (line && !check_all_textures(&game->texture))
 	{
@@ -129,8 +127,8 @@ static void	get_data(t_game *game)
 	}
 	game->map = get_map(game->fd, line);
 	check_char_map(game->map, &game->player);
-	check_wall_map(game->map, game->player.mat_position.axis[0],
-		game->player.mat_position.axis[1]);
+	check_wall_map(game->map, game->player.array_y,
+		game->player.array_x);
 }
 
 int	parsing(int argc, char **argv, t_game *game)
