@@ -73,7 +73,8 @@ SRC_FILES				:= main.c\
 							utils.c\
 							movement_y.c\
 							movement_x.c\
-							texture.c
+							texture.c\
+							process_map.c
 
 OBJ_LIST                := $(patsubst %.c,%.o,$(SRC_FILES))
 OBJS                    := $(addprefix $(OBJ_DIR),$(OBJ_LIST))

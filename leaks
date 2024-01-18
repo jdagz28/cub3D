@@ -1,137 +1,16 @@
 
 =================================================================
-==29621==ERROR: LeakSanitizer: detected memory leaks
-
-Direct leak of 1050 byte(s) in 10 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b7232 in ft_strjoin (/home/jdagz28/Documents/19/cub3D/cub3D+0x14232)
-    #2 0x5610aa8ae8ee in get_map (/home/jdagz28/Documents/19/cub3D/cub3D+0xb8ee)
-    #3 0x5610aa8af0ea in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xc0ea)
-    #4 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #5 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #6 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Direct leak of 153 byte(s) in 9 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b774f in ft_strjoin_gnl (/home/jdagz28/Documents/19/cub3D/cub3D+0x1474f)
-    #2 0x5610aa8b755a in get_next_line (/home/jdagz28/Documents/19/cub3D/cub3D+0x1455a)
-    #3 0x5610aa8ae912 in get_map (/home/jdagz28/Documents/19/cub3D/cub3D+0xb912)
-    #4 0x5610aa8af0ea in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xc0ea)
-    #5 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #6 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #7 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Direct leak of 150 byte(s) in 12 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b6fcf in ft_word (/home/jdagz28/Documents/19/cub3D/cub3D+0x13fcf)
-    #2 0x5610aa8b709a in ft_insert_to_tab (/home/jdagz28/Documents/19/cub3D/cub3D+0x1409a)
-    #3 0x5610aa8b71da in ft_split (/home/jdagz28/Documents/19/cub3D/cub3D+0x141da)
-    #4 0x5610aa8b4a72 in get_texture (/home/jdagz28/Documents/19/cub3D/cub3D+0x11a72)
-    #5 0x5610aa8aefb4 in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xbfb4)
-    #6 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #7 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #8 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Direct leak of 103 byte(s) in 4 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b774f in ft_strjoin_gnl (/home/jdagz28/Documents/19/cub3D/cub3D+0x1474f)
-    #2 0x5610aa8b755a in get_next_line (/home/jdagz28/Documents/19/cub3D/cub3D+0x1455a)
-    #3 0x5610aa8af044 in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xc044)
-    #4 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #5 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #6 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Direct leak of 34 byte(s) in 1 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b774f in ft_strjoin_gnl (/home/jdagz28/Documents/19/cub3D/cub3D+0x1474f)
-    #2 0x5610aa8b755a in get_next_line (/home/jdagz28/Documents/19/cub3D/cub3D+0x1455a)
-    #3 0x5610aa8aeefd in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xbefd)
-    #4 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #5 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #6 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Direct leak of 17 byte(s) in 1 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b774f in ft_strjoin_gnl (/home/jdagz28/Documents/19/cub3D/cub3D+0x1474f)
-    #2 0x5610aa8b755a in get_next_line (/home/jdagz28/Documents/19/cub3D/cub3D+0x1455a)
-    #3 0x5610aa8ae8d5 in get_map (/home/jdagz28/Documents/19/cub3D/cub3D+0xb8d5)
-    #4 0x5610aa8af0ea in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xc0ea)
-    #5 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #6 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #7 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Direct leak of 17 byte(s) in 1 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b774f in ft_strjoin_gnl (/home/jdagz28/Documents/19/cub3D/cub3D+0x1474f)
-    #2 0x5610aa8b755a in get_next_line (/home/jdagz28/Documents/19/cub3D/cub3D+0x1455a)
-    #3 0x5610aa8b2836 in skip_empty_line (/home/jdagz28/Documents/19/cub3D/cub3D+0xf836)
-    #4 0x5610aa8ae8c7 in get_map (/home/jdagz28/Documents/19/cub3D/cub3D+0xb8c7)
-    #5 0x5610aa8af0ea in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xc0ea)
-    #6 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #7 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #8 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Direct leak of 13 byte(s) in 1 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b774f in ft_strjoin_gnl (/home/jdagz28/Documents/19/cub3D/cub3D+0x1474f)
-    #2 0x5610aa8b755a in get_next_line (/home/jdagz28/Documents/19/cub3D/cub3D+0x1455a)
-    #3 0x5610aa8aef4c in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xbf4c)
-    #4 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #5 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #6 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Direct leak of 11 byte(s) in 3 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b6fcf in ft_word (/home/jdagz28/Documents/19/cub3D/cub3D+0x13fcf)
-    #2 0x5610aa8b709a in ft_insert_to_tab (/home/jdagz28/Documents/19/cub3D/cub3D+0x1409a)
-    #3 0x5610aa8b71da in ft_split (/home/jdagz28/Documents/19/cub3D/cub3D+0x141da)
-    #4 0x5610aa8b42f7 in get_rgb (/home/jdagz28/Documents/19/cub3D/cub3D+0x112f7)
-    #5 0x5610aa8b4a4a in assign_texture (/home/jdagz28/Documents/19/cub3D/cub3D+0x11a4a)
-    #6 0x5610aa8b4b1e in get_texture (/home/jdagz28/Documents/19/cub3D/cub3D+0x11b1e)
-    #7 0x5610aa8aefb4 in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xbfb4)
-    #8 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #9 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #10 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Direct leak of 11 byte(s) in 3 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b6fcf in ft_word (/home/jdagz28/Documents/19/cub3D/cub3D+0x13fcf)
-    #2 0x5610aa8b709a in ft_insert_to_tab (/home/jdagz28/Documents/19/cub3D/cub3D+0x1409a)
-    #3 0x5610aa8b71da in ft_split (/home/jdagz28/Documents/19/cub3D/cub3D+0x141da)
-    #4 0x5610aa8b42f7 in get_rgb (/home/jdagz28/Documents/19/cub3D/cub3D+0x112f7)
-    #5 0x5610aa8b49c7 in assign_texture (/home/jdagz28/Documents/19/cub3D/cub3D+0x119c7)
-    #6 0x5610aa8b4b1e in get_texture (/home/jdagz28/Documents/19/cub3D/cub3D+0x11b1e)
-    #7 0x5610aa8aefb4 in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xbfb4)
-    #8 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #9 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #10 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Direct leak of 4 byte(s) in 2 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b7693 in ft_strdup_mod (/home/jdagz28/Documents/19/cub3D/cub3D+0x14693)
-    #2 0x5610aa8b74f4 in get_next_line (/home/jdagz28/Documents/19/cub3D/cub3D+0x144f4)
-    #3 0x5610aa8af044 in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xc044)
-    #4 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #5 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #6 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+==213827==ERROR: LeakSanitizer: detected memory leaks
 
 Direct leak of 2 byte(s) in 1 object(s) allocated from:
-    #0 0x7fdcf2cb4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x5610aa8b7693 in ft_strdup_mod (/home/jdagz28/Documents/19/cub3D/cub3D+0x14693)
-    #2 0x5610aa8b74f4 in get_next_line (/home/jdagz28/Documents/19/cub3D/cub3D+0x144f4)
-    #3 0x5610aa8b2836 in skip_empty_line (/home/jdagz28/Documents/19/cub3D/cub3D+0xf836)
-    #4 0x5610aa8ae8c7 in get_map (/home/jdagz28/Documents/19/cub3D/cub3D+0xb8c7)
-    #5 0x5610aa8af0ea in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xc0ea)
-    #6 0x5610aa8af31e in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xc31e)
-    #7 0x5610aa8aaca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x7ca8)
-    #8 0x7fdcf2629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #0 0x7f52eeab4887 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x55a1169d4e8b in ft_strdup_mod (/home/jdagz28/Documents/19/cub3D/cub3D+0x15e8b)
+    #2 0x55a1169d4cec in get_next_line (/home/jdagz28/Documents/19/cub3D/cub3D+0x15cec)
+    #3 0x55a1169cfa25 in skip_empty_line (/home/jdagz28/Documents/19/cub3D/cub3D+0x10a25)
+    #4 0x55a1169cb83d in get_map (/home/jdagz28/Documents/19/cub3D/cub3D+0xc83d)
+    #5 0x55a1169cc152 in get_data (/home/jdagz28/Documents/19/cub3D/cub3D+0xd152)
+    #6 0x55a1169cc3df in parsing (/home/jdagz28/Documents/19/cub3D/cub3D+0xd3df)
+    #7 0x55a1169c7ca8 in main (/home/jdagz28/Documents/19/cub3D/cub3D+0x8ca8)
+    #8 0x7f52ee629d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
 
-Indirect leak of 408 byte(s) in 3 object(s) allocated from:
-    #0 0x7fdcf2cb4a57 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
-    #1 0x7fdcf36890c3 in XShmCreateImage (/lib/x86_64-linux-gnu/libXext.so.6+0x50c3)
-
-Indirect leak of 264 byte(s) in 3 object(s) allocated from:
-    #0 0x7fdcf2cb4a57 in __interceptor_calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:154
-    #1 0x5610aa8b542b in mlx_int_new_xshm_image (/home/jdagz28/Documents/19/cub3D/cub3D+0x1242b)
-
-SUMMARY: AddressSanitizer: 2237 byte(s) leaked in 54 allocation(s).
+SUMMARY: AddressSanitizer: 2 byte(s) leaked in 1 allocation(s).

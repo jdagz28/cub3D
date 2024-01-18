@@ -1,8 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../src/Libft/libft.h"
-# include "../src/get_next_line/get_next_line.h"
+# include "libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -14,12 +13,6 @@
 
 
 # define TILE_SIZE 64
-
-# define WHITE 0xFFFFFF
-# define RED 0xFF0000
-# define GRAY 0xADADAD
-# define GREEN 0x00FF00
-
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 900
 
@@ -114,5 +107,8 @@ void		player_movement_x(int keycode, t_game *game);
 // free.c
 void		free_all(t_game *game);
 int			error_manager(t_game *game, char *error_msg);
+
+// process_map.c
+int	process_map(t_game *game, char **map);
 
 #endif
