@@ -8,7 +8,7 @@ static int	check_texture(char *texture, char *path)
 	{
 		printf("Error: Textures not valid.\n");
 		printf("Test ---------> %s\n", path); // test (delete)
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	if (texture == NULL)
 		return (0);
@@ -24,7 +24,7 @@ static int	check_texture(char *texture, char *path)
 	else
 	{
 		printf("Error: Textures not valid.\n");
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	return (1);
 }
@@ -36,7 +36,7 @@ static int	check_color(int color)
 	else
 	{
 		printf("Error: Textures not valid.\n");
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	return (1);
 }
@@ -47,11 +47,17 @@ static int	get_rgb(t_texture *texture, char c, char *path)
 
 	split = ft_split(path, ',');
 	if (split[3] || !split[0] || !split[1] || !split[2])
-		exit(1);
+	{
+		ft_freesplit(split);
+		return (1);
+	}		
 	if (c == 'F')
 	{
 		if (texture->floor != -1)
-			exit(1);
+		{
+			ft_freesplit(split);
+			return (1);
+		}
 		else
 			texture->floor = rgb_to_hex(ft_atoi(split[0]), 
 					ft_atoi(split[1]), ft_atoi(split[2]));
@@ -59,12 +65,15 @@ static int	get_rgb(t_texture *texture, char c, char *path)
 	else if (c == 'C')
 	{
 		if (texture->ceiling != -1)
-			exit(1);
+		{
+			ft_freesplit(split);
+			return (1);
+		}
 		else
 			texture->ceiling = rgb_to_hex(ft_atoi(split[0]), 
 					ft_atoi(split[1]), ft_atoi(split[2]));
 	}
-	free(split);
+	ft_freesplit(split);
 	return (0);
 }
 
@@ -97,16 +106,17 @@ void	get_texture(t_texture *texture, char *line)
 	char	**split;
 
 	split = ft_split(line, ' ');
+	if (!split)
+		return ;
 	if (len_split(split) != 2)
 	{
 		if (len_split(split) != 0)
 		{
-			printf("Texture path is not valid.\n");
-			exit(EXIT_FAILURE);
+			ft_freesplit(split);
+			free(line);
+			error_manager(NULL, "Texture path is not valid. \n");
 		}
 	}
-	if (!split)
-		return ;
 	assign_texture(texture, split[0], split[1]);
-	free(split);
+	ft_freesplit(split);
 }
