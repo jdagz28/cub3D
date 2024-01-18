@@ -45,12 +45,11 @@ char	**get_map(int fd, char *start)
 	while (line)
 	{
 		temp = ft_strjoin(start, line);
-		free(line);
 		free(start);
 		if (!temp)
 			return (NULL);
 		start = temp;
-		line = get_next_line(fd);
+		line = next_line(fd, line);
 	}
 	free(line);
 	array = ft_split(start, '\n');
@@ -120,10 +119,7 @@ static void	get_data(t_game *game)
 	while (line && !check_all_textures(&game->texture))
 	{
 		while (line && line[0] == '\n')
-		{	
-			free(line);
-			line = get_next_line(game->fd);
-		}
+			line = next_line(game->fd, line);
 		get_texture(&game->texture, line);
 		if (game->texture.ceiling == 1 || game->texture.floor == 1)
 		{
@@ -131,10 +127,7 @@ static void	get_data(t_game *game)
 			error_manager(game, "Parsing floor/ceiling color");
 		}
 		if (line && line[0] != '\0')
-		{
-			free(line);
-			line = get_next_line(game->fd);
-		}
+			line = next_line(game->fd, line);
 		else
 			break ;
 	}
@@ -146,7 +139,6 @@ static void	get_data(t_game *game)
 	game->map = get_map(game->fd, line);
 	if (game->map == NULL)
 		error_manager(game, "Map parsing error");
-	free(line);
 	check_char_map(game->map, &game->player);
 	check_wall_map(game->map, game->player.array_x,
 		game->player.array_y);

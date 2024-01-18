@@ -50,7 +50,7 @@ float	deg_to_rad(float degrees)
 char	*skip_empty_line(int fd, char *line)
 {
 	while (line && line[0] == '\n')
-		line = get_next_line(fd);
+		line = next_line(fd, line);
 	return (line);
 }
 
@@ -71,4 +71,11 @@ void replace_threes(char **map)
 		printf("\n");
 		i++;
 	}
+}
+
+
+char *next_line(int fd, char *line)
+{
+	free(line);
+	return (get_next_line(fd));
 }

@@ -50,6 +50,7 @@ int			rgb_to_hex(int red, int green, int blue);
 float		deg_to_rad(float degrees);
 char		*skip_empty_line(int fd, char *line);
 void		replace_threes(char **map);
+char		*next_line(int fd, char *line);
 
 // mlx
 int		init_mlx(t_display *mlx);
