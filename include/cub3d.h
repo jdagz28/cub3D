@@ -35,7 +35,7 @@
 
 /* Hooks */
 int			keybindings(int keycode, t_game *game);
-int			close_window_cross(t_display *display);
+int			close_window_cross(t_game *game);
 
 /* Parsing */
 int			parsing(int argc, char **argv, t_game *game);
@@ -52,13 +52,14 @@ void check_wall_map(char **map, int y, int x);
 
 /* Utils */
 int			len_split(char **split);
+void		ft_freesplit(char **tab);
 int			rgb_to_hex(int red, int green, int blue);
 float		deg_to_rad(float degrees);
 char		*skip_empty_line(int fd, char *line);
 void		replace_threes(char **map);
 
 // mlx
-void		init_mlx(t_display *mlx);
+int		init_mlx(t_display *mlx);
 void		my_mlx_pixel_put(t_image_data *img, t_point pixel);
 
 // calc_mapdimensions.c
@@ -109,5 +110,9 @@ void		player_movement_y(int keycode, t_game *game);
 
 //movement_x.c
 void		player_movement_x(int keycode, t_game *game);
+
+// free.c
+void		free_all(t_game *game);
+int			error_manager(t_game *game, char *error_msg);
 
 #endif

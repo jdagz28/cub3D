@@ -1,16 +1,17 @@
 #include "../include/cub3d.h"
 
-int	close_window_cross(t_display *display)
+int	close_window_cross(t_game *game)
 {
-	mlx_destroy_image(display->mlx, display->img.img);
-	mlx_destroy_window(display->mlx, display->window);
+	free_all(game);
+	mlx_destroy_image(game->display.mlx, game->display.img.img);
+	mlx_destroy_window(game->display.mlx, game->display.window);
 	exit(0);
 }
 
 int	keybindings(int keycode, t_game *game)
 {
 	if (keycode == K_ESC)
-		close_window_cross(&game->display);
+		close_window_cross(game);
 	else if (keycode == K_W || keycode == K_S)
 		player_movement_y(keycode, game);
 	else if (keycode == K_A || keycode == K_D)

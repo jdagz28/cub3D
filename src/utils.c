@@ -10,6 +10,22 @@ int	len_split(char **split)
 	return (i);
 }
 
+void	ft_freesplit(char **tab)
+{
+	int	i;
+	int	len;
+
+	if (!tab)
+		return ;
+	i = -1;
+	len = len_split(tab);
+	if (++i < len)
+		if (tab[i])
+			free(tab[i]);
+	free(tab);
+}
+
+
 int	rgb_to_hex(int red, int green, int blue)
 {
 	int	res;

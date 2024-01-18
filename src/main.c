@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/17 19:45:35 by gmarchal         ###   ########.fr       */
+/*   Updated: 2024/01/18 03:16:18 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ int	main(int argc, char **argv)
 
 	parsing(argc, argv, &game);
 	calc_mapdimensions(&game);
-	init_mlx(&game.display);
+	if (init_mlx(&game.display) != 0)
+		error_manager(&game, "MLX initialization failed");
 	get_textures(&game);
 	init_player(&game);
 	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, keybindings, &game);
 	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, \
-				close_window_cross, &game.display);
+				close_window_cross, &game);
 	mlx_loop_hook(game.display.mlx, &draw_map, &game);
 	mlx_loop(game.display.mlx);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 /*   DELETE BEFORE PUSHING FOR CORRECTION
