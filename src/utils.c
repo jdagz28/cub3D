@@ -19,7 +19,7 @@ void	ft_freesplit(char **tab)
 		return ;
 	i = -1;
 	len = len_split(tab);
-	if (++i < len)
+	while (++i < len)
 		if (tab[i])
 			free(tab[i]);
 	free(tab);

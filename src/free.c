@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 02:11:19 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/18 15:19:52 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/18 23:50:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ void	free_textures(t_texture *texture)
 
 void	free_all(t_game *game)
 {
+	int i;
+
+	i = -1;
 	if (game->map)
-	{
-		ft_freesplit(game->map);
-		game->map = NULL;
-	}
+		while (++i < game->map_height)
+			free(game->map[i]);
 	free_textures(&game->texture);
 }
 
