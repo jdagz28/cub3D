@@ -6,24 +6,39 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 00:18:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/17 12:26:59 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/18 03:14:31 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-void	read_textures(t_game *game, t_image_data *img, char *texture_path, \
-							char *dir)
+static void	assign_xpm(t_texture *texture, t_image_data *img, \
+							char *dir, int pos)
 {
-	int	i;
-	int	j;
-	int	pos;
+	if (ft_strncmp(dir, "NORTH", ft_strlen(dir)) == 0)
+		texture->n_texture[pos] = img->add_itr[pos];
+	else if (ft_strncmp(dir, "SOUTH", ft_strlen(dir)) == 0)
+		texture->s_texture[pos] = img->add_itr[pos];
+	else if (ft_strncmp(dir, "EAST", ft_strlen(dir)) == 0)
+		texture->e_texture[pos] = img->add_itr[pos];
+	else if (ft_strncmp(dir, "WEST", ft_strlen(dir)) == 0)
+		texture->w_texture[pos] = img->add_itr[pos];
+}
 
-	img->img = mlx_xpm_file_to_image(game->display.mlx, texture_path, \
+
+static void	read_textures(t_game *game, char *texture_path, char *dir)
+{
+	int				i;
+	int				j;
+	int				pos;
+	t_image_data	img;
+
+	img.img = mlx_xpm_file_to_image(game->display.mlx, texture_path, \
 						&game->texture.width, &game->texture.height);
-	img->add_itr = (int *)mlx_get_data_addr(img->img, \
-			&img->bits_per_pixel, &img->line_length, &img->endian);
+	if (img.img == NULL)
+		error_manager(game, "Loading of .xpm image");
+	img.add_itr = (int *)mlx_get_data_addr(img.img, \
+			&img.bits_per_pixel, &img.line_length, &img.endian);
 	i = -1;
 	while (++i < TILE_SIZE)
 	{
@@ -31,25 +46,16 @@ void	read_textures(t_game *game, t_image_data *img, char *texture_path, \
 		while (++j < TILE_SIZE)
 		{
 			pos = game->texture.width * i + j;
-			if (ft_strncmp(dir, "NORTH", ft_strlen(dir)) == 0)
-				game->texture.n_texture[pos] = img->add_itr[pos];
-			else if (ft_strncmp(dir, "SOUTH", ft_strlen(dir)) == 0)
-				game->texture.s_texture[pos] = img->add_itr[pos];
-			else if (ft_strncmp(dir, "EAST", ft_strlen(dir)) == 0)
-				game->texture.e_texture[pos] = img->add_itr[pos];
-			else if (ft_strncmp(dir, "WEST", ft_strlen(dir)) == 0)
-				game->texture.w_texture[pos] = img->add_itr[pos];
+			assign_xpm(&game->texture, &img, dir, pos);
 		}
 	}
+	mlx_destroy_image(game->display.mlx, img.img);
 }
 
 void	get_textures(t_game *game)
 {
-	t_image_data	img;
-
-	read_textures(game, &img, game->texture.north, "NORTH");
-	read_textures(game, &img, game->texture.south, "SOUTH");
-	read_textures(game, &img, game->texture.east, "EAST");
-	read_textures(game, &img, game->texture.west, "WEST");
-	mlx_destroy_image(game->display.mlx, img.img);
+	read_textures(game, game->texture.north, "NORTH");
+	read_textures(game, game->texture.south, "SOUTH");
+	read_textures(game, game->texture.east, "EAST");
+	read_textures(game, game->texture.west, "WEST");
 }
