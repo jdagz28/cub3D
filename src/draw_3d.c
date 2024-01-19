@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/17 12:28:20 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 09:19:34 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ static void	draw_wall(t_game *game, int i, int j)
 	counter = -1;
 	while (++counter < game->ray.height)
 	{
-		pixel = create_point(i, j + counter);
-		pixel.color = get_texturecolor(game, &texture);
+		pixel = create_point(i, j + counter, get_texturecolor(game, &texture));
 		my_mlx_pixel_put(&game->display.img, pixel);
 		texture.y += texture.y_step;
 	}
@@ -119,8 +118,7 @@ void	draw_3d(t_game *game, int raynum)
 	j = -1;
 	while (++j < game->ray.start)
 	{
-		pixel = create_point(raynum, j);
-		pixel.color = game->texture.ceiling;
+		pixel = create_point(raynum, j, game->texture.ceiling);
 		my_mlx_pixel_put(&game->display.img, pixel);
 	}
 	j--;
@@ -128,8 +126,7 @@ void	draw_3d(t_game *game, int raynum)
 	j = game->ray.end - 2;
 	while (++j < WIN_HEIGHT)
 	{
-		pixel = create_point(raynum, j);
-		pixel.color = game->texture.floor;
+		pixel = create_point(raynum, j, game->texture.floor);
 		my_mlx_pixel_put(&game->display.img, pixel);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:24:11 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/17 12:42:01 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 09:20:21 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	update_player_front(t_player *player)
 void	init_player(t_game *game)
 {
 	game->player.position = create_point(game->player.array_x * TILE_SIZE, \
-											game->player.array_y * TILE_SIZE);
+											game->player.array_y * TILE_SIZE, \
+											0);
 	if (game->player.direction == 'N')
 		game->player.angle = M_PI_2;
 	else if (game->player.direction == 'S')

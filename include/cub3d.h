@@ -60,7 +60,7 @@ void		my_mlx_pixel_put(t_image_data *img, t_point pixel);
 void	calc_mapdimensions(t_game *game);
 
 // create_vectorpoint.c
-t_point		create_point(float x, float y);
+t_point		create_point(float x, float y, int color);
 t_vector	create_vector(float x, float y);
 
 // draw_3d.c
