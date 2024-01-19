@@ -9,7 +9,7 @@ ifeq ($(OS_NAME), Linux)
     MLX_DIR             := ./minilibx/minilibx-linux
     OS_FLAG             := -D LINUX
 else
-    FSANITIZE           := -fsanitize=address
+    FSANITIZE           := #-fsanitize=address
     FRAMEWORK           := -framework OpenGL -framework AppKit
     LINUX_LIBS          :=
     LINUX_INCLUDES      :=
@@ -28,7 +28,7 @@ ifdef debug
 endif
 
 CC                  	:= cc
-CFLAGS              	:= -Wall -Werror -Wextra -O3 #$(FSANITIZE) $(OS_FLAG)
+CFLAGS              	:= -Wall -Werror -Wextra -O3 $(OS_FLAG) $(FSANITIZE) 
 
 OBJ_DIR             	:= ./objects/
 INCLUDE_DIR         	:= ./include/
