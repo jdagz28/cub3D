@@ -86,7 +86,7 @@ int	check_char_map(char **map, t_player *player)
 		{
 			if (check_char(map[x][y]) == 0)
 			{
-				printf("Error: Wrong char in map\n");
+				printf("Error\nWrong char in map\n");
 				exit(1);
 			}
 			else if (check_char(map[x][y]) == 2)
@@ -105,7 +105,7 @@ int	check_char_map(char **map, t_player *player)
 	}
 	if (spawn != 1)
 	{
-		printf("Error: More than one spawn\n");
+		printf("Error\nMore than one spawn\n");
 		exit(1);
 	}
 	return (0);
@@ -152,7 +152,7 @@ int	parsing(int argc, char **argv, t_game *game)
 	game->fd = open(argv[1], O_RDONLY);
 	if (game->fd == -1)
 	{
-		printf("Error: Can't open file.\n");
+		printf("Error\nCan't open file.\n");
 		exit(1);
 	}
 	get_data(game);

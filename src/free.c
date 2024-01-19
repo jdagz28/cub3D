@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmarchal <gmarchal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 02:11:19 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 09:58:33 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:34:32 by gmarchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	free_all(t_game *game)
 
 static void	print_error(char *error_msg)
 {
-	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putstr_fd("Error\n", STDERR_FILENO);
 	ft_putstr_fd(error_msg, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 }

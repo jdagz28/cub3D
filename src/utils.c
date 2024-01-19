@@ -16,11 +16,11 @@ int	rgb_to_hex(t_game *game, int red, int green, int blue)
 
 	res = -2;
 	if (red < 0 || red > 255)
-		error_manager(game, "Not RGB");
+		error_manager(game, "Not RGB.");
 	else if (green < 0 || green > 255)
-		error_manager(game, "Not RGB");
+		error_manager(game, "Not RGB.");
 	else if (blue < 0 || blue > 255)
-		error_manager(game, "Not RGB");
+		error_manager(game, "Not RGB.");
 	else
 		res = (red << 16) | (green << 8) | blue;
 	return (res);
