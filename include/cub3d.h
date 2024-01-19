@@ -11,16 +11,13 @@
 # include "struct.h"
 # include "enums.h"
 
-
 # define TILE_SIZE 64
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 900
-
 # define ON_KEYDOWN 2
 # define ON_DESTROY 17
 # define X 0
 # define Y 1
-
 # define M_PI_3 4.71238898038  //3 *PI/2
 # define FOV 1.0471975512 // M_PI /3
 # define DEGINRAD 0.0174533
@@ -40,12 +37,11 @@ t_game		*init_game(t_game *game);
 void		get_texture(t_texture *texture, char *line);
 
 /* Check Map */
-int check_borders_horizontal(char **map);
-void check_wall_map(char **map, int y, int x);
+int			check_borders_horizontal(char **map);
+void		check_wall_map(char **map, int y, int x);
 
 /* Utils */
 int			len_split(char **split);
-void		ft_freesplit(char **tab);
 int			rgb_to_hex(int red, int green, int blue);
 float		deg_to_rad(float degrees);
 char		*skip_empty_line(int fd, char *line);
@@ -53,11 +49,11 @@ void		replace_threes(char **map);
 char		*next_line(int fd, char *line);
 
 // mlx
-int		init_mlx(t_display *mlx);
+int			init_mlx(t_display *mlx);
 void		my_mlx_pixel_put(t_image_data *img, t_point pixel);
 
 // calc_mapdimensions.c
-void	calc_mapdimensions(t_game *game);
+void		calc_mapdimensions(t_game *game);
 
 // create_vectorpoint.c
 t_point		create_point(float x, float y, int color);
@@ -66,16 +62,21 @@ t_vector	create_vector(float x, float y);
 // draw_3d.c
 void		draw_3d(t_game *game, int raynum);
 
+// draw_3d_utils.c
+float		fix_fisheye(t_game *game);
+float		check_rayhit(t_game *game, float x);
+int			get_direction(t_game *game);
+
 // draw_line.c
 void		draw_direction_dda(t_image_data *img, t_point start, \
 								t_vector front);
 void		draw_line_dda(t_image_data *img, t_point start, t_point end);
 
 // draw_map.c
-int		draw_map(t_game *game);
+int			draw_map(t_game *game);
 
 // get_textures.c
-void	get_textures(t_game *game);
+void		get_textures(t_game *game);
 
 // init_player.c
 void		update_player_front(t_player *player);
@@ -96,20 +97,23 @@ void		cast_vertical_rays(t_game *game);
 float		get_distance(float x1, float y1, float x2, float y2);
 void		draw_ray(t_game *game);
 
-
-//movement_y.c
+// movement_utils.c
+void		cal_side_direction(t_vector *front, t_vector *side);
 int			check_playerpos(t_game *game);
 int			offset_check(t_game *game, char *type, int value);
+
+// movement_y.c
 void		player_movement_y(int keycode, t_game *game);
 
-//movement_x.c
+// movement_x.c
 void		player_movement_x(int keycode, t_game *game);
 
 // free.c
 void		free_all(t_game *game);
 int			error_manager(t_game *game, char *error_msg);
+void		ft_freesplit(char **tab);
 
 // process_map.c
-int	process_map(t_game *game, char **map);
+int			process_map(t_game *game, char **map);
 
 #endif

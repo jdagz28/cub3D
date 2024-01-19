@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   movement_x.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:27:27 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 18:09:29 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 10:03:36 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	cal_side_direction(t_vector *front, t_vector *side)
-{
-	side->dir[X] = -front->dir[Y];
-	side->dir[Y] = front->dir[X];
-}
 
 static void	move_x(t_game *game, int x, int y, int keycode)
 {

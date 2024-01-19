@@ -56,6 +56,7 @@ SRC_FILES				:= main.c\
 							check_map.c\
 							create_vectorpoint.c\
 							draw_3d.c\
+							draw_3d_utils.c\
 							draw_line.c\
 							draw_map.c\
 							free.c\
@@ -71,6 +72,7 @@ SRC_FILES				:= main.c\
 							mlx_init.c\
 							hooks.c\
 							utils.c\
+							movement_utils.c\
 							movement_y.c\
 							movement_x.c\
 							texture.c\

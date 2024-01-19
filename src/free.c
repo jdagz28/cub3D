@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 02:11:19 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 09:50:56 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 09:58:33 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,19 @@ int	error_manager(t_game *game, char *error_msg)
 	free_all(game);
 	print_error(error_msg);
 	exit(EXIT_FAILURE);
+}
+
+void	ft_freesplit(char **tab)
+{
+	int	i;
+	int	len;
+
+	if (!tab)
+		return ;
+	i = -1;
+	len = len_split(tab);
+	while (++i < len)
+		if (tab[i])
+			free(tab[i]);
+	free(tab);
 }
