@@ -41,7 +41,7 @@ static int	check_color(int color)
 	return (1);
 }
 
-static int	get_rgb(t_texture *texture, char c, char *path)
+static int	get_rgb(t_game *game, t_texture *texture, char c, char *path)
 {
 	char	**split;
 
@@ -59,7 +59,7 @@ static int	get_rgb(t_texture *texture, char c, char *path)
 			return (1);
 		}
 		else
-			texture->floor = rgb_to_hex(ft_atoi(split[0]), 
+			texture->floor = rgb_to_hex(game, ft_atoi(split[0]), 
 					ft_atoi(split[1]), ft_atoi(split[2]));
 	}
 	else if (c == 'C')
@@ -70,14 +70,14 @@ static int	get_rgb(t_texture *texture, char c, char *path)
 			return (1);
 		}
 		else
-			texture->ceiling = rgb_to_hex(ft_atoi(split[0]), 
+			texture->ceiling = rgb_to_hex(game, ft_atoi(split[0]), 
 					ft_atoi(split[1]), ft_atoi(split[2]));
 	}
 	ft_freesplit(split);
 	return (0);
 }
 
-static void	assign_texture(t_texture *texture, char *direction, char *path)
+static void	assign_texture(t_game *game, t_texture *texture, char *direction, char *path)
 {
 	if (ft_strncmp(direction, "NO", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->north, path)))
@@ -94,14 +94,14 @@ static void	assign_texture(t_texture *texture, char *direction, char *path)
 	if (ft_strncmp(direction, "F", ft_strlen(direction)) == 0)
 	{
 		if (!(check_color(texture->floor)))
-			get_rgb(texture, 'F', path);
+			get_rgb(game, texture, 'F', path);
 	}
 	if (ft_strncmp(direction, "C", ft_strlen(direction)) == 0)
 		if (!(check_color(texture->ceiling)))
-			get_rgb(texture, 'C', path);
+			get_rgb(game, texture, 'C', path);
 }
 
-void	get_texture(t_texture *texture, char *line)
+void	get_texture(t_game *game, t_texture *texture, char *line)
 {
 	char	**split;
 
@@ -117,6 +117,6 @@ void	get_texture(t_texture *texture, char *line)
 			error_manager(NULL, "Texture path is not valid. \n");
 		}
 	}
-	assign_texture(texture, split[0], split[1]);
+	assign_texture(game, texture, split[0], split[1]);
 	ft_freesplit(split);
 }

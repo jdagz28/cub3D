@@ -120,7 +120,7 @@ static void	get_data(t_game *game)
 	{
 		while (line && line[0] == '\n')
 			line = next_line(game->fd, line);
-		get_texture(&game->texture, line);
+		get_texture(game, &game->texture, line);
 		if (game->texture.ceiling == 1 || game->texture.floor == 1)
 		{
 			free(line);

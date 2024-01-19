@@ -34,7 +34,7 @@ int			parsing(int argc, char **argv, t_game *game);
 t_game		*init_game(t_game *game);
 
 /* Texture */
-void		get_texture(t_texture *texture, char *line);
+void		get_texture(t_game *game, t_texture *texture, char *line);
 
 /* Check Map */
 int			check_borders_horizontal(char **map);
@@ -42,7 +42,7 @@ void		check_wall_map(char **map, int y, int x);
 
 /* Utils */
 int			len_split(char **split);
-int			rgb_to_hex(int red, int green, int blue);
+int			rgb_to_hex(t_game *game, int red, int green, int blue);
 float		deg_to_rad(float degrees);
 char		*skip_empty_line(int fd, char *line);
 void		replace_threes(char **map);
