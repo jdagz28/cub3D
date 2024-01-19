@@ -1,30 +1,27 @@
 #include "../include/cub3d.h"
 
-static int	check_texture(char *texture, char *path)
+static int	check_texture(t_game *game, char *texture, char *path)
 {
 	if (ft_strncmp(&path[ft_strlen(path) - 5], ".xpm", 3) != 0)
 	{
-		printf("Error: Textures not valid.\n");
-		return (0);
+		error_manager(game, "Texture path is not valid.");
 	}
 	if (texture == NULL)
 		return (0);
 	else
 	{
-		printf("Error: Textures not valid.\n");
-		return (0);
+		error_manager(game, "Texture path is not valid.");
 	}
 	return (1);
 }
 
-static int	check_color(int color)
+static int	check_color(t_game *game, int color)
 {
 	if (color == -1)
 		return (0);
 	else
 	{
-		printf("Error: Textures not valid.\n");
-		return (0);
+		error_manager(game, "Texture path is not valid.");
 	}
 	return (1);
 }
@@ -68,24 +65,24 @@ static int	get_rgb(t_game *game, t_texture *texture, char c, char *path)
 static void	assign_texture(t_game *game, t_texture *texture, char *direction, char *path)
 {
 	if (ft_strncmp(direction, "NO", ft_strlen(direction)) == 0)
-		if (!(check_texture(texture->north, path)))
+		if (!(check_texture(game, texture->north, path)))
 			texture->north = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "SO", ft_strlen(direction)) == 0)
-		if (!(check_texture(texture->south, path)))
+		if (!(check_texture(game, texture->south, path)))
 			texture->south = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "WE", ft_strlen(direction)) == 0)
-		if (!(check_texture(texture->west, path)))
+		if (!(check_texture(game, texture->west, path)))
 			texture->west = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "EA", ft_strlen(direction)) == 0)
-		if (!(check_texture(texture->east, path)))
+		if (!(check_texture(game, texture->east, path)))
 			texture->east = ft_strtrim(path, "\n");
 	if (ft_strncmp(direction, "F", ft_strlen(direction)) == 0)
 	{
-		if (!(check_color(texture->floor)))
+		if (!(check_color(game, texture->floor)))
 			get_rgb(game, texture, 'F', path);
 	}
 	if (ft_strncmp(direction, "C", ft_strlen(direction)) == 0)
-		if (!(check_color(texture->ceiling)))
+		if (!(check_color(game, texture->ceiling)))
 			get_rgb(game, texture, 'C', path);
 }
 
