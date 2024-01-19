@@ -107,6 +107,17 @@ void	check_char_map(t_game *game, char **map, t_player *player)
 		error_manager(game, "More than one spawn.");
 }
 
+void	map_functions(t_game *game, char *line)
+{
+	game->map = get_map(game->fd, line);
+	if (game->map == NULL)
+		error_manager(game, "Map parsing error");
+	check_char_map(game, game->map, &game->player);
+	check_wall_map(game->map, game->player.array_x,
+		game->player.array_y);
+	replace_threes(game->map);
+}
+
 static void	get_data(t_game *game)
 {
 	char	*line;
@@ -130,15 +141,9 @@ static void	get_data(t_game *game)
 	if (!check_all_textures(&game->texture))
 	{
 		free(line);
-		error_manager(game, "Test: Manque des textures");
+		error_manager(game, "Missing textures.");
 	}
-	game->map = get_map(game->fd, line);
-	if (game->map == NULL)
-		error_manager(game, "Map parsing error");
-	check_char_map(game, game->map, &game->player);
-	check_wall_map(game->map, game->player.array_x,
-		game->player.array_y);
-	replace_threes(game->map);
+	map_functions(game, line);
 }
 
 int	parsing(int argc, char **argv, t_game *game)
