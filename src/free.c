@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gmarchal <gmarchal@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 02:11:19 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 20:34:32 by gmarchal         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 void	free_textures(t_texture *texture)
@@ -23,7 +11,6 @@ void	free_textures(t_texture *texture)
 	if (texture->west)
 		free(texture->west);
 }
-
 
 void	free_all(t_game *game)
 {
@@ -49,7 +36,6 @@ static void	print_error(char *error_msg)
 	ft_putstr_fd(error_msg, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
-
 
 int	error_manager(t_game *game, char *error_msg)
 {

@@ -6,12 +6,11 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:37:19 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/17 12:37:42 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:57:10 by gmarchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void	calc_mapdimensions(t_game *game)
 {

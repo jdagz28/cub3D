@@ -32,4 +32,3 @@ int	keybindings(int keycode, t_game *game)
 	}
 	return (0);
 }
-

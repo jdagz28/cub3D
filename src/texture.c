@@ -32,17 +32,11 @@ static int	get_rgb(t_game *game, t_texture *texture, char c, char *path)
 
 	split = ft_split(path, ',');
 	if (len_split(split) != 3)
-	{
-		ft_freesplit(split);
 		error_manager(game, "Wrong RGB");
-	}		
 	if (c == 'F')
 	{
 		if (texture->floor != -1)
-		{
-			ft_freesplit(split);
 			error_manager(game, "Wrong input");
-		}
 		else
 			texture->floor = rgb_to_hex(game, ft_atoi(split[0]), 
 					ft_atoi(split[1]), ft_atoi(split[2]));
@@ -50,10 +44,7 @@ static int	get_rgb(t_game *game, t_texture *texture, char c, char *path)
 	else if (c == 'C')
 	{
 		if (texture->ceiling != -1)
-		{
-			ft_freesplit(split);
 			error_manager(game, "Wrong input");
-		}
 		else
 			texture->ceiling = rgb_to_hex(game, ft_atoi(split[0]), 
 					ft_atoi(split[1]), ft_atoi(split[2]));
@@ -62,7 +53,8 @@ static int	get_rgb(t_game *game, t_texture *texture, char c, char *path)
 	return (0);
 }
 
-static void	assign_texture(t_game *game, t_texture *texture, char *direction, char *path)
+static void	assign_texture(t_game *game, t_texture *texture,
+		char *direction, char *path)
 {
 	if (ft_strncmp(direction, "NO", ft_strlen(direction)) == 0)
 		if (!(check_texture(game, texture->north, path)))

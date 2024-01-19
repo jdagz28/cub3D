@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 00:18:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 09:47:19 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:58:19 by gmarchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	assign_xpm(t_texture *texture, t_image_data *img, \
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
-
 
 static void	read_textures(t_game *game, char *texture_path, char *dir)
 {

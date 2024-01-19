@@ -40,9 +40,10 @@ char	*skip_empty_line(int fd, char *line)
 
 void	replace_threes(char **map)
 {
-	int	i, j;
-	i = 0;
+	int	i;
+	int	j;
 
+	i = 0;
 	while (map[i])
 	{
 		j = 0;

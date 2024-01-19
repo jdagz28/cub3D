@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:03:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 10:04:18 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:59:18 by gmarchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	cal_side_direction(t_vector *front, t_vector *side)
 	side->dir[X] = -front->dir[Y];
 	side->dir[Y] = front->dir[X];
 }
-
 
 int	check_playerpos(t_game *game)
 {

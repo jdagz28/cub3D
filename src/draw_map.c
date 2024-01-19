@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:27:39 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/08 23:39:36 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:57:28 by gmarchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,3 @@ int	draw_map(t_game *game)
 		game->display.window, game->display.img.img, 0, 0);
 	return (0);
 }
-
