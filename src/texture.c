@@ -2,25 +2,13 @@
 
 static int	check_texture(char *texture, char *path)
 {
-	//int	fd;
-
 	if (ft_strncmp(&path[ft_strlen(path) - 5], ".xpm", 3) != 0)
 	{
 		printf("Error: Textures not valid.\n");
-		printf("Test ---------> %s\n", path); // test (delete)
 		return (0);
 	}
 	if (texture == NULL)
 		return (0);
-	/*
-	{
-		if ((fd = open(path, O_RDONLY)) == -1)
-		{
-			printf("Error: Can't open file texture.\n");
-			exit(1); // free + exit (delete)
-		}
-	}
-	*/
 	else
 	{
 		printf("Error: Textures not valid.\n");
@@ -46,17 +34,17 @@ static int	get_rgb(t_game *game, t_texture *texture, char c, char *path)
 	char	**split;
 
 	split = ft_split(path, ',');
-	if (split[3] || !split[0] || !split[1] || !split[2])
+	if (len_split(split) != 3)
 	{
 		ft_freesplit(split);
-		return (1);
+		error_manager(game, "Wrong RGB");
 	}		
 	if (c == 'F')
 	{
 		if (texture->floor != -1)
 		{
 			ft_freesplit(split);
-			return (1);
+			error_manager(game, "Wrong input");
 		}
 		else
 			texture->floor = rgb_to_hex(game, ft_atoi(split[0]), 
@@ -67,7 +55,7 @@ static int	get_rgb(t_game *game, t_texture *texture, char c, char *path)
 		if (texture->ceiling != -1)
 		{
 			ft_freesplit(split);
-			return (1);
+			error_manager(game, "Wrong input");
 		}
 		else
 			texture->ceiling = rgb_to_hex(game, ft_atoi(split[0]), 
@@ -110,12 +98,7 @@ void	get_texture(t_game *game, t_texture *texture, char *line)
 		return ;
 	if (len_split(split) != 2)
 	{
-		if (len_split(split) != 0)
-		{
-			ft_freesplit(split);
-			free(line);
-			error_manager(NULL, "Texture path is not valid. \n");
-		}
+		error_manager(game, "Texture path is not valid.");
 	}
 	assign_texture(game, texture, split[0], split[1]);
 	ft_freesplit(split);
