@@ -28,7 +28,7 @@ ifdef debug
 endif
 
 CC                  	:= cc
-CFLAGS              	:= -Wall -Werror -Wextra #$(FSANITIZE) $(OS_FLAG)
+CFLAGS              	:= -Wall -Werror -Wextra -O3 #$(FSANITIZE) $(OS_FLAG)
 
 OBJ_DIR             	:= ./objects/
 INCLUDE_DIR         	:= ./include/

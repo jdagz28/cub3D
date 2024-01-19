@@ -71,44 +71,40 @@ int	check_char(char c)
 		return (0);
 }
 
-int	check_char_map(char **map, t_player *player)
+void	fill_array(t_player *player, int x, int y, char z)
 {
-	int	x;
-	int	y;
-	int	spawn;
+	player->array_x = x;
+	player->array_y = y;
+	player->direction = z;
+}
 
-	x = 0;
-	spawn = 0;
-	while (map[x])
+void	check_char_map(t_game *game, char **map, t_player *player)
+{
+	int	coord[3];
+
+	coord[0] = 0;
+	coord[2] = 0;
+	while (map[coord[0]])
 	{
-		y = 0;
-		while (map[x][y])
+		coord[1] = 0;
+		while (map[coord[0]][coord[1]])
 		{
-			if (check_char(map[x][y]) == 0)
+			if (check_char(map[coord[0]][coord[1]]) == 0)
+				error_manager(game, "Wrong char in map.");
+			else if (check_char(map[coord[0]][coord[1]]) == 2)
+				map[coord[0]][coord[1]] = '2';
+			else if (check_char(map[coord[0]][coord[1]]) == 3)
 			{
-				printf("Error\nWrong char in map\n");
-				exit(1);
+				fill_array(player, coord[1], coord[0], map[coord[0]][coord[1]]);
+				map[coord[0]][coord[1]] = '0';
+				coord[2] += 1;
 			}
-			else if (check_char(map[x][y]) == 2)
-				map[x][y] = '2';
-			else if (check_char(map[x][y]) == 3)
-			{
-				player->array_x = y;
-				player->array_y = x;
-				player->direction = map[x][y];
-				map[x][y] = '0';
-				spawn += 1;
-			}
-			y++;
+			coord[1]++;
 		}
-		x++;
+		coord[0]++;
 	}
-	if (spawn != 1)
-	{
-		printf("Error\nMore than one spawn\n");
-		exit(1);
-	}
-	return (0);
+	if (coord[2] != 1)
+		error_manager(game, "More than one spawn.");
 }
 
 static void	get_data(t_game *game)
@@ -139,7 +135,7 @@ static void	get_data(t_game *game)
 	game->map = get_map(game->fd, line);
 	if (game->map == NULL)
 		error_manager(game, "Map parsing error");
-	check_char_map(game->map, &game->player);
+	check_char_map(game, game->map, &game->player);
 	check_wall_map(game->map, game->player.array_x,
 		game->player.array_y);
 	replace_threes(game->map);
