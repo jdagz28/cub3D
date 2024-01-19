@@ -3,39 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   movement_y.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:25:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 02:07:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 10:04:09 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_playerpos(t_game *game)
-{
-	game->player.array_x = (int)game->player.position.axis[X] / TILE_SIZE;
-	game->player.array_y = (int)game->player.position.axis[Y] / TILE_SIZE;
-	if (game->player.array_x < 0 || game->player.array_y < 0)
-		return (0);
-	return (1);
-}
-
-int offset_check(t_game *game, char *type, int value)
-{
-	int res;
-
-	res = 0;
-	if (value < 0)
-		res = 0;
-	else if (ft_strncmp(type, "add_x", ft_strlen(type)) == 0 || \
-				ft_strncmp(type, "sub_x", ft_strlen(type)) == 0)
-		res = game->map_width;
-	else if (ft_strncmp(type, "add_y", ft_strlen(type)) == 0 || \
-				ft_strncmp(type, "sub_y", ft_strlen(type)) == 0)
-		res = game->map_height;
-	return res;
-}
 static void	move_y(t_game *game, int x, int y, int keycode)
 {
 	if (keycode == K_W)

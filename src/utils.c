@@ -10,22 +10,6 @@ int	len_split(char **split)
 	return (i);
 }
 
-void	ft_freesplit(char **tab)
-{
-	int	i;
-	int	len;
-
-	if (!tab)
-		return ;
-	i = -1;
-	len = len_split(tab);
-	if (++i < len)
-		if (tab[i])
-			free(tab[i]);
-	free(tab);
-}
-
-
 int	rgb_to_hex(int red, int green, int blue)
 {
 	int	res;
@@ -50,13 +34,13 @@ float	deg_to_rad(float degrees)
 char	*skip_empty_line(int fd, char *line)
 {
 	while (line && line[0] == '\n')
-		line = get_next_line(fd);
+		line = next_line(fd, line);
 	return (line);
 }
 
-void replace_threes(char **map)
+void	replace_threes(char **map)
 {
-	int i, j;
+	int	i, j;
 	i = 0;
 
 	while (map[i])
@@ -71,4 +55,10 @@ void replace_threes(char **map)
 		printf("\n");
 		i++;
 	}
+}
+
+char	*next_line(int fd, char *line)
+{
+	free(line);
+	return (get_next_line(fd));
 }

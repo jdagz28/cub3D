@@ -6,12 +6,11 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/18 03:16:18 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/18 23:54:48 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 int	main(int argc, char **argv)
 {
@@ -19,6 +18,8 @@ int	main(int argc, char **argv)
 
 	parsing(argc, argv, &game);
 	calc_mapdimensions(&game);
+	if (process_map(&game, game.map) != 0)
+		error_manager(&game, "Calloc error");
 	if (init_mlx(&game.display) != 0)
 		error_manager(&game, "MLX initialization failed");
 	get_textures(&game);

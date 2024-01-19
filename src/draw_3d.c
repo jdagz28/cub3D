@@ -3,59 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/17 12:28:20 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 10:09:30 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "enums.h"
-
-static float	fix_fisheye(t_game *game)
-{
-	float	angle;
-
-	angle = game->player.angle - game->ray.angle;
-	if (angle < 0)
-		return (angle += 2 * M_PI);
-	if (angle > 2 * M_PI)
-		return (angle -= 2 * M_PI);
-	return (angle);
-}
-
-static int	get_direction(t_game *game)
-{
-	if (game->ray.hit == 1)
-	{
-		if (game->ray.angle > M_PI)
-			return (SOUTH);
-		else
-			return (NORTH);
-	}
-	else if (game->ray.angle > M_PI_2 && game->ray.angle < M_PI_3)
-		return (WEST);
-	else
-		return (EAST);
-}
-
-static float	check_rayhit(t_game *game, float x)
-{
-	if (game->ray.hit == 1)
-	{
-		x = (int)(game->ray.x / 3) % TILE_SIZE;
-		if (get_direction(game) == SOUTH)
-			return (TILE_SIZE - x - 1);
-	}
-	else
-	{
-		x = (int)(game->ray.y / 2) % TILE_SIZE;
-		if (get_direction(game) == WEST)
-			return (TILE_SIZE - x - 1);
-	}
-	return (x);
-}
 
 static int	get_texturecolor(t_game *game, t_walltexture *texture)
 {
@@ -96,8 +52,7 @@ static void	draw_wall(t_game *game, int i, int j)
 	counter = -1;
 	while (++counter < game->ray.height)
 	{
-		pixel = create_point(i, j + counter);
-		pixel.color = get_texturecolor(game, &texture);
+		pixel = create_point(i, j + counter, get_texturecolor(game, &texture));
 		my_mlx_pixel_put(&game->display.img, pixel);
 		texture.y += texture.y_step;
 	}
@@ -119,8 +74,7 @@ void	draw_3d(t_game *game, int raynum)
 	j = -1;
 	while (++j < game->ray.start)
 	{
-		pixel = create_point(raynum, j);
-		pixel.color = game->texture.ceiling;
+		pixel = create_point(raynum, j, game->texture.ceiling);
 		my_mlx_pixel_put(&game->display.img, pixel);
 	}
 	j--;
@@ -128,8 +82,7 @@ void	draw_3d(t_game *game, int raynum)
 	j = game->ray.end - 2;
 	while (++j < WIN_HEIGHT)
 	{
-		pixel = create_point(raynum, j);
-		pixel.color = game->texture.floor;
+		pixel = create_point(raynum, j, game->texture.floor);
 		my_mlx_pixel_put(&game->display.img, pixel);
 	}
 }

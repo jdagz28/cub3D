@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 02:11:19 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/18 03:15:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 09:58:33 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,48 @@ void	free_textures(t_texture *texture)
 
 void	free_all(t_game *game)
 {
+	int	i;
+
 	if (game->map)
-		ft_freesplit(game->map);
+	{
+		if (game->map_height != 0)
+		{
+			i = -1;
+			while (++i < game->map_height)
+				free(game->map[i]);
+		}
+		else
+			ft_freesplit(game->map);
+	}
 	free_textures(&game->texture);
+}
+
+static void	print_error(char *error_msg)
+{
+	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putstr_fd(error_msg, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
 
 int	error_manager(t_game *game, char *error_msg)
 {
 	free_all(game);
-	ft_putstr_fd("Error: ", STDERR_FILENO);
-	ft_putstr_fd(error_msg, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
+	print_error(error_msg);
 	exit(EXIT_FAILURE);
+}
+
+void	ft_freesplit(char **tab)
+{
+	int	i;
+	int	len;
+
+	if (!tab)
+		return ;
+	i = -1;
+	len = len_split(tab);
+	while (++i < len)
+		if (tab[i])
+			free(tab[i]);
+	free(tab);
 }

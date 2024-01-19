@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/08 23:29:24 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/18 23:59:04 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	calculate_shading(t_game *game)
 		game->ray.x = game->ray.h_x;
 		game->ray.y = game->ray.h_y;
 		game->ray.dist = game->ray.dist_h;
-		game->ray.color = RED;
+		game->ray.color = 0xFF0000;
 		game->ray.hit = 1;
 	}
 	else if (game->ray.dist_v < game->ray.dist_h)

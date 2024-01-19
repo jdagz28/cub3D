@@ -38,18 +38,22 @@ char	**get_map(int fd, char *start)
 {
 	char	*line;
 	char	**array;
+	char	*temp;
 
 	start = skip_empty_line(fd, start);
 	line = get_next_line(fd);
 	while (line)
 	{
-		start = ft_strjoin(start, line);
-		if (!start)
-			exit(1);
-		line = get_next_line(fd);
+		temp = ft_strjoin(start, line);
+		free(start);
+		if (!temp)
+			return (NULL);
+		start = temp;
+		line = next_line(fd, line);
 	}
 	free(line);
 	array = ft_split(start, '\n');
+	free(start);
 	return (array);
 }
 
@@ -115,19 +119,26 @@ static void	get_data(t_game *game)
 	while (line && !check_all_textures(&game->texture))
 	{
 		while (line && line[0] == '\n')
-			line = get_next_line(game->fd);
+			line = next_line(game->fd, line);
 		get_texture(&game->texture, line);
+		if (game->texture.ceiling == 1 || game->texture.floor == 1)
+		{
+			free(line);
+			error_manager(game, "Parsing floor/ceiling color");
+		}
 		if (line && line[0] != '\0')
-			line = get_next_line(game->fd);
+			line = next_line(game->fd, line);
 		else
 			break ;
 	}
 	if (!check_all_textures(&game->texture))
 	{
-		printf("Test: Manque des textures\n");
-		exit(1);
+		free(line);
+		error_manager(game, "Test: Manque des textures");
 	}
 	game->map = get_map(game->fd, line);
+	if (game->map == NULL)
+		error_manager(game, "Map parsing error");
 	check_char_map(game->map, &game->player);
 	check_wall_map(game->map, game->player.array_x,
 		game->player.array_y);

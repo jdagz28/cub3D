@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 20:57:26 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/18 02:59:55 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 10:02:19 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_mlx(t_display *mlx)
 	mlx->mlx = mlx_init();
 	if (mlx->mlx == NULL)
 		return (EXIT_FAILURE);
-	mlx->window = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
+	mlx->window = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	if (mlx->window == NULL)
 		return (EXIT_FAILURE);
 	mlx->img.img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
