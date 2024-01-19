@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 02:11:19 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 09:14:03 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 09:50:56 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ void	free_all(t_game *game)
 {
 	int	i;
 
-	i = -1;
 	if (game->map)
 	{
 		if (game->map_height != 0)
+		{
+			i = -1;
 			while (++i < game->map_height)
 				free(game->map[i]);
+		}
 		else
 			ft_freesplit(game->map);
 	}

@@ -3,26 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 00:18:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/18 03:14:31 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 09:47:19 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	assign_xpm(t_texture *texture, t_image_data *img, \
+static int	assign_xpm(t_texture *texture, t_image_data *img, \
 							char *dir, int pos)
 {
-	if (ft_strncmp(dir, "NORTH", ft_strlen(dir)) == 0)
-		texture->n_texture[pos] = img->add_itr[pos];
-	else if (ft_strncmp(dir, "SOUTH", ft_strlen(dir)) == 0)
-		texture->s_texture[pos] = img->add_itr[pos];
-	else if (ft_strncmp(dir, "EAST", ft_strlen(dir)) == 0)
-		texture->e_texture[pos] = img->add_itr[pos];
-	else if (ft_strncmp(dir, "WEST", ft_strlen(dir)) == 0)
-		texture->w_texture[pos] = img->add_itr[pos];
+	if (pos >= 0 && pos <= texture->width * texture->height)
+	{
+		if (ft_strncmp(dir, "NORTH", ft_strlen(dir)) == 0)
+			texture->n_texture[pos] = img->add_itr[pos];
+		else if (ft_strncmp(dir, "SOUTH", ft_strlen(dir)) == 0)
+			texture->s_texture[pos] = img->add_itr[pos];
+		else if (ft_strncmp(dir, "EAST", ft_strlen(dir)) == 0)
+			texture->e_texture[pos] = img->add_itr[pos];
+		else if (ft_strncmp(dir, "WEST", ft_strlen(dir)) == 0)
+			texture->w_texture[pos] = img->add_itr[pos];
+	}
+	else
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 
@@ -46,7 +52,8 @@ static void	read_textures(t_game *game, char *texture_path, char *dir)
 		while (++j < TILE_SIZE)
 		{
 			pos = game->texture.width * i + j;
-			assign_xpm(&game->texture, &img, dir, pos);
+			if (assign_xpm(&game->texture, &img, dir, pos) != 0)
+				error_manager(game, "Loading of .xpm image");
 		}
 	}
 	mlx_destroy_image(game->display.mlx, img.img);
