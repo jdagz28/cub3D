@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 02:11:19 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/18 23:50:04 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/19 09:13:20 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,17 @@ void	free_textures(t_texture *texture)
 
 void	free_all(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (game->map)
-		while (++i < game->map_height)
-			free(game->map[i]);
+	{
+		if (game->map_height != 0)
+			while (++i < game->map_height)
+				free(game->map[i]);
+		else
+			ft_freesplit(game->map);
+	}
 	free_textures(&game->texture);
 }
 
