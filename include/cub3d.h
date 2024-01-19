@@ -40,12 +40,17 @@ void		get_texture(t_game *game, t_texture *texture, char *line);
 int			check_borders_horizontal(char **map);
 void		check_wall_map(char **map, int y, int x);
 
+/* Check Utils */
+int			check_all_textures(t_texture *texture);
+int			check_char(char c);
+void		check_char_map(t_game *game, char **map, t_player *player);
+void		replace_threes(char **map);
+
 /* Utils */
 int			len_split(char **split);
 int			rgb_to_hex(t_game *game, int red, int green, int blue);
 float		deg_to_rad(float degrees);
 char		*skip_empty_line(int fd, char *line);
-void		replace_threes(char **map);
 char		*next_line(int fd, char *line);
 
 // mlx

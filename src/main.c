@@ -6,22 +6,16 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 21:13:29 by gmarchal         ###   ########.fr       */
+/*   Updated: 2024/01/19 22:42:17 by gmarchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void  leakcheck(void)
-{	
-	system("leaks --list cub3D");
-}
-
 int	main(int argc, char **argv)
 {
 	t_game			game;
 
-	atexit(leakcheck);
 	parsing(argc, argv, &game);
 	calc_mapdimensions(&game);
 	if (process_map(&game, game.map) != 0)
