@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3d_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:59:15 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 10:09:37 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/20 21:50:12 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ float	check_rayhit(t_game *game, float x)
 {
 	if (game->ray.hit == 1)
 	{
-		x = (int)(game->ray.x / 3) % TILE_SIZE;
+		x = (int)(game->ray.x) % TILE_SIZE;
 		if (get_direction(game) == SOUTH)
 			return (TILE_SIZE - x - 1);
 	}
 	else
 	{
-		x = (int)(game->ray.y / 2) % TILE_SIZE;
+		x = (int)(game->ray.y) % TILE_SIZE;
 		if (get_direction(game) == WEST)
 			return (TILE_SIZE - x - 1);
 	}
