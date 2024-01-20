@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:51:52 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/20 12:58:43 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/20 21:57:16 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_ray
 	int		color;
 	float	shade;
 	int		hit;
+	int		cast_len;
 }	t_ray;
 
 typedef struct s_walltexture
