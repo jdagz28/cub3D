@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#              #
+#    Updated: 2024/01/20 13:04:35 by jdagoy           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME        			:= cub3D
 OS_NAME     			:= $(shell uname -s)
 
@@ -57,7 +69,6 @@ SRC_FILES				:= main.c\
 							create_vectorpoint.c\
 							draw_3d.c\
 							draw_3d_utils.c\
-							draw_line.c\
 							draw_map.c\
 							free.c\
 							get_textures.c\

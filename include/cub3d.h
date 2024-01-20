@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/19 20:51:52 by gmarchal          #+#    #+#             */
+/*   Updated: 2024/01/20 12:57:30 by jdagoy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -71,11 +83,6 @@ void		draw_3d(t_game *game, int raynum);
 float		fix_fisheye(t_game *game);
 float		check_rayhit(t_game *game, float x);
 int			get_direction(t_game *game);
-
-// draw_line.c
-void		draw_direction_dda(t_image_data *img, t_point start, \
-								t_vector front);
-void		draw_line_dda(t_image_data *img, t_point start, t_point end);
 
 // draw_map.c
 int			draw_map(t_game *game);

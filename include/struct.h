@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/19 20:51:52 by gmarchal          #+#    #+#             */
+/*   Updated: 2024/01/20 12:58:43 by jdagoy           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCT_H
 # define STRUCT_H
 
@@ -18,13 +30,13 @@ typedef struct s_texture
 	int			e_texture[4096];
 }				t_texture;
 
-typedef struct valid_text
+typedef struct s_valid_text
 {
 	int	north;
 	int	south;
 	int	west;
 	int	east;
-}				valid_text;
+}	t_valid_text;
 
 typedef struct s_image_data
 {
@@ -41,7 +53,7 @@ typedef struct s_display
 	void			*mlx;
 	void			*window;
 	t_image_data	img;
-}			t_display;
+}	t_display;
 
 typedef struct s_point
 {

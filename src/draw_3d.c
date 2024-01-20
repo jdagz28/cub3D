@@ -6,12 +6,11 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:24:06 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 10:09:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/20 12:59:20 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "enums.h"
 
 static int	get_texturecolor(t_game *game, t_walltexture *texture)
 {
