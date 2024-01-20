@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/20 13:01:49 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/20 22:04:44 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	get_rgb(t_game *game, t_texture *texture, char c, char *path)
 		if (texture->floor != -1)
 			error_manager(game, "Wrong input");
 		else
-			texture->floor = rgb_to_hex(game, ft_atoi(split[0]), 
+			texture->floor = rgb_to_hex(game, ft_atoi(split[0]),
 					ft_atoi(split[1]), ft_atoi(split[2]));
 	}
 	else if (c == 'C')
@@ -58,7 +58,7 @@ static int	get_rgb(t_game *game, t_texture *texture, char c, char *path)
 		if (texture->ceiling != -1)
 			error_manager(game, "Wrong input");
 		else
-			texture->ceiling = rgb_to_hex(game, ft_atoi(split[0]), 
+			texture->ceiling = rgb_to_hex(game, ft_atoi(split[0]),
 					ft_atoi(split[1]), ft_atoi(split[2]));
 	}
 	ft_freesplit(split);

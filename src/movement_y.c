@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:25:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/20 21:48:20 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/20 22:03:34 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int	check_adjacent(t_game *game, int x_offset, int y_offset)
 
 	check_x = (game->player.position.axis[X] + x_offset) / TILE_SIZE;
 	check_y = (game->player.position.axis[Y] + y_offset) / TILE_SIZE;
-
 	if (game->map[check_y][check_x] == '0')
 		return (0);
 	return (1);

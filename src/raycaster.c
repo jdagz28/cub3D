@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 01:36:23 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/18 23:59:04 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/20 22:02:00 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,26 @@ static void	calculate_shading(t_game *game)
 	}
 }
 
+static int	check_mapdimension(t_game *game)
+{
+	int	castlen;
+	int	far;
+
+	castlen = 30;
+	far = game->map_width;
+	if (game->map_height > far)
+		far = game->map_height;
+	if (far * 2 > castlen)
+		castlen = far * 2;
+	return (castlen);
+}
+
 static void	init_ray(t_game *game)
 {
 	float	tangent;
 	float	arc_tan;
 
+	game->ray.cast_len = check_mapdimension(game);
 	arc_tan = 1 / tan(game->ray.angle);
 	game->ray.dist_h = 10000000;
 	game->ray.map_intersect_x = game->player.array_x;

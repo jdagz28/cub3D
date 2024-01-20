@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:31:25 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/08 23:07:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/20 22:01:54 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_raywallhit(t_game *game)
 void	cast_horizontal_rays(t_game *game)
 {
 	game->ray.dof = 0;
-	while (game->ray.dof < 20)
+	while (game->ray.dof < game->ray.cast_len)
 	{
 		game->ray.map_intersect_x = (int)game->ray.x / TILE_SIZE;
 		if (game->ray.map_intersect_x >= game->map_width)
@@ -51,7 +51,7 @@ void	cast_horizontal_rays(t_game *game)
 void	cast_vertical_rays(t_game *game)
 {
 	game->ray.dof = 0;
-	while (game->ray.dof < 20)
+	while (game->ray.dof < game->ray.cast_len)
 	{
 		game->ray.map_intersect_x = (int)game->ray.x / TILE_SIZE;
 		if (game->ray.map_intersect_x >= game->map_width)
