@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_y.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:25:29 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 10:04:09 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/20 21:48:20 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ static void	move_backward(t_game *game, int keycode)
 	move_y(game, sub_x, sub_y, keycode);
 }
 
+static int	check_adjacent(t_game *game, int x_offset, int y_offset)
+{
+	int	check_x;
+	int	check_y;
+
+	check_x = (game->player.position.axis[X] + x_offset) / TILE_SIZE;
+	check_y = (game->player.position.axis[Y] + y_offset) / TILE_SIZE;
+
+	if (game->map[check_y][check_x] == '0')
+		return (0);
+	return (1);
+}
+
 static void	move_forward(t_game *game, int keycode)
 {
 	int	x_offset;
@@ -61,9 +74,12 @@ static void	move_forward(t_game *game, int keycode)
 	y_offset = 20;
 	if (game->player.front.dir[Y] < 0)
 		y_offset = -20;
-	add_x = (game->player.position.axis[X] + x_offset) / TILE_SIZE;
-	add_y = (game->player.position.axis[Y] + y_offset) / TILE_SIZE;
-	move_y(game, add_x, add_y, keycode);
+	if (check_adjacent(game, x_offset, y_offset) == 0)
+	{
+		add_x = (game->player.position.axis[X] + x_offset) / TILE_SIZE;
+		add_y = (game->player.position.axis[Y] + y_offset) / TILE_SIZE;
+		move_y(game, add_x, add_y, keycode);
+	}
 }
 
 void	player_movement_y(int keycode, t_game *game)
