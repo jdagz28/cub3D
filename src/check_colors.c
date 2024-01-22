@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.c                                          :+:      :+:    :+:   */
+/*   check_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/22 18:00:29 by gmarchal         ###   ########.fr       */
+/*   Updated: 2024/01/23 00:23:40 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,23 @@ int	check_color(t_game *game, int color)
 void	check_atoi(t_game *game, char *color, int atoi_color)
 {
 	char	*tmp;
+	char	*color_trim;
 
 	tmp = ft_itoa(atoi_color);
-	if (ft_strncmp(ft_strtrim(color, "\n"), tmp, ft_strlen(color)) != 0)
+	color_trim = ft_strtrim(color, "\n");
+	if (ft_strncmp(color_trim, tmp, ft_strlen(color)) != 0)
 	{
 		printf("Color = %s\n", color);
+		free(color_trim);
 		error_manager(game, "Not RGB.");
 	}
+	free(color_trim);
 }
 
 int	check_rgb(t_game *game, char *red, char *green, char *blue)
 {
-	int	i;
 	int	res;
 
-	i = 0;
 	check_atoi(game, red, ft_atoi(red));
 	check_atoi(game, green, ft_atoi(green));
 	check_atoi(game, blue, ft_atoi(blue));

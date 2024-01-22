@@ -3,7 +3,7 @@ WE ./texture/brick_graymoss.xpm
 SO ./texture/banner_redbrick.xpm
 EA ./texture/brick_red.xpm
 
-F 220,100,0
+F 220000000000000000000000000000000000000,100,0
 C 0,255,255
 
 
