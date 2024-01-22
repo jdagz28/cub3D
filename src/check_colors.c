@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/23 00:23:40 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/23 00:27:32 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	check_atoi(t_game *game, char *color, int atoi_color)
 		free(color_trim);
 		error_manager(game, "Not RGB.");
 	}
+	free(tmp);
 	free(color_trim);
 }
 
