@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:51:52 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/20 12:57:30 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/22 18:01:18 by gmarchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ int			check_all_textures(t_texture *texture);
 int			check_char(char c);
 void		check_char_map(t_game *game, char **map, t_player *player);
 void		replace_threes(char **map);
+
+/* Check Colors */
+int			check_color(t_game *game, int color);
+void		check_atoi(t_game *game, char *color, int atoi_color);
+int			check_rgb(t_game *game, char *red, char *green, char *blue);
 
 /* Utils */
 int			len_split(char **split);

@@ -6,7 +6,7 @@
 #    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#              #
-#    Updated: 2024/01/20 13:04:35 by jdagoy           ###   ########.fr        #
+#    Updated: 2024/01/22 17:59:48 by gmarchal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,8 @@ SRC_FILES				:= main.c\
 							movement_x.c\
 							texture.c\
 							process_map.c\
-							check_utils.c
+							check_utils.c\
+							check_colors.c
 
 OBJ_LIST                := $(patsubst %.c,%.o,$(SRC_FILES))
 OBJS                    := $(addprefix $(OBJ_DIR),$(OBJ_LIST))
