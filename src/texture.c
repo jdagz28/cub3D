@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/20 22:04:44 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/22 17:51:23 by gmarchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_texture(t_game *game, char *texture, char *path)
 	return (1);
 }
 
-static int	check_color(t_game *game, int color)
+static int	check_color(t_game *game, int color) // put this function in check_utils (delete static)
 {
 	if (color == -1)
 		return (0);
@@ -38,28 +38,51 @@ static int	check_color(t_game *game, int color)
 	return (1);
 }
 
+void	check_atoi(t_game *game, char *color, int atoi_color)
+{
+	char	*tmp;
+
+	tmp = ft_itoa(atoi_color);
+	if (ft_strncmp(ft_strtrim(color, "\n"), tmp, ft_strlen(color)) != 0)
+	{
+		printf("Color = %s\n", color);
+		error_manager(game, "Not RGB.");
+	}
+}
+
+int	check_rgb(t_game *game, char *red, char *green, char *blue)
+{
+	int	i;
+	int	res;
+
+	i = 0;
+	check_atoi(game, red, ft_atoi(red));
+	check_atoi(game, green, ft_atoi(green));
+	check_atoi(game, blue, ft_atoi(blue));
+	res = rgb_to_hex(game, ft_atoi(red), ft_atoi(green), ft_atoi(blue));
+	return (res);
+}
+
 static int	get_rgb(t_game *game, t_texture *texture, char c, char *path)
 {
 	char	**split;
 
 	split = ft_split(path, ',');
 	if (len_split(split) != 3)
-		error_manager(game, "Wrong RGB");
+		error_manager(game, "Not RGB");
 	if (c == 'F')
 	{
 		if (texture->floor != -1)
 			error_manager(game, "Wrong input");
 		else
-			texture->floor = rgb_to_hex(game, ft_atoi(split[0]),
-					ft_atoi(split[1]), ft_atoi(split[2]));
+			texture->floor = check_rgb(game, split[0], split[1], split[2]);
 	}
 	else if (c == 'C')
 	{
 		if (texture->ceiling != -1)
 			error_manager(game, "Wrong input");
 		else
-			texture->ceiling = rgb_to_hex(game, ft_atoi(split[0]),
-					ft_atoi(split[1]), ft_atoi(split[2]));
+			texture->ceiling = check_rgb(game, split[0], split[1], split[2]);
 	}
 	ft_freesplit(split);
 	return (0);
