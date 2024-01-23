@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/23 00:27:32 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/23 03:39:39 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	check_atoi(t_game *game, char *color, int atoi_color)
 	if (ft_strncmp(color_trim, tmp, ft_strlen(color)) != 0)
 	{
 		printf("Color = %s\n", color);
+		free(tmp);
 		free(color_trim);
 		error_manager(game, "Not RGB.");
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/21 16:58:36 by gmarchal         ###   ########.fr       */
+/*   Updated: 2024/01/23 03:38:28 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	arg_error(int argc, char **argv)
 	}
 }
 
-char	**get_map(t_game *game, int fd, char *start)
+char	**get_map(int fd, char *start)
 {
 	char	*line;
 	char	**array;
@@ -40,11 +40,9 @@ char	**get_map(t_game *game, int fd, char *start)
 	while (line)
 	{
 		if (line[0] == '\n')
-		{
-			free(line);
-			error_manager(game, "Map not closed.");
-		}
-		temp = ft_strjoin(start, line);
+			temp = ft_strjoin(start, "1\n");
+		else
+			temp = ft_strjoin(start, line);
 		free(start);
 		if (!temp)
 			return (NULL);
@@ -59,7 +57,7 @@ char	**get_map(t_game *game, int fd, char *start)
 
 void	map_functions(t_game *game, char *line)
 {
-	game->map = get_map(game, game->fd, line);
+	game->map = get_map(game->fd, line);
 	if (game->map == NULL)
 		error_manager(game, "Map parsing error");
 	check_char_map(game, game->map, &game->player);
