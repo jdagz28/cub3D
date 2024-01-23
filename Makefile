@@ -3,31 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+         #
+#    By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#              #
-#    Updated: 2024/01/22 17:59:48 by gmarchal         ###   ########.fr        #
+#    Updated: 2024/01/23 19:25:35 by jdagoy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        			:= cub3D
 OS_NAME     			:= $(shell uname -s)
 
-ifeq ($(OS_NAME), Linux)
-    FSANITIZE           := -fsanitize=address -fsanitize=leak
-    FRAMEWORK           :=
-    LINUX_LIBS          := -lXext -lX11
-    LINUX_INCLUDES      := -I/usr/include
-    MLX_DIR             := ./minilibx/minilibx-linux
-    OS_FLAG             := -D LINUX
-else
-    FSANITIZE           := #-fsanitize=address
-    FRAMEWORK           := -framework OpenGL -framework AppKit
-    LINUX_LIBS          :=
-    LINUX_INCLUDES      :=
-    MLX_DIR             := ./minilibx/mlx
-    OS_FLAG             := -D OSX
-endif
+FRAMEWORK           	:= -framework OpenGL -framework AppKit
+LINUX_LIBS          	:=
+LINUX_INCLUDES      	:=
+MLX_DIR             	:= ./minilibx/mlx
+OS_FLAG             	:= -D OSX
 
 SANITIZE            	:= 0
 
@@ -35,13 +25,8 @@ ifeq ($(SANITIZE), 1)
     CFLAGS         		+= -fsanitize=address -g3
 endif
 
-ifdef debug
-    FSANITIZE        	= -g
-endif
-
 CC                  	:= cc
-CFLAGS              	:= -Wall -Werror -Wextra -O3 $(OS_FLAG) $(FSANITIZE) 
-
+CFLAGS              	:= -Wall -Werror -Wextra -O3 $(OS_FLAG) 
 OBJ_DIR             	:= ./objects/
 INCLUDE_DIR         	:= ./include/
 MAIN_SRCS				:= ./src/
