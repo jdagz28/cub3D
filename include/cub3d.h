@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:51:52 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/22 18:01:18 by gmarchal         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:14:43 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			parsing(int argc, char **argv, t_game *game);
 t_game		*init_game(t_game *game);
 
 /* Texture */
-void		get_texture(t_game *game, t_texture *texture, char *line);
+int			get_texture(t_game *game, t_texture *texture, char *line);
 
 /* Check Map */
 int			check_borders_horizontal(char **map);
@@ -94,6 +94,8 @@ int			draw_map(t_game *game);
 
 // get_textures.c
 void		get_textures(t_game *game);
+int			count_commas(char *string);
+int			checkspace(char *line);
 
 // init_player.c
 void		update_player_front(t_player *player);

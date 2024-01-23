@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/22 18:05:07 by gmarchal         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:14:13 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	check_texture(t_game *game, char *texture, char *path)
 {
-	if (ft_strncmp(&path[ft_strlen(path) - 5], ".xpm", 3) != 0)
+	if (ft_strncmp(&path[ft_strlen(path) - 4], ".xpm", 3) != 0)
 	{
 		error_manager(game, "Texture path is not valid.");
 	}
@@ -77,17 +77,29 @@ static void	assign_texture(t_game *game, t_texture *texture,
 			get_rgb(game, texture, 'C', path);
 }
 
-void	get_texture(t_game *game, t_texture *texture, char *line)
+int	get_texture(t_game *game, t_texture *texture, char *line)
 {
 	char	**split;
+	char	f_or_c;
 
+	if (checkspace(line) == 1)
+		return (0);
+	f_or_c = 0;
+	if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
+		f_or_c = 1;
 	split = ft_split(line, ' ');
 	if (!split)
-		return ;
+		return (1);
 	if (len_split(split) != 2)
 	{
-		error_manager(game, "Texture path is not valid.");
+		if (f_or_c == 1)
+			error_manager(game, "Wrong RGB. Example : F 0,255,255");
+		else
+			error_manager(game, "Texture path is not valid.");
 	}
+	if (f_or_c == 1 && count_commas(split[1]) == 0)
+		error_manager(game, "Wrong RGB.");
 	assign_texture(game, texture, split[0], split[1]);
 	ft_freesplit(split);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by gmarchal          #+#    #+#             */
-/*   Updated: 2024/01/23 03:38:28 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:06:39 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,19 @@ void	map_functions(t_game *game, char *line)
 static void	get_data(t_game *game)
 {
 	char	*line;
+	char	*trimmed;
+	char	*trimmed_bis;
 
 	line = get_next_line(game->fd);
 	while (line && !check_all_textures(&game->texture))
 	{
 		while (line && line[0] == '\n')
 			line = next_line(game->fd, line);
-		get_texture(game, &game->texture, line);
+		trimmed = ft_strtrim(line, "\n");
+		trimmed_bis = ft_strtrim(trimmed, " ");
+		get_texture(game, &game->texture, trimmed_bis);
+		free(trimmed);
+		free(trimmed_bis);
 		if (line && line[0] != '\0')
 			line = next_line(game->fd, line);
 		else

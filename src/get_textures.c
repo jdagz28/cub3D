@@ -6,7 +6,7 @@
 /*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 00:18:45 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/19 20:58:19 by gmarchal         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:14:55 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,36 @@ void	get_textures(t_game *game)
 	read_textures(game, game->texture.south, "SOUTH");
 	read_textures(game, game->texture.east, "EAST");
 	read_textures(game, game->texture.west, "WEST");
+}
+
+int	count_commas(char *string)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (string[i])
+		if (string[i++] == ',')
+			count++;
+	if (count == 2)
+		return (1);
+	return (0);
+}
+
+int	checkspace(char *line)
+{
+	int	i;
+	int	count;
+	int	len;
+
+	count = 0;
+	len = ft_strlen(line);
+	i = -1;
+	while (line[++i])
+		if (line[i] == ' ')
+			count++;
+	if (count == len)
+		return (1);
+	return (0);
 }
